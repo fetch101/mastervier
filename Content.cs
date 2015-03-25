@@ -199,6 +199,15 @@ public class Content : MonoBehaviour {
 			lineRenderGameObject = new GameObject();
 			lr = lineRenderGameObject.AddComponent<LineRenderer>();
 			lr.SetVertexCount(vertexCount * 2);   
+			lr.SetWidth(0.08f, 0.08f);
+			lr.SetColors(Color.white, Color.white);
+
+			Material whiteDiffuseMat = new Material(Shader.Find("Unlit/Texture"));
+
+			lr.material = whiteDiffuseMat;
+
+
+
 			
 		}
 		
