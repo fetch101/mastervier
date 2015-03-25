@@ -67,7 +67,9 @@ public class Content : MonoBehaviour {
 	void Update()
 	{
 		drawLines();
-		
+
+
+		// TODO: Jedes Object/Inhalt muss sich nach der MainCamera ausrichten 
 		
 	}
 
