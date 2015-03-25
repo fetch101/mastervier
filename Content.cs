@@ -68,6 +68,7 @@ public class Content : MonoBehaviour {
 	{
 		drawLines();
 
+		aligneObjectToCamera ();
 
 		// TODO: Jedes Object/Inhalt muss sich nach der MainCamera ausrichten 
 		
@@ -315,6 +316,16 @@ public class Content : MonoBehaviour {
 		return this.simList;
 	}
 
+
+	public void aligneObjectToCamera()
+	{
+
+
+		transform.LookAt (Camera.main.transform.position);
+
+		transform.Rotate(0, 180, 0);
+
+	}
 
 
 
