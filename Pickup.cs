@@ -22,7 +22,7 @@ public class Pickup : MonoBehaviour {
 
         //Debug.Log("Mouse position: " + Input.mousePosition);
 
-        if (Physics.Raycast(raycheck, out hitcheck, 10f) && hitcheck.collider.gameObject.GetComponent<Content>() != null) 
+        if (Physics.Raycast(raycheck, out hitcheck, 40f) && hitcheck.collider.gameObject.GetComponent<Content>() != null) 
         {
             setLock(true);
             
