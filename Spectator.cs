@@ -26,7 +26,7 @@ public class Spectator : MonoBehaviour
         else
         {
             //if shift is not pressed, reset to default speed
-            speed = 50;
+            speed = 40;
         }
         //For the following 'if statements' don't include 'else if', so that the user can press multiple buttons at the same time
         //move camera to the left
