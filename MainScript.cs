@@ -142,7 +142,7 @@ public class MainScript : MonoBehaviour {
                 alignContentsInCube(getAllContents());
             if (GUILayout.Button("Circle View"))
                 alignContentsInCircleWithCenter(getAllContents()[0]);
-            if (GUILayout.Button("Student Cube View"))
+            if (GUILayout.Button("Curly Line"))
                 //alignContentsAsSun(getStudentList(getAllContents()));
                 alignSpiral(getAllContents(), new Vector3(0f,0f,0f));
             if (GUILayout.Button("Close"))
@@ -175,7 +175,8 @@ public class MainScript : MonoBehaviour {
     private void alignSpiral(List<Content> contentList, Vector3 startPosition)
     {
         float radius = 50;
-        CurlyLine spiral = new CurlyLine(radius, startPosition);
+        float offsetZ = 30;
+        Circle spiral = new Circle(radius, offsetZ, startPosition);
         int i = 0;
         foreach (Content content in contentList)
         {
