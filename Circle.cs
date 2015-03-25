@@ -18,6 +18,8 @@ public class Circle {
         this.numberOfElements = numberOfElements;
     }
 
+
+    //TODO needs direction, decouple spiral from circle
     public Circle(float radius, float offsetZ, Vector3 startVector)
     {
         this.radius = radius;

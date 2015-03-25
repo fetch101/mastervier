@@ -3,9 +3,7 @@ using System.Collections.Generic;
 
 public class Content : MonoBehaviour {
 	
-	
-	
-	
+		
 	public string Student;
 	public string Semester;
 	public string Phase;
@@ -40,7 +38,9 @@ public class Content : MonoBehaviour {
 	public List<string> tagList = new List<string>();
 	public List<Content> contentList = new List<Content>();
 	public List<KeyValuePair<Content, int>> simList = new List<KeyValuePair<Content, int>>();
-	public List<KeyValuePair<Content, int>> lineList = new List<KeyValuePair<Content, int>>();
+
+
+	//public List<KeyValuePair<Content, int>> lineList = new List<KeyValuePair<Content, int>>();
 	
 	private GameObject lineRenderGameObject;
 	
@@ -81,7 +81,7 @@ public class Content : MonoBehaviour {
 	
 	
 	
-	
+	//TODO divide into tag and metatag list, also adjust compare method
 	public void buildTagList()
 	{
 
@@ -110,8 +110,6 @@ public class Content : MonoBehaviour {
 		{
 			tagList.Add(PUR);
 		}
-
-
 
 
 		if (Tag0 != "")
