@@ -9,8 +9,7 @@ public class Circle {
     float currX;
     float currY;
     float currZ;
-    float offsetZ = 0;
-    Vector3 startVector = new Vector3(0f, 0f, 0f);
+    Vector3 center = new Vector3(0f, 0f, 0f);
 
     public Circle(float radius, int numberOfElements)
     {
@@ -18,16 +17,15 @@ public class Circle {
         this.numberOfElements = numberOfElements;
     }
 
-
-    //TODO needs direction, decouple spiral from circle
-    public Circle(float radius, float offsetZ, Vector3 startVector)
+    public Circle(float radius, int numberOfElements, Vector3 center)
     {
         this.radius = radius;
-        this.numberOfElements = 5;
-        this.offsetZ = offsetZ;
-        this.startVector = startVector;
+        this.numberOfElements = numberOfElements;
+        this.center = center;
     }
 
+
+ 
 
     public Vector3 getPosForElement(int elementNumber)
     {
@@ -36,10 +34,9 @@ public class Circle {
 
         currX = Mathf.Cos(angleRad) * radius;
         currY = Mathf.Sin(angleRad) * radius;
-        currZ = offsetZ * elementNumber;
 
 
-        return new Vector3(startVector.x + currX, startVector.y + currY, startVector.z + currZ);
+        return new Vector3(center.x + currX, center.y + currY, center.z + currZ);
     }
 
 }
