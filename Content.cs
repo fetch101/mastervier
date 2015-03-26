@@ -39,6 +39,7 @@ public class Content : MonoBehaviour {
     public List<string> metaTagList = new List<string>();
 	public List<Content> contentList = new List<Content>();
 	public List<KeyValuePair<Content, int>> simList = new List<KeyValuePair<Content, int>>();
+    private List<KeyValuePair<LineRenderer, int>> lineList = new List<KeyValuePair<LineRenderer, int>>();
 
 
 	//public List<KeyValuePair<Content, int>> lineList = new List<KeyValuePair<Content, int>>();
@@ -186,30 +187,30 @@ public class Content : MonoBehaviour {
 		
 		simList.Sort((x, y) => y.Value.CompareTo(x.Value));
 		
-		if (simList.Count > 0 && simList[0].Value >= threshold)
-		{
-			int vertexCount = 0;
-			foreach (KeyValuePair<Content, int> pair in simList)
-			{
-				if (pair.Value >= threshold)
-				{
-					vertexCount++;
-				}
-			}
-			lineRenderGameObject = new GameObject();
-			lr = lineRenderGameObject.AddComponent<LineRenderer>();
-			lr.SetVertexCount(vertexCount * 2);   
-			lr.SetWidth(0.08f, 0.08f);
-			lr.SetColors(Color.white, Color.white);
+        //if (simList.Count > 0 && simList[0].Value >= threshold)
+        //{
+        //    int vertexCount = 0;
+        //    foreach (KeyValuePair<Content, int> pair in simList)
+        //    {
+        //        if (pair.Value >= threshold)
+        //        {
+        //            vertexCount++;
+        //        }
+        //    }
+        //    lineRenderGameObject = new GameObject();
+        //    lr = lineRenderGameObject.AddComponent<LineRenderer>();
+        //    lr.SetVertexCount(vertexCount * 2);   
+        //    lr.SetWidth(0.08f, 0.08f);
+        //    lr.SetColors(Color.white, Color.white);
 
-			Material whiteDiffuseMat = new Material(Shader.Find("Unlit/Texture"));
+        //    Material whiteDiffuseMat = new Material(Shader.Find("Unlit/Texture"));
 
-			lr.material = whiteDiffuseMat;
+        //    lr.material = whiteDiffuseMat;
 
 
 
 			
-		}
+        //}
 		
 	}
 	
@@ -278,31 +279,39 @@ public class Content : MonoBehaviour {
 	private float getMinRadius(int numberOfElements){
 		return (numberOfElements * 60)/(2*Mathf.PI);
 	}
+
+    public void drawLines()
+    {
+        foreach (KeyValuePair<LineRenderer, int> pair in lineList)
+        {
+            pair.Key.SetPosition(pair.Value, this.transform.position);
+        }
+    }
 	
-	public void drawLines()
-	{
+    //public void drawLines()
+    //{
 		
-		if (simList.Count > 0 && simList[0].Value >= threshold)
-		{
+    //    if (simList.Count > 0 && simList[0].Value >= threshold)
+    //    {
 			
-			int i = 0;
-			//lr.SetPosition(0, this.gameObject.transform.position);
-			foreach (KeyValuePair<Content, int> pair in simList)
-			{
-				if (pair.Value >= threshold)
-				{
-					lr.SetPosition(i, gameObject.transform.position);
-					i++;
-					lr.SetPosition(i, pair.Key.transform.position);
-					i++;
-				}
-				else
-				{
-					break;
-				}
-			}
-		}
-	}
+    //        int i = 0;
+    //        //lr.SetPosition(0, this.gameObject.transform.position);
+    //        foreach (KeyValuePair<Content, int> pair in simList)
+    //        {
+    //            if (pair.Value >= threshold)
+    //            {
+    //                lr.SetPosition(i, gameObject.transform.position);
+    //                i++;
+    //                lr.SetPosition(i, pair.Key.transform.position);
+    //                i++;
+    //            }
+    //            else
+    //            {
+    //                break;
+    //            }
+    //        }
+    //    }
+    //}
 	
 	
 	public List<string> getTagList()
@@ -338,10 +347,13 @@ public class Content : MonoBehaviour {
 	}
 
 
-
-
     public List<string> getMetaTagList()
     {
         return metaTagList;
+    }
+
+    public void addLine(LineRenderer linerenderer, int vertex)
+    {
+        lineList.Add(new KeyValuePair<LineRenderer, int>(linerenderer, vertex));
     }
 }
