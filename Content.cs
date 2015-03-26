@@ -336,7 +336,12 @@ public class Content : MonoBehaviour {
 		//boxCollider.size = rend.bounds.size * 100;
 
 	}
-	
-	
-	
+
+
+
+
+    public List<string> getMetaTagList()
+    {
+        return metaTagList;
+    }
 }
