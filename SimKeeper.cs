@@ -6,14 +6,25 @@ public class SimKeeper : MonoBehaviour {
 
     List<Content> contentList;
     int[,] simTable;
-    int threshold = 1;
+    public int threshold = 1;
 
 	// Use this for initialization
 	void Start () {
         contentList = getAllContents();
         buildTagLists(contentList);
         buildSimTable();
-        //spawnLineRenderers();
+        spawnLineRenderers();
+
+        for (int y = 0; y < contentList.Count; y++)
+        {
+            string line = "";
+            for (int x = 0; x < contentList.Count; x++)
+            {
+                line = line + "," +simTable[x, y];
+            }
+
+            Debug.Log("I am: " + contentList[y] + " sim: " + line);
+        }
 
 	}
 
@@ -65,7 +76,32 @@ public class SimKeeper : MonoBehaviour {
 
     private void spawnLineRenderers()
     {
-        throw new System.NotImplementedException();
+        int vertexY = 0;
+        int vertexX = 1;
+        for (int x = 0; x < contentList.Count; x++)
+        {
+            for (int y = x + 1; y < contentList.Count; y++)
+            {
+                int score = simTable[x,y];
+                if (score >= threshold)
+                {
+                    LineRenderer line = getNewLine();
+                    contentList[y].addLine(line, vertexY);
+                    contentList[x].addLine(line, vertexX);
+                }
+            }
+        }
+    }
+
+    private static LineRenderer getNewLine()
+    {
+        GameObject lineObject = new GameObject();
+        LineRenderer linerenderer = lineObject.AddComponent<LineRenderer>();
+        linerenderer.SetVertexCount(2);
+        linerenderer.SetWidth(0.08f, 0.08f);
+        linerenderer.SetColors(Color.white, Color.white);
+        linerenderer.material = new Material(Shader.Find("Unlit/Texture"));
+        return linerenderer;
     }
 
     private List<Content> getAllContents()

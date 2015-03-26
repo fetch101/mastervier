@@ -30,7 +30,6 @@ public class Content : MonoBehaviour {
 	public string Tag8;
 	public string Tag9;
 	
-	public int threshold;
 	
 	public LineRenderer lr;
 	Vector3 seedContentPos;
