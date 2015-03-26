@@ -36,6 +36,7 @@ public class Content : MonoBehaviour {
 	Vector3 seedContentPos;
 	
 	public List<string> tagList = new List<string>();
+    public List<string> metaTagList = new List<string>();
 	public List<Content> contentList = new List<Content>();
 	public List<KeyValuePair<Content, int>> simList = new List<KeyValuePair<Content, int>>();
 
@@ -69,8 +70,6 @@ public class Content : MonoBehaviour {
 		drawLines();
 
 		aligneObjectToCamera ();
-
-		// TODO: Jedes Object/Inhalt muss sich nach der MainCamera ausrichten 
 		
 	}
 
@@ -84,34 +83,8 @@ public class Content : MonoBehaviour {
 	//TODO divide into tag and metatag list, also adjust compare method
 	public void buildTagList()
 	{
-
-
-		if (Titel != "")
-		{
-			tagList.Add(Titel);
-		}
-		if (Untertitel != "")
-		{
-			tagList.Add(Untertitel);
-		}
-		if (Autor != "")
-		{
-			tagList.Add(Autor);
-		}
-		if (Verortung != "")
-		{
-			tagList.Add(Verortung);
-		}
-		if (UR != "")
-		{
-			tagList.Add(UR);
-		}
-		if (PUR != "")
-		{
-			tagList.Add(PUR);
-		}
-
-
+        buildMetaTagList();
+        
 		if (Tag0 != "")
 		{
 			tagList.Add(Tag0);
@@ -154,6 +127,34 @@ public class Content : MonoBehaviour {
 		}
 		
 	}
+
+    private void buildMetaTagList()
+    {
+        if (Titel != "")
+        {
+            metaTagList.Add(Titel);
+        }
+        if (Untertitel != "")
+        {
+            metaTagList.Add(Untertitel);
+        }
+        if (Autor != "")
+        {
+            metaTagList.Add(Autor);
+        }
+        if (Verortung != "")
+        {
+            metaTagList.Add(Verortung);
+        }
+        if (UR != "")
+        {
+            metaTagList.Add(UR);
+        }
+        if (PUR != "")
+        {
+            metaTagList.Add(PUR);
+        }
+    }
 	
 	
 	public void buildContentList()
@@ -317,13 +318,9 @@ public class Content : MonoBehaviour {
 
 	public void aligneObjectToCamera()
 	{
-
-
-		transform.LookAt (Camera.main.transform.position);
-
-		transform.Rotate(0, 180, 0);
-
-	}
+        transform.LookAt (Camera.main.transform.position);
+        transform.Rotate(0, 180, 0);
+    }
 
 
 
