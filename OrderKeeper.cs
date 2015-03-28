@@ -14,6 +14,8 @@ public class OrderKeeper : MonoBehaviour {
 	
 	}
 
+    //TODO refactor this
+    //TODO call this when similarities change
     public void alignContentInCircleWithCenter(Content centerContent)
     {
         SimKeeper simKeeper = getSimKeeper();

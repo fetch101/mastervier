@@ -25,7 +25,7 @@ public class MainScript : MonoBehaviour {
         return contentList;
     }
 
-
+    //TODO move align methods to OrderKeeper
     private void alignContentsInLine(List<Content> contents)
     {
         Vector3 start = new Vector3(0f, 0f, 0f);
