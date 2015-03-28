@@ -10,55 +10,7 @@ public class MainScript : MonoBehaviour {
     // Use this for initialization
 	void Start () {
         List<Content> contentList = getAllContents();
-
-
-        //foreach (Content content in contentList)
-        //{
-        //    content.buildTagList();
-        //    content.buildContentList();
-        //}
-        //foreach (Content content in contentList)
-        //{
-        //    content.buildSimList();
-        //}
-
-        //contentList[0].alignCircle();
-
-        //int count = 0;
-        //foreach (Content content in contentList)
-        //{
-
-        //    //content.drawLines();
-        //    Debug.Log("Object Nr: " + count + ", " + content.Titel);
-        //    count++;
-        //}
-
-
-        //foreach (KeyValuePair<Content, int> pair in contentList[6].getSimList())
-        //{
-        //    Debug.Log("I am " + contentList[6].Titel + " and have score " + pair.Value + " to " + pair.Key.Titel);
-
-        //}
-
-
-        //System.Random rand = new System.Random();
-
-
-        //testtags seedContent = (testtags)objectContents[rand.Next(0, contents.Count)];
-
-
-        //alignContentsInCube(contents);
-
-        //Vector3 seedContentPos = getContentPos(seedContent);
-
-
-        //foreach (testtags currentContent in contents)
-        //{
-
-        //    currentContent.drawLine(seedContentPos);
-        //}
-
-	}
+    }
 
     private List<Content> getAllContents()
     {
