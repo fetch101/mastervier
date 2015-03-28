@@ -6,12 +6,11 @@ public class SimKeeper : MonoBehaviour {
 
     List<Content> contentList;
     int[,] simTable;
-    public int threshold = 1;
+    public int threshold;
 
 	// Use this for initialization
 	void Start () {
         contentList = getAllContents();
-        buildTagLists(contentList);
         buildSimTable();
         spawnLineRenderers();
 
@@ -33,13 +32,6 @@ public class SimKeeper : MonoBehaviour {
 
 	}
 
-    private void buildTagLists(List<Content> contentList)
-    {
-        foreach (Content content in contentList)
-        {
-            content.buildTagList();
-        }
-    }
 
     private void buildSimTable()
     {
@@ -69,7 +61,7 @@ public class SimKeeper : MonoBehaviour {
 
         int metaScore = 0;
         List<string> metaTagListY = contentY.getMetaTagList();
-        List<string> metaTagListX = contentY.getMetaTagList();
+        List<string> metaTagListX = contentX.getMetaTagList();
         foreach (string metaTagX in metaTagListX)
         {
             if (metaTagListY.Contains(metaTagX))
@@ -77,8 +69,6 @@ public class SimKeeper : MonoBehaviour {
                 metaScore++;
             }
         }
-        Debug.Log("I am Y" + contentY + " and have score " + score + " meta " + metaScore + " to X: " + contentX);
-
         return score + metaScore;
     }
 
@@ -93,7 +83,6 @@ public class SimKeeper : MonoBehaviour {
                 int score = simTable[x,y];
                 if (score >= threshold)
                 {
-                    Debug.Log("Line from " + contentList[y] + " to " + contentList[x]);
                     LineRenderer line = getNewLine();
                     contentList[y].addLine(line, vertexY);
                     contentList[x].addLine(line, vertexX);
