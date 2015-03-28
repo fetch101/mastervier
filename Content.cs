@@ -41,7 +41,7 @@ public class Content : MonoBehaviour {
 
     public void addBoxCollider()
     {
-        BoxCollider boxCollider = this.gameObject.AddComponent<BoxCollider>();
+        this.gameObject.AddComponent<BoxCollider>();
     }
 	
 	
