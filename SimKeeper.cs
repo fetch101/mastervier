@@ -15,16 +15,21 @@ public class SimKeeper : MonoBehaviour {
         buildSimTable();
         spawnLineRenderers();
 
-        for (int y = 0; y < contentList.Count; y++)
-        {
-            string line = "";
-            for (int x = 0; x < contentList.Count; x++)
-            {
-                line = line + "," +simTable[x, y];
-            }
+        //for (int y = 0; y < contentList.Count; y++)
+        //{
+        //    string line = "";
+        //    for (int x = 0; x < contentList.Count; x++)
+        //    {
+        //        line = line + "," +simTable[x, y];
+        //    }
 
-            Debug.Log("I am: " + contentList[y] + " sim: " + line);
-        }
+        //    Debug.Log("I am: " + contentList[y] + " sim: " + line);
+        //}
+        //List<KeyValuePair<Content, int>> simList = getSimListForContent(contentList[1]);
+        //foreach (KeyValuePair<Content, int> pair in simList)
+        //{
+        //    Debug.Log("I am: " + contentList[1] + " sim: " + pair.Value + " to " + pair.Key);
+        //}
 
 	}
 
@@ -53,7 +58,8 @@ public class SimKeeper : MonoBehaviour {
 
         int score = 0;
         List<string> tagListY = contentY.getTagList();
-        foreach (string tagX in contentX.getTagList())
+        List<string> tagListX = contentX.getTagList();
+        foreach (string tagX in tagListX)
         {
             if (tagListY.Contains(tagX))
             {
@@ -63,13 +69,15 @@ public class SimKeeper : MonoBehaviour {
 
         int metaScore = 0;
         List<string> metaTagListY = contentY.getMetaTagList();
-        foreach (string metaTagX in contentX.getMetaTagList())
+        List<string> metaTagListX = contentY.getMetaTagList();
+        foreach (string metaTagX in metaTagListX)
         {
             if (metaTagListY.Contains(metaTagX))
             {
                 metaScore++;
             }
         }
+        Debug.Log("I am Y" + contentY + " and have score " + score + " meta " + metaScore + " to X: " + contentX);
 
         return score + metaScore;
     }
@@ -85,6 +93,7 @@ public class SimKeeper : MonoBehaviour {
                 int score = simTable[x,y];
                 if (score >= threshold)
                 {
+                    Debug.Log("Line from " + contentList[y] + " to " + contentList[x]);
                     LineRenderer line = getNewLine();
                     contentList[y].addLine(line, vertexY);
                     contentList[x].addLine(line, vertexX);
@@ -93,7 +102,7 @@ public class SimKeeper : MonoBehaviour {
         }
     }
 
-    private static LineRenderer getNewLine()
+    private LineRenderer getNewLine()
     {
         GameObject lineObject = new GameObject();
         LineRenderer linerenderer = lineObject.AddComponent<LineRenderer>();
@@ -114,6 +123,25 @@ public class SimKeeper : MonoBehaviour {
             contentList.Add((Content)obj);
         }
         return contentList;
+    }
+
+    public List<KeyValuePair<Content, int>> getSimListForContent(Content content)
+    {
+        List<KeyValuePair<Content, int>> simList = new List<KeyValuePair<Content, int>>();
+
+        int contentIndex = contentList.IndexOf(content);
+        for (int i = 0; i < contentList.Count; i++)
+        {
+            int score = simTable[contentIndex,i];
+            Content neighbor = contentList[i];
+            if (neighbor != content)
+            {
+                simList.Add(new KeyValuePair<Content, int>(neighbor, score));
+            }
+        }
+        simList.Sort((x, y) => y.Value.CompareTo(x.Value));
+
+        return simList;
     }
 	
 	// Update is called once per frame

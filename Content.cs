@@ -31,29 +31,28 @@ public class Content : MonoBehaviour {
 	public string Tag9;
 	
 	
-	public LineRenderer lr;
-	Vector3 seedContentPos;
+    //public LineRenderer lr;
+    //Vector3 seedContentPos;
 	
 	public List<string> tagList = new List<string>();
     public List<string> metaTagList = new List<string>();
-	public List<Content> contentList = new List<Content>();
-	public List<KeyValuePair<Content, int>> simList = new List<KeyValuePair<Content, int>>();
+    //public List<Content> contentList = new List<Content>();
+    //public List<KeyValuePair<Content, int>> simList = new List<KeyValuePair<Content, int>>();
     private List<KeyValuePair<LineRenderer, int>> lineList = new List<KeyValuePair<LineRenderer, int>>();
 
 
 	//public List<KeyValuePair<Content, int>> lineList = new List<KeyValuePair<Content, int>>();
 	
-	private GameObject lineRenderGameObject;
+    //private GameObject lineRenderGameObject;
 	
-	private Renderer rend; 
+    //private Renderer rend; 
 
 
 
 	//BoxCollider col = (BoxCollider)collider;
 
 
-
-	
+    
 	
 	// Use this for initialization
 	void Start () {
@@ -157,104 +156,96 @@ public class Content : MonoBehaviour {
     }
 	
 	
-	public void buildContentList()
-	{
-		Object[] objectContents = FindObjectsOfType(typeof(Content));
+    //public void buildContentList()
+    //{
+    //    Object[] objectContents = FindObjectsOfType(typeof(Content));
 		
-		foreach (Object obj in objectContents)
-		{
-			contentList.Add((Content)obj);
-		}
-		contentList.Remove(this);
-	}
+    //    foreach (Object obj in objectContents)
+    //    {
+    //        contentList.Add((Content)obj);
+    //    }
+    //    contentList.Remove(this);
+    //}
 	
-	public void buildSimList()
-	{
-		foreach (Content cont in contentList)
-		{
-			int score = 0;
-			List<string> remoteTagList = cont.getTagList();
-			foreach (string tag in remoteTagList)
-			{
-				if (tagList.Contains(tag))
-				{
-					score++;
-				}
-			}
-			simList.Add(new KeyValuePair<Content, int>(cont, score));
-		}
+    //public void buildSimList()
+    //{
+    //    foreach (Content cont in contentList)
+    //    {
+    //        int score = 0;
+    //        List<string> remoteTagList = cont.getTagList();
+    //        foreach (string tag in remoteTagList)
+    //        {
+    //            if (tagList.Contains(tag))
+    //            {
+    //                score++;
+    //            }
+    //        }
+    //        simList.Add(new KeyValuePair<Content, int>(cont, score));
+    //    }
 		
-		simList.Sort((x, y) => y.Value.CompareTo(x.Value));
+    //    simList.Sort((x, y) => y.Value.CompareTo(x.Value));
 		
      
 		
-	}
+    //}
 	
-	public void alignCircle()
-	{
-		Debug.Log("center: " + Titel);
-		float currRad = 60;
-		Vector3 currPos = new Vector3(0f, 0f, 0f);
-		gameObject.transform.position = currPos;
-		int sameScore = 1;
-		//TODO content with no similarities has an empty simList
+    //public void alignCircle()
+    //{
+    //    float currRad = 60;
+    //    Vector3 currPos = new Vector3(0f, 0f, 0f);
+    //    gameObject.transform.position = currPos;
+    //    int sameScore = 1;
+    //    //TODO content with no similarities has an empty simList
 
 
-		int currScore = simList[0].Value;
-		int circlePos = 1;
+    //    int currScore = simList[0].Value;
+    //    int circlePos = 1;
 		
-		while (simList[sameScore].Value == currScore)
-		{
-			sameScore++;
-		}
-		//TODO make sure all elements have enough space on currRad
+    //    while (simList[sameScore].Value == currScore)
+    //    {
+    //        sameScore++;
+    //    }
+    //    //TODO make sure all elements have enough space on currRad
 
 
-		Circle circle = new Circle(currRad, sameScore);
+    //    Circle circle = new Circle(currRad, sameScore);
 		
-		for (int i = 0; i < simList.Count; i++)
-		{
-			currPos = circle.getPosForElement(circlePos);
-			simList[i].Key.transform.position = currPos;
-			circlePos++;
+    //    for (int i = 0; i < simList.Count; i++)
+    //    {
+    //        currPos = circle.getPosForElement(circlePos);
+    //        simList[i].Key.transform.position = currPos;
+    //        circlePos++;
 			
-			if (i + 1 < simList.Count && simList[i + 1].Value != currScore)
-			{
+    //        if (i + 1 < simList.Count && simList[i + 1].Value != currScore)
+    //        {
+    //            sameScore = 1;
+    //            currScore = simList[i + 1].Value;
+    //            while (i + sameScore + 1 < simList.Count && simList[i + sameScore + 1].Value == currScore)
+    //            {
+    //                sameScore++;
+    //            }
 
+    //            if ( getMinRadius(sameScore) > currRad + 60)
+    //            {
+    //                currRad = getMinRadius(sameScore);					
+    //            }
+    //            else 					
+    //            {
+    //                currRad += 60;
+    //            }
 
-				sameScore = 1;
-				currScore = simList[i + 1].Value;
-				while (i + sameScore + 1 < simList.Count && simList[i + sameScore + 1].Value == currScore)
-				{
-					sameScore++;
-				}
-
-				if ( getMinRadius(sameScore) > currRad + 60)
-				{
-					
-					currRad = getMinRadius(sameScore);
-					
-				}
-				else 
-					
-				{
-					currRad += 60;
-				}
-
-
-
-				circle = new Circle(currRad, sameScore);
-				circlePos = 1;
+    //            circle = new Circle(currRad, sameScore);
+    //            circlePos = 1;
 				
-			}
+    //        }
 			
-		}
+    //    }
 		
-	}
+    //}
 
-	private float getMinRadius(int numberOfElements){
-		return (numberOfElements * 60)/(2*Mathf.PI);
-	}
+    //private float getMinRadius(int numberOfElements){
+    //    return (numberOfElements * 60)/(2*Mathf.PI);
+    //}
 
     public void drawLines()
     {
@@ -270,10 +261,10 @@ public class Content : MonoBehaviour {
 		return this.tagList;
 	}
 	
-	public List<KeyValuePair<Content,int>> getSimList()
-	{
-		return this.simList;
-	}
+    //public List<KeyValuePair<Content,int>> getSimList()
+    //{
+    //    return this.simList;
+    //}
 
 
 	public void aligneObjectToCamera()

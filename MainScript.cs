@@ -12,33 +12,33 @@ public class MainScript : MonoBehaviour {
         List<Content> contentList = getAllContents();
 
 
-        foreach (Content content in contentList)
-        {
-            content.buildTagList();
-            content.buildContentList();
-        }
-        foreach (Content content in contentList)
-        {
-            content.buildSimList();
-        }
+        //foreach (Content content in contentList)
+        //{
+        //    content.buildTagList();
+        //    content.buildContentList();
+        //}
+        //foreach (Content content in contentList)
+        //{
+        //    content.buildSimList();
+        //}
 
-        contentList[0].alignCircle();
+        //contentList[0].alignCircle();
 
-        int count = 0;
-        foreach (Content content in contentList)
-        {
+        //int count = 0;
+        //foreach (Content content in contentList)
+        //{
 
-            //content.drawLines();
-            Debug.Log("Object Nr: " + count + ", " + content.Titel);
-            count++;
-        }
+        //    //content.drawLines();
+        //    Debug.Log("Object Nr: " + count + ", " + content.Titel);
+        //    count++;
+        //}
 
 
-        foreach (KeyValuePair<Content, int> pair in contentList[6].getSimList())
-        {
-            Debug.Log("I am " + contentList[6].Titel + " and have score " + pair.Value + " to " + pair.Key.Titel);
+        //foreach (KeyValuePair<Content, int> pair in contentList[6].getSimList())
+        //{
+        //    Debug.Log("I am " + contentList[6].Titel + " and have score " + pair.Value + " to " + pair.Key.Titel);
 
-        }
+        //}
 
 
         //System.Random rand = new System.Random();
@@ -150,6 +150,12 @@ public class MainScript : MonoBehaviour {
         }
     }
 
+    private OrderKeeper getOrderKeeper()
+    {
+        Object[] objectOrderKeeper = FindObjectsOfType(typeof(OrderKeeper));
+        return (OrderKeeper)objectOrderKeeper[0];
+    }
+
     private List<List<Content>> getStudentList(List<Content> contents)
     {
         List<List<Content>> studentList = new List<List<Content>>();
@@ -185,7 +191,8 @@ public class MainScript : MonoBehaviour {
 
     private void alignContentsInCircleWithCenter(Content content)
     {
-        content.alignCircle();
+        //content.alignCircle();
+        getOrderKeeper().alignContentInCircleWithCenter(content);
     }
 
     bool togglePause()
