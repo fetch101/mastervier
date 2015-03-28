@@ -9,7 +9,6 @@ public class MainScript : MonoBehaviour {
 
     // Use this for initialization
 	void Start () {
-        List<Content> contentList = getAllContents();
     }
 
     private List<Content> getAllContents()
@@ -25,56 +24,9 @@ public class MainScript : MonoBehaviour {
         return contentList;
     }
 
-    //TODO move align methods to OrderKeeper
-    private void alignContentsInLine(List<Content> contents)
-    {
-        Vector3 start = new Vector3(0f, 0f, 0f);
-        foreach (Content cont in contents)
-        {
-            cont.gameObject.transform.position = start;
-            start.z += 10;
-        }
-    }
+  
 
-    private void alignContentsInCube(List<Content> contents)
-    {
-
-        int numberOfContents = contents.Count;
-        int cubeDegree = getCubeDegree(numberOfContents);
-        int i = 0;
-            for (int x = 0; x < cubeDegree; x++)
-            {
-                for(int y = 0; y < cubeDegree; y++){
-
-                    for(int z = 0; z < cubeDegree; z++){
-                        Vector3 pos = new Vector3(x*100, y*100, z*100);
-                        if (i < contents.Count)
-                        {
-                            contents[i].gameObject.transform.position = pos;
-                            i++;
-                        }
-
-                    }
-                }
-            }
-    }
-
-    private int getCubeDegree(int numberOfContents)
-    {
-
-		//TODO round degree to next higher int 
-        float degree = Mathf.Pow(numberOfContents, 1f/3f);
-        return (int)degree + 1;
-    }
-
-
-
-    private static Vector3 getContentPos(Content content)
-    {
-        Vector3 seedCubePos = new Vector3(content.transform.position.x, content.transform.position.y, content.transform.position.z);
-        return seedCubePos;
-    }
-	
+    	
 	// Update is called once per frame
 	void Update () {
         if (Input.GetKeyDown(KeyCode.Escape))
@@ -89,14 +41,13 @@ public class MainScript : MonoBehaviour {
         if (isPause) {
             GUILayout.Label("Game is paused!");
             if (GUILayout.Button("Line View"))
-                alignContentsInLine(getAllContents());
+                alignContentsInLine();
             if (GUILayout.Button("Start Cube View"))
-                alignContentsInCube(getAllContents());
+                alignContentsInCube();
             if (GUILayout.Button("Circle View"))
                 alignContentsInCircleWithCenter(getAllContents()[0]);
             if (GUILayout.Button("Spiral View"))
-                //alignContentsAsSun(getStudentList(getAllContents()));
-                alignSpiral(getAllContents(), new Vector3(0f,0f,0f));
+                alignContentsAsSun();
             if (GUILayout.Button("Close"))
                 isPause = togglePause();
         }
@@ -108,42 +59,24 @@ public class MainScript : MonoBehaviour {
         return (OrderKeeper)objectOrderKeeper[0];
     }
 
-    private List<List<Content>> getStudentList(List<Content> contents)
+    //TODO move align methods to OrderKeeper
+    private void alignContentsInLine()
     {
-        List<List<Content>> studentList = new List<List<Content>>();
-        foreach (Content content in contents)
-        {
-           //studentList.Add(cont)
-        }
-
-        return null;
+        getOrderKeeper().alignContentsInLine();
     }
 
-
-    private void alignContentsAsSun(List<List<Content>> studentList)
+    private void alignContentsInCube()
     {
-        Vector3 firstPos = new Vector3(0f, 0f, 0f);
-        foreach (List<Content> contentList in studentList)
-        {
-            alignSpiral(contentList, firstPos);
-            firstPos.x += 50;
-        }
+        getOrderKeeper().alignContentsInCube();
     }
 
-    private void alignSpiral(List<Content> contentList, Vector3 startPosition)
+    private void alignContentsAsSun()
     {
-        Spiral spiral = new Spiral();
-        int i = 0;
-        foreach (Content content in contentList)
-        {
-            content.transform.position = spiral.getPosForElement(i);
-            i++;
-        }
-    }
+        getOrderKeeper().alignContentsAsSun();
+    }    
 
     private void alignContentsInCircleWithCenter(Content content)
     {
-        //content.alignCircle();
         getOrderKeeper().alignContentInCircleWithCenter(content);
     }
 
