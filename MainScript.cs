@@ -41,44 +41,25 @@ public class MainScript : MonoBehaviour {
         if (isPause) {
             GUILayout.Label("Game is paused!");
             if (GUILayout.Button("Line View"))
-                alignContentsInLine();
-            if (GUILayout.Button("Start Cube View"))
-                alignContentsInCube();
+                getOrderKeeper().GetComponent<LineView>().alignContents(getAllContents());
+            if (GUILayout.Button("Cube View"))
+                getOrderKeeper().GetComponent<CubeView>().alignContents(getAllContents());
             if (GUILayout.Button("Circle View"))
-                alignContentsInCircleWithCenter(getAllContents()[0]);
+                getOrderKeeper().GetComponent<CircleView>().alignContents(getAllContents()[0]);
             if (GUILayout.Button("Spiral View"))
-                alignContentsAsSun();
+                getOrderKeeper().GetComponent<SunView>().alignContents(getAllContents());
             if (GUILayout.Button("Close"))
                 isPause = togglePause();
         }
     }
 
-    private OrderKeeper getOrderKeeper()
+    private GameObject getOrderKeeper()
     {
-        Object[] objectOrderKeeper = FindObjectsOfType(typeof(OrderKeeper));
-        return (OrderKeeper)objectOrderKeeper[0];
+        GameObject objectOrderKeeper = GameObject.Find("OrderKeeper");
+        return objectOrderKeeper;
     }
 
-    //TODO move align methods to OrderKeeper
-    private void alignContentsInLine()
-    {
-        getOrderKeeper().alignContentsInLine();
-    }
-
-    private void alignContentsInCube()
-    {
-        getOrderKeeper().alignContentsInCube();
-    }
-
-    private void alignContentsAsSun()
-    {
-        getOrderKeeper().alignContentsAsSun();
-    }    
-
-    private void alignContentsInCircleWithCenter(Content content)
-    {
-        getOrderKeeper().alignContentInCircleWithCenter(content);
-    }
+  
 
     bool togglePause()
     {
