@@ -29,4 +29,14 @@ public class SunView : MonoBehaviour {
             i++;
         }
     }
+    public void alignSpiralRotate(List<Content> contentList)
+    {
+        Spiral spiral = new Spiral(new Vector3(0f,0f,0f), 45f);
+        int i = 0;
+        foreach (Content content in contentList)
+        {
+            content.transform.position = spiral.getPosForElement(i);
+            i++;
+        }
+    }
 }

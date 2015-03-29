@@ -6,7 +6,7 @@ public class Spiral {
 
 
     Vector3 startPosition = new Vector3(0f, 0f, 0f);
-    Vector3 direction = new Vector3(0f, 0f, 0f);
+    float rotationYDegree;
     float currX;
     float currY;
     float currZ;
@@ -17,11 +17,11 @@ public class Spiral {
     public Spiral()
     {
     }    
-    
-    // TODO Implement direction
-    public Spiral(Vector3 startPosition, Vector3 direction)
+
+    public Spiral(Vector3 startPosition, float rotationYDegree)
     {
         this.startPosition = startPosition;
+        this.rotationYDegree = rotationYDegree;
     }
 
     public Spiral(float radius, Vector3 startPosition, int numberOfElementsPerCircle, float zAxisOffset)
@@ -43,8 +43,10 @@ public class Spiral {
         currY = startPosition.y + Mathf.Sin(angleRad) * radius;
         currZ = startPosition.z + elementNumber * zAxisOffset;
 
+        Vector3 currVector = new Vector3(currX, currY, currZ);
+        currVector = Quaternion.Euler(0, rotationYDegree, 0) * currVector;
 
-        return new Vector3(currX, currY, currZ);
+        return currVector;
 
     }
 

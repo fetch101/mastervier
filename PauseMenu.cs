@@ -38,6 +38,8 @@ public class PauseMenu : MonoBehaviour {
                 getOrderKeeper().GetComponent<CircleView>().alignContents(GameObject.Find("DarioSala_p5_12").GetComponent<Content>());
             if (GUILayout.Button("Spiral View"))
                 getOrderKeeper().GetComponent<SunView>().alignContents(getAllContents());
+            if (GUILayout.Button("Rotated Spiral View"))
+                getOrderKeeper().GetComponent<SunView>().alignSpiralRotate(getAllContents());
             if (GUILayout.Button("Wordcloud"))
                 getOrderKeeper().GetComponent<WordCloud>().drawCloud(getAllContents());
             //if (GUILayout.Button("Close"))
