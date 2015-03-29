@@ -25,8 +25,8 @@ public class WordCloud : MonoBehaviour {
         float currX = 100;
         float currY = 100;
         float currZ = 0;
-        float offsetX = 10;
-        float offsetY = 10;
+        float offsetX = 5;
+        float offsetY = 12;
         int pos = 0;
         foreach (KeyValuePair<string,int> tag in tagDic)
         {
@@ -37,8 +37,10 @@ public class WordCloud : MonoBehaviour {
             float percent = ((float)tag.Value / maxCount) * 100f;
             currMesh.text = tag.Key;
             currMesh.fontSize = calculateFontSize(percent);
+            currMesh.color = Color.black;
             currTag.transform.position = new Vector3(currX, currY, currZ);
-            currX += offsetX;
+            BoxCollider collider = currTag.AddComponent<BoxCollider>();
+            currX += collider.size.x + offsetX;
             if (pos > Mathf.Sqrt(tagDic.Count))
             {
                 currY += offsetY;
