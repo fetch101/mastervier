@@ -9,6 +9,10 @@ public class PauseMenu : MonoBehaviour {
     // Use this for initialization
     void Start()
     {
+        Cursor.lockState = CursorLockMode.Confined;
+        Cursor.visible = true;
+        isPause = true;
+        getOrderKeeper().GetComponent<CubeView>().alignContents(getAllContents());
     }
 
     // Update is called once per frame
@@ -16,7 +20,7 @@ public class PauseMenu : MonoBehaviour {
     {
         if (Input.GetKeyDown(KeyCode.Escape))
         {
-            isPause = togglePause();
+            togglePause();
         }
 
     }
@@ -59,25 +63,33 @@ public class PauseMenu : MonoBehaviour {
         return contentList;
     }
 
-    bool togglePause()
+    void togglePause()
     {
-        if (Time.timeScale == 0f)
+        if (isPause)
         {
-            Time.timeScale = 1f;
-            MouseLook.instance.enabled = true;
-            Spectator.instance.enabled = true;
-            Cursor.lockState = CursorLockMode.Locked;
-            Cursor.visible = false;
-            return (false);
+            setUnPause();
         }
         else
         {
-            Time.timeScale = 0f;
-            MouseLook.instance.enabled = false;
-            Spectator.instance.enabled = false;
-            Cursor.lockState = CursorLockMode.Confined;
-            Cursor.visible = true;
-            return (true);
+            setPause();
         }
+    }
+
+    private void setUnPause()
+    {
+        MouseLook.instance.enabled = true;
+        Spectator.instance.enabled = true;
+        Cursor.lockState = CursorLockMode.Locked;
+        Cursor.visible = false;
+        isPause = false;
+    }
+
+    private void setPause()
+    {
+        MouseLook.instance.enabled = false;
+        Spectator.instance.enabled = false;
+        Cursor.lockState = CursorLockMode.Confined;
+        Cursor.visible = true;
+        isPause = true;
     }
 }

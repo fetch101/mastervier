@@ -13,6 +13,7 @@ public class Spectator : MonoBehaviour
     void Start()
     {
         instance = this;
+        this.enabled = false;
     }
 
     // Update is called once per frame
