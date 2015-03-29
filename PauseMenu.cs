@@ -35,7 +35,6 @@ public class PauseMenu : MonoBehaviour {
             if (GUILayout.Button("Cube View"))
                 getOrderKeeper().GetComponent<CubeView>().alignContents(getAllContents());
             if (GUILayout.Button("Circle View"))
-                getOrderKeeper().GetComponent<CircleView>().alignContents(getAllContents()[0]);
             if (GUILayout.Button("Spiral View"))
                 getOrderKeeper().GetComponent<SunView>().alignContents(getAllContents());
             //if (GUILayout.Button("Close"))
