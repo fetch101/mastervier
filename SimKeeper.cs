@@ -8,29 +8,12 @@ public class SimKeeper : MonoBehaviour {
     int[,] simTable;
     public int threshold;
 
-	// Use this for initialization
+
 	void Start () {
         contentList = getAllContents();
         buildSimTable();
         spawnLineRenderers();
-
-        //for (int y = 0; y < contentList.Count; y++)
-        //{
-        //    string line = "";
-        //    for (int x = 0; x < contentList.Count; x++)
-        //    {
-        //        line = line + "," +simTable[x, y];
-        //    }
-
-        //    Debug.Log("I am: " + contentList[y] + " sim: " + line);
-        //}
-        //List<KeyValuePair<Content, int>> simList = getSimListForContent(contentList[1]);
-        //foreach (KeyValuePair<Content, int> pair in simList)
-        //{
-        //    Debug.Log("I am: " + contentList[1] + " sim: " + pair.Value + " to " + pair.Key);
-        //}
-
-	}
+    }
 
 
     private void buildSimTable()
@@ -58,7 +41,6 @@ public class SimKeeper : MonoBehaviour {
                 score++;
             }
         }
-
         int metaScore = 0;
         List<string> metaTagListY = contentY.getMetaTagList();
         List<string> metaTagListX = contentX.getMetaTagList();
@@ -133,7 +115,6 @@ public class SimKeeper : MonoBehaviour {
         return simList;
     }
 	
-	// Update is called once per frame
 	void Update () {
 	
 	}

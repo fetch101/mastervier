@@ -10,23 +10,7 @@ public class MainScript : MonoBehaviour {
     // Use this for initialization
 	void Start () {
     }
-
-    private List<Content> getAllContents()
-    {
-       
-        Object[] objectContents = FindObjectsOfType(typeof(Content));
-        
-        List<Content> contentList = new List<Content>();
-        foreach (Object obj in objectContents)
-        {
-            contentList.Add((Content)obj);
-        }
-        return contentList;
-    }
-
-  
-
-    	
+        	
 	// Update is called once per frame
 	void Update () {
         if (Input.GetKeyDown(KeyCode.Escape))
@@ -59,7 +43,19 @@ public class MainScript : MonoBehaviour {
         return objectOrderKeeper;
     }
 
-  
+
+    private List<Content> getAllContents()
+    {
+
+        Object[] objectContents = FindObjectsOfType(typeof(Content));
+
+        List<Content> contentList = new List<Content>();
+        foreach (Object obj in objectContents)
+        {
+            contentList.Add((Content)obj);
+        }
+        return contentList;
+    }
 
     bool togglePause()
     {

@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
+using System;
 
 public class CubeView : MonoBehaviour {
 
@@ -41,8 +42,7 @@ public class CubeView : MonoBehaviour {
 
     private int getCubeDegree(int numberOfContents)
     {
-        //TODO round degree to next higher int 
-        float degree = Mathf.Pow(numberOfContents, 1f / 3f);
-        return (int)degree + 1;
+        double degree = Mathf.Pow(numberOfContents, 1f / 3f);
+        return (int)Math.Round(degree, MidpointRounding.AwayFromZero);
     }
 }
