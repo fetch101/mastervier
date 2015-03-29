@@ -4,13 +4,15 @@ using System.Collections;
 public class Spectator : MonoBehaviour
 {
 
+    public static Spectator instance;
+
     //initial speed
     public int speed = 40;
 
     // Use this for initialization
     void Start()
     {
-
+        instance = this;
     }
 
     // Update is called once per frame
