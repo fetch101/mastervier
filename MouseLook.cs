@@ -13,12 +13,10 @@ public class MouseLook : MonoBehaviour
     Vector2 _smoothMouse;
 
     public Vector2 clampInDegrees = new Vector2(360, 180);
-    public bool lockCursor;
     public Vector2 sensitivity = new Vector2(2, 2);
     public Vector2 smoothing = new Vector2(3, 3);
     public Vector2 targetDirection;
     public Vector2 targetCharacterDirection;
-    public bool isPause = false;
 
     // Assign this if there's a parent object controlling motion, such as a Character Controller.
     // Yaw rotation will affect this object instead of the camera if set.
@@ -37,9 +35,7 @@ public class MouseLook : MonoBehaviour
 
     void Update()
     {
-        
-        // Ensure the cursor is always locked when set
-        Screen.lockCursor = lockCursor;
+
 
         // Allow the script to clamp based on a desired target value.
         var targetOrientation = Quaternion.Euler(targetDirection);

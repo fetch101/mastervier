@@ -66,6 +66,8 @@ public class PauseMenu : MonoBehaviour {
             Time.timeScale = 1f;
             MouseLook.instance.enabled = true;
             Spectator.instance.enabled = true;
+            Cursor.lockState = CursorLockMode.Locked;
+            Cursor.visible = false;
             return (false);
         }
         else
@@ -73,6 +75,8 @@ public class PauseMenu : MonoBehaviour {
             Time.timeScale = 0f;
             MouseLook.instance.enabled = false;
             Spectator.instance.enabled = false;
+            Cursor.lockState = CursorLockMode.Confined;
+            Cursor.visible = true;
             return (true);
         }
     }
