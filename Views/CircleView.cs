@@ -15,7 +15,6 @@ public class CircleView : MonoBehaviour {
 	}
 
  
-    //TODO update this if similarities change
     public void alignContents(Content center)
     {
         SimKeeper simKeeper = getSimKeeper();

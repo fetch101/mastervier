@@ -45,6 +45,7 @@ public class PauseMenu : MonoBehaviour {
                 getOrderKeeper().GetComponent<WordCloud>().drawCloud(getAllContents());
             //if (GUILayout.Button("Close"))
             //    isPause = togglePause();
+            //TODO Who shoud to this? pause menu oder simkeeper? also who sets startvalue?
             int thresholdOld = threshold;
             threshold = (int)GUI.VerticalSlider(new Rect(1200, 25, 100, 300), (float)threshold, 10.0F, 0.0F);
             if (thresholdChanged(threshold, thresholdOld))
