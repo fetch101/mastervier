@@ -35,7 +35,6 @@ public class WordCloud : MonoBehaviour {
             TextMesh currMesh = currTag.AddComponent<TextMesh>();
             float maxCount = getMaxValue(tagDic);
             float percent = ((float)tag.Value / maxCount) * 100f;
-            Debug.Log(percent);
             currMesh.text = tag.Key;
             currMesh.fontSize = calculateFontSize(percent);
             currTag.transform.position = new Vector3(currX, currY, currZ);
