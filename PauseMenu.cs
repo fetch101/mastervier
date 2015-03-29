@@ -35,8 +35,11 @@ public class PauseMenu : MonoBehaviour {
             if (GUILayout.Button("Cube View"))
                 getOrderKeeper().GetComponent<CubeView>().alignContents(getAllContents());
             if (GUILayout.Button("Circle View"))
+                getOrderKeeper().GetComponent<CircleView>().alignContents(GameObject.Find("DarioSala_p5_Fragestellung").GetComponent<Content>());
             if (GUILayout.Button("Spiral View"))
                 getOrderKeeper().GetComponent<SunView>().alignContents(getAllContents());
+            if (GUILayout.Button("Wordcloud"))
+                getOrderKeeper().GetComponent<WordCloud>().drawCloud(getAllContents());
             //if (GUILayout.Button("Close"))
             //    isPause = togglePause();
         }
