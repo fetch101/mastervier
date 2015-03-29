@@ -48,7 +48,6 @@ public class PauseMenu : MonoBehaviour {
             //TODO Who shoud to this? pause menu oder simkeeper? also who sets startvalue?
             int thresholdOld = threshold;
             threshold = (int)GUI.VerticalSlider(new Rect(1220, 25, 100, 300), (float)threshold, 10.0F, 0.0F);
-            Debug.Log("screen width: " + Screen.width);
             if (thresholdChanged(threshold, thresholdOld))
             {
                 SimKeeper.instance.thresholdChanged(threshold);
