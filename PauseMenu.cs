@@ -5,6 +5,7 @@ using System.Collections.Generic;
 public class PauseMenu : MonoBehaviour {
 
     private bool isPause;
+    public int threshold = 3;
 
     // Use this for initialization
     void Start()
@@ -44,7 +45,25 @@ public class PauseMenu : MonoBehaviour {
                 getOrderKeeper().GetComponent<WordCloud>().drawCloud(getAllContents());
             //if (GUILayout.Button("Close"))
             //    isPause = togglePause();
+            int thresholdOld = threshold;
+            threshold = (int)GUI.VerticalSlider(new Rect(1200, 25, 100, 300), (float)threshold, 10.0F, 0.0F);
+            if (thresholdChanged(threshold, thresholdOld))
+            {
+                SimKeeper.instance.thresholdChanged(threshold);
+            }
+           
+
         }
+    }
+
+    private bool thresholdChanged(int thresholdNew, int thresholdOld)
+    {
+        if (thresholdNew != thresholdOld)
+        {
+            threshold = thresholdNew;
+            return true;
+        }
+        return false;
     }
 
     private GameObject getOrderKeeper()
@@ -52,7 +71,6 @@ public class PauseMenu : MonoBehaviour {
         GameObject objectOrderKeeper = GameObject.Find("OrderKeeper");
         return objectOrderKeeper;
     }
-
 
     private List<Content> getAllContents()
     {

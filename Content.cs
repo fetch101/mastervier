@@ -49,7 +49,7 @@ public class Content : MonoBehaviour {
 	void Update()
 	{
 		drawLines();
-		aligneObjectToCamera ();
+		aligneObjectToCamera();
 	}
 
     public void drawLines()
@@ -149,5 +149,10 @@ public class Content : MonoBehaviour {
     public void addLine(LineRenderer linerenderer, int vertex)
     {
         lineList.Add(new KeyValuePair<LineRenderer, int>(linerenderer, vertex));
+    }
+
+    public void removeLines()
+    {
+        lineList.RemoveRange(0, lineList.Count);
     }
 }

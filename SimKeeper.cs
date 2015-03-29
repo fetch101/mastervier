@@ -5,11 +5,16 @@ using System.Collections.Generic;
 public class SimKeeper : MonoBehaviour {
 
     List<Content> contentList;
+    List<GameObject> lineRenderList = new List<GameObject>();
     int[,] simTable;
-    public int threshold;
+    public int startThreshold = 3;
+
+    public static SimKeeper instance;
+
 
 
 	void Start () {
+        instance = this;
         contentList = getAllContents();
         buildSimTable();
         spawnLineRenderers();
@@ -63,7 +68,7 @@ public class SimKeeper : MonoBehaviour {
             for (int y = x + 1; y < contentList.Count; y++)
             {
                 int score = simTable[x,y];
-                if (score >= threshold)
+                if (score >= startThreshold)
                 {
                     LineRenderer line = getNewLine();
                     contentList[y].addLine(line, vertexY);
@@ -81,6 +86,7 @@ public class SimKeeper : MonoBehaviour {
         linerenderer.SetWidth(0.08f, 0.08f);
         linerenderer.SetColors(Color.white, Color.white);
         linerenderer.material = new Material(Shader.Find("Unlit/Texture"));
+        lineRenderList.Add(lineObject);
         return linerenderer;
     }
 
@@ -118,4 +124,34 @@ public class SimKeeper : MonoBehaviour {
 	void Update () {
 	
 	}
+
+    void OnGUI()
+    {
+        
+    }
+
+    public void thresholdChanged(int threshold)
+    {
+        this.startThreshold = threshold;
+        removeLinesFromContent();
+        destroyLineRenderObjects();
+        spawnLineRenderers();
+    }
+
+    private void destroyLineRenderObjects()
+    {
+        foreach (GameObject lineRenderer in lineRenderList)
+        {
+            GameObject.Destroy(lineRenderer);
+        }
+        lineRenderList.RemoveRange(0, lineRenderList.Count);
+    }
+
+    private void removeLinesFromContent()
+    {
+        foreach (Content content in contentList)
+        {
+            content.removeLines();
+        }
+    }
 }
