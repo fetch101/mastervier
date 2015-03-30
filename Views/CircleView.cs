@@ -21,8 +21,7 @@ public class CircleView : MonoBehaviour, IView {
  
     public void alignContents(Content center)
     {
-        SimKeeper simKeeper = getSimKeeper();
-        List<KeyValuePair<Content, int>> simList = simKeeper.getSimListForContent(center);
+        List<KeyValuePair<Content, int>> simList = getSimKeeper().getSimListForContent(center);
         float currRadius = 0;
         center.transform.position = new Vector3(0f, 0f, 0f);
 
