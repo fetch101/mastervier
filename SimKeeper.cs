@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
+using System;
 
 public class SimKeeper : MonoBehaviour {
 
@@ -92,9 +93,7 @@ public class SimKeeper : MonoBehaviour {
         {
             for (int y = x + 1; y < contentList.Count; y++)
             {
-                float score = simTable[x,y] / 100f * tagWeight + metaSimTable[x,y] / 100f * metaTagWeight;
-                //Debug.Log("score: " + score + " tagweight: " + tagWeight + " metatag weight: " + metaTagWeight);
-                //Debug.Log("score: " + score + " tag score: " + simTable[x, y] + " metatag score: " + metaSimTable[x, y]);
+                int score = (int)Math.Round(simTable[x,y] / 100f * tagWeight + metaSimTable[x,y] / 100f * metaTagWeight, MidpointRounding.AwayFromZero);
                 if (score >= threshold)
                 {
                     LineRenderer line = getNewLine();
@@ -119,10 +118,10 @@ public class SimKeeper : MonoBehaviour {
 
     private List<Content> getAllContents()
     {
-        Object[] objectContents = FindObjectsOfType(typeof(Content));
+        UnityEngine.Object[] objectContents = FindObjectsOfType(typeof(Content));
 
         List<Content> contentList = new List<Content>();
-        foreach (Object obj in objectContents)
+        foreach (UnityEngine.Object obj in objectContents)
         {
             contentList.Add((Content)obj);
         }
@@ -165,7 +164,6 @@ public class SimKeeper : MonoBehaviour {
 
         GUI.Label(new Rect(1040, 95, 200, Screen.height), "Meta Tag Weight: " + metaTagWeight + "%");
         newMetaTagWeight = (int)GUI.HorizontalSlider(new Rect(1040, 115, 300, 25), (float)metaTagWeight, 100.0F, 0.0F);
-        metaTagWeight = newMetaTagWeight;
 
         if (threshold != newThreshold || metaTagWeight != newMetaTagWeight || tagWeight != newTagWeight)
         {
