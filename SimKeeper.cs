@@ -15,6 +15,7 @@ public class SimKeeper : MonoBehaviour {
     private int newThreshold;
     private int newTagWeight;
     private int newMetaTagWeight;
+    private int[,] metaSimTable;
 
 
 
@@ -22,6 +23,7 @@ public class SimKeeper : MonoBehaviour {
         instance = this;
         contentList = getAllContents();
         buildSimTable();
+        buildMetaSimTable();
         spawnLineRenderers();
     }
 
@@ -38,6 +40,33 @@ public class SimKeeper : MonoBehaviour {
         }
     }
 
+    private void buildMetaSimTable()
+    {
+        metaSimTable = new int[contentList.Count, contentList.Count];
+        for (int y = 0; y < contentList.Count; y++)
+        {
+            for (int x = 0; x < contentList.Count; x++)
+            {
+                metaSimTable[x, y] = getMetaScore(contentList[x], contentList[y]);
+            }
+        }
+    }
+
+    private int getMetaScore(Content contentX, Content contentY)
+    {
+        int metaScore = 0;
+        List<string> metaTagListY = contentY.getMetaTagList();
+        List<string> metaTagListX = contentX.getMetaTagList();
+        foreach (string metaTagX in metaTagListX)
+        {
+            if (metaTagListY.Contains(metaTagX))
+            {
+                metaScore++;
+            }
+        }
+        return metaScore;
+    }
+
 
     private int getScore(Content contentX, Content contentY){
 
@@ -51,17 +80,8 @@ public class SimKeeper : MonoBehaviour {
                 score++;
             }
         }
-        int metaScore = 0;
-        List<string> metaTagListY = contentY.getMetaTagList();
-        List<string> metaTagListX = contentX.getMetaTagList();
-        foreach (string metaTagX in metaTagListX)
-        {
-            if (metaTagListY.Contains(metaTagX))
-            {
-                metaScore++;
-            }
-        }
-        return score + metaScore;
+       
+        return score;
     }
 
     private void spawnLineRenderers()
@@ -72,7 +92,9 @@ public class SimKeeper : MonoBehaviour {
         {
             for (int y = x + 1; y < contentList.Count; y++)
             {
-                int score = simTable[x,y];
+                float score = simTable[x,y] / 100f * tagWeight + metaSimTable[x,y] / 100f * metaTagWeight;
+                //Debug.Log("score: " + score + " tagweight: " + tagWeight + " metatag weight: " + metaTagWeight);
+                //Debug.Log("score: " + score + " tag score: " + simTable[x, y] + " metatag score: " + metaSimTable[x, y]);
                 if (score >= threshold)
                 {
                     LineRenderer line = getNewLine();
@@ -135,22 +157,25 @@ public class SimKeeper : MonoBehaviour {
 
         
         newThreshold = (int)GUI.HorizontalSlider(new Rect(1040, 35, 300, 25), (float)threshold, 10.0F, 0.0F);
-        if (threshold != newThreshold)
-        {
-            threshold = newThreshold;
-            removeLinesFromContent();
-            destroyLineRenderObjects();
-            spawnLineRenderers();
-        }
+        
         GUI.Label(new Rect(1040, 15, 200, Screen.height), "Current Threshold: " + threshold);
 
         GUI.Label(new Rect(1040, 55, 200, Screen.height), "Tag Weight: " + tagWeight + "%");
         newTagWeight = (int)GUI.HorizontalSlider(new Rect(1040, 75, 300, 25), (float)tagWeight, 100.0F, 0.0F);
-        tagWeight = newTagWeight;
 
         GUI.Label(new Rect(1040, 95, 200, Screen.height), "Meta Tag Weight: " + metaTagWeight + "%");
         newMetaTagWeight = (int)GUI.HorizontalSlider(new Rect(1040, 115, 300, 25), (float)metaTagWeight, 100.0F, 0.0F);
         metaTagWeight = newMetaTagWeight;
+
+        if (threshold != newThreshold || metaTagWeight != newMetaTagWeight || tagWeight != newTagWeight)
+        {
+            threshold = newThreshold;
+            tagWeight = newTagWeight;
+            metaTagWeight = newMetaTagWeight;
+            removeLinesFromContent();
+            destroyLineRenderObjects();
+            spawnLineRenderers();
+        }
         
     }
     
