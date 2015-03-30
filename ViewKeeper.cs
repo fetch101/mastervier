@@ -39,7 +39,7 @@ public class ViewKeeper : MonoBehaviour {
 
     public void sunView()
     {
-        this.GetComponent<SunView>().alignContents(getAllContents());
+        changeCurrentView(this.GetComponent<SunView>());
     }
 
     public void wordCloud()
