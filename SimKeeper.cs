@@ -7,10 +7,14 @@ public class SimKeeper : MonoBehaviour {
     List<Content> contentList;
     List<GameObject> lineRenderList = new List<GameObject>();
     int[,] simTable;
-    public int startThreshold = 3;
     private int threshold = 3;
 
     public static SimKeeper instance;
+    private int tagWeight = 100;
+    private int metaTagWeight = 100;
+    private int newThreshold;
+    private int newTagWeight;
+    private int newMetaTagWeight;
 
 
 
@@ -69,7 +73,7 @@ public class SimKeeper : MonoBehaviour {
             for (int y = x + 1; y < contentList.Count; y++)
             {
                 int score = simTable[x,y];
-                if (score >= startThreshold)
+                if (score >= threshold)
                 {
                     LineRenderer line = getNewLine();
                     contentList[y].addLine(line, vertexY);
@@ -129,29 +133,27 @@ public class SimKeeper : MonoBehaviour {
     void OnGUI()
     {
 
-        int thresholdOld = threshold;
-        threshold = (int)GUI.VerticalSlider(new Rect(1220, 25, 100, 300), (float)threshold, 10.0F, 0.0F);
-        if (thresholdHasChanged(threshold, thresholdOld))
+        
+        newThreshold = (int)GUI.HorizontalSlider(new Rect(1040, 35, 300, 25), (float)threshold, 10.0F, 0.0F);
+        if (threshold != newThreshold)
         {
-            startThreshold = threshold;
+            threshold = newThreshold;
             removeLinesFromContent();
             destroyLineRenderObjects();
             spawnLineRenderers();
         }
-        GUI.Label(new Rect(Screen.width - 130, 25, 200, Screen.height), "Current Threshold: " + threshold);
+        GUI.Label(new Rect(1040, 15, 200, Screen.height), "Current Threshold: " + threshold);
+
+        GUI.Label(new Rect(1040, 55, 200, Screen.height), "Tag Weight: " + tagWeight + "%");
+        newTagWeight = (int)GUI.HorizontalSlider(new Rect(1040, 75, 300, 25), (float)tagWeight, 100.0F, 0.0F);
+        tagWeight = newTagWeight;
+
+        GUI.Label(new Rect(1040, 95, 200, Screen.height), "Meta Tag Weight: " + metaTagWeight + "%");
+        newMetaTagWeight = (int)GUI.HorizontalSlider(new Rect(1040, 115, 300, 25), (float)metaTagWeight, 100.0F, 0.0F);
+        metaTagWeight = newMetaTagWeight;
         
     }
-
-    private bool thresholdHasChanged(int thresholdNew, int thresholdOld)
-    {
-        if (thresholdNew != thresholdOld)
-        {
-            threshold = thresholdNew;
-            return true;
-        }
-        return false;
-    }
-
+    
     private void destroyLineRenderObjects()
     {
         foreach (GameObject lineRenderer in lineRenderList)
