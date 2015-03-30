@@ -13,7 +13,6 @@ public class PauseMenu : MonoBehaviour {
         Cursor.lockState = CursorLockMode.Confined;
         Cursor.visible = true;
         isPause = true;
-        getOrderKeeper().GetComponent<CubeView>().alignContents(getAllContents());
     }
 
     // Update is called once per frame
@@ -32,20 +31,20 @@ public class PauseMenu : MonoBehaviour {
         {
             GUILayout.Label("Game is paused!");
             if (GUILayout.Button("Line View"))
-                getOrderKeeper().GetComponent<LineView>().alignContents(getAllContents());
+                ViewKeeper.instance.lineView();
             if (GUILayout.Button("Cube View"))
-                getOrderKeeper().GetComponent<CubeView>().alignContents(getAllContents());
+                ViewKeeper.instance.cubeView();
             if (GUILayout.Button("Circle View"))
-                getOrderKeeper().GetComponent<CircleView>().alignContents(GameObject.Find("DarioSala_p5_12").GetComponent<Content>());
+                ViewKeeper.instance.circleView(GameObject.Find("DarioSala_p5_12").GetComponent<Content>());
             if (GUILayout.Button("Spiral View"))
-                getOrderKeeper().GetComponent<SunView>().alignContents(getAllContents());
-            if (GUILayout.Button("Rotated Spiral View"))
-                getOrderKeeper().GetComponent<SunView>().alignSpiralRotate(getAllContents());
+                ViewKeeper.instance.sunView();
+            if (GUILayout.Button("TEST Rotated Spiral View"))
+                ViewKeeper.instance.alignSpiralRotate();
             if (GUILayout.Button("Wordcloud"))
-                getOrderKeeper().GetComponent<WordCloud>().drawCloud(getAllContents());
+                ViewKeeper.instance.wordCloud();
             //if (GUILayout.Button("Close"))
             //    isPause = togglePause();
-            //TODO Who shoud to this? pause menu oder simkeeper? also who sets startvalue?
+            //TODO Who should to this? pause menu oder simkeeper? also who sets startvalue?
             int thresholdOld = threshold;
             threshold = (int)GUI.VerticalSlider(new Rect(1220, 25, 100, 300), (float)threshold, 10.0F, 0.0F);
             if (thresholdChanged(threshold, thresholdOld))
