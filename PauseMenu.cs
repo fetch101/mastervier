@@ -39,7 +39,7 @@ public class PauseMenu : MonoBehaviour {
                 ViewKeeper.instance.sunView();
             if (GUILayout.Button("TEST Rotated Spiral View"))
                 ViewKeeper.instance.alignSpiralRotate();
-            if (GUILayout.Button("Wordcloud"))
+            if (GUILayout.Button("TEST Wordcloud"))
                 ViewKeeper.instance.wordCloud();          
 
         }

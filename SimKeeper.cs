@@ -128,6 +128,7 @@ public class SimKeeper : MonoBehaviour {
         return contentList;
     }
 
+    //TODO use weight for this? circle view uses this to calculate view
     public List<KeyValuePair<Content, int>> getSimListForContent(Content content)
     {
         List<KeyValuePair<Content, int>> simList = new List<KeyValuePair<Content, int>>();
@@ -135,7 +136,7 @@ public class SimKeeper : MonoBehaviour {
         int contentIndex = contentList.IndexOf(content);
         for (int i = 0; i < contentList.Count; i++)
         {
-            int score = simTable[contentIndex,i];
+            int score = simTable[contentIndex, i] + metaSimTable[contentIndex, i];
             Content neighbor = contentList[i];
             if (neighbor != content)
             {
@@ -157,6 +158,7 @@ public class SimKeeper : MonoBehaviour {
         
         newThreshold = (int)GUI.HorizontalSlider(new Rect(1040, 35, 300, 25), (float)threshold, 10.0F, 0.0F);
         
+        GUI.contentColor = Color.black;
         GUI.Label(new Rect(1040, 15, 200, Screen.height), "Current Threshold: " + threshold);
 
         GUI.Label(new Rect(1040, 55, 200, Screen.height), "Tag Weight: " + tagWeight + "%");
