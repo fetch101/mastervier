@@ -30,17 +30,11 @@ public class WordCloud : MonoBehaviour {
         int pos = 0;
         foreach (KeyValuePair<string,int> tag in tagDic)
         {
-
-            GameObject currTag = new GameObject();
-            TextMesh currMesh = currTag.AddComponent<TextMesh>();
             float maxCount = getMaxValue(tagDic);
             float percent = ((float)tag.Value / maxCount) * 100f;
-            currMesh.text = tag.Key;
-            currMesh.fontSize = calculateFontSize(percent);
-            currMesh.color = Color.black;
-            currTag.transform.position = new Vector3(currX, currY, currZ);
-            BoxCollider collider = currTag.AddComponent<BoxCollider>();
-            currX += collider.size.x + offsetX;
+
+            GameObject currTag = createTag(currX, currY, currZ, tag.Key, percent);
+            currX += currTag.GetComponent<BoxCollider>().size.x + offsetX;
             if (pos > Mathf.Sqrt(tagDic.Count))
             {
                 currY += offsetY;
@@ -50,6 +44,18 @@ public class WordCloud : MonoBehaviour {
             pos++;
             
         }
+    }
+
+    private GameObject createTag(float currX, float currY, float currZ, string tag, float percent)
+    {
+        GameObject currTag = new GameObject();
+        TextMesh currMesh = currTag.AddComponent<TextMesh>();
+        currMesh.text = tag;
+        currMesh.fontSize = calculateFontSize(percent);
+        currMesh.color = Color.black;
+        currTag.transform.position = new Vector3(currX, currY, currZ);
+        BoxCollider collider = currTag.AddComponent<BoxCollider>();
+        return currTag;
     }
 
     private float getMaxValue(SortedDictionary<string, int> tagDic)

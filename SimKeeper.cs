@@ -8,6 +8,7 @@ public class SimKeeper : MonoBehaviour {
     List<GameObject> lineRenderList = new List<GameObject>();
     int[,] simTable;
     public int startThreshold = 3;
+    private int threshold = 3;
 
     public static SimKeeper instance;
 
@@ -127,15 +128,28 @@ public class SimKeeper : MonoBehaviour {
 
     void OnGUI()
     {
+
+        int thresholdOld = threshold;
+        threshold = (int)GUI.VerticalSlider(new Rect(1220, 25, 100, 300), (float)threshold, 10.0F, 0.0F);
+        if (thresholdHasChanged(threshold, thresholdOld))
+        {
+            startThreshold = threshold;
+            removeLinesFromContent();
+            destroyLineRenderObjects();
+            spawnLineRenderers();
+        }
+        GUI.Label(new Rect(Screen.width - 130, 25, 200, Screen.height), "Current Threshold: " + threshold);
         
     }
 
-    public void thresholdChanged(int threshold)
+    private bool thresholdHasChanged(int thresholdNew, int thresholdOld)
     {
-        this.startThreshold = threshold;
-        removeLinesFromContent();
-        destroyLineRenderObjects();
-        spawnLineRenderers();
+        if (thresholdNew != thresholdOld)
+        {
+            threshold = thresholdNew;
+            return true;
+        }
+        return false;
     }
 
     private void destroyLineRenderObjects()

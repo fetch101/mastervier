@@ -5,7 +5,6 @@ using System.Collections.Generic;
 public class PauseMenu : MonoBehaviour {
 
     private bool isPause;
-    public int threshold = 3;
 
     // Use this for initialization
     void Start()
@@ -41,36 +40,9 @@ public class PauseMenu : MonoBehaviour {
             if (GUILayout.Button("TEST Rotated Spiral View"))
                 ViewKeeper.instance.alignSpiralRotate();
             if (GUILayout.Button("Wordcloud"))
-                ViewKeeper.instance.wordCloud();
-            //if (GUILayout.Button("Close"))
-            //    isPause = togglePause();
-            //TODO Who should to this? pause menu oder simkeeper? also who sets startvalue?
-            int thresholdOld = threshold;
-            threshold = (int)GUI.VerticalSlider(new Rect(1220, 25, 100, 300), (float)threshold, 10.0F, 0.0F);
-            if (thresholdChanged(threshold, thresholdOld))
-            {
-                SimKeeper.instance.thresholdChanged(threshold);
-            }
-            GUI.Label(new Rect(Screen.width - 130, 25, 200, Screen.height), "Current Threshold: " + threshold);
-           
+                ViewKeeper.instance.wordCloud();          
 
         }
-    }
-
-    private bool thresholdChanged(int thresholdNew, int thresholdOld)
-    {
-        if (thresholdNew != thresholdOld)
-        {
-            threshold = thresholdNew;
-            return true;
-        }
-        return false;
-    }
-
-    private GameObject getOrderKeeper()
-    {
-        GameObject objectOrderKeeper = GameObject.Find("OrderKeeper");
-        return objectOrderKeeper;
     }
 
     private List<Content> getAllContents()
@@ -102,6 +74,7 @@ public class PauseMenu : MonoBehaviour {
     {
         MouseLook.instance.enabled = true;
         Spectator.instance.enabled = true;
+        SimKeeper.instance.enabled = false;
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
         isPause = false;
@@ -111,6 +84,7 @@ public class PauseMenu : MonoBehaviour {
     {
         MouseLook.instance.enabled = false;
         Spectator.instance.enabled = false;
+        SimKeeper.instance.enabled = true;
         Cursor.lockState = CursorLockMode.Confined;
         Cursor.visible = true;
         isPause = true;
