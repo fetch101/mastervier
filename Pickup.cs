@@ -27,7 +27,7 @@ public class Pickup : MonoBehaviour {
             setLock(true);
             
 
-
+			// TODO: boolean has object damitmer chan zweimal "t"
             if (Input.GetKeyDown("t"))
             {
                 hitcheck.collider.gameObject.transform.parent = this.transform;
