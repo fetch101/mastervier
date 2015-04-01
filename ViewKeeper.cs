@@ -5,13 +5,11 @@ using System.Collections.Generic;
 public class ViewKeeper : MonoBehaviour {
 
     public static ViewKeeper instance;
-    private IView currentView;
 
 	// Use this for initialization
 	void Start () {
         instance = this;
-        currentView = this.GetComponent<CubeView>();
-        changeCurrentView(this.GetComponent<CubeView>());
+        this.GetComponent<CubeView>().alignContents(getAllContents());
 	}
 	
 	// Update is called once per frame
@@ -21,25 +19,28 @@ public class ViewKeeper : MonoBehaviour {
 
     public void circleView(Content center)
     {
-        CircleView circleView = this.GetComponent<CircleView>();
-        circleView.setCenter(center);
-        changeCurrentView(circleView);
+        this.GetComponent<CircleView>().destroyLines();
+        this.GetComponent<CircleView>().alignContentsWithCenter(center);
+        this.GetComponent<CircleView>().drawLines();
     }
 
     public void cubeView()
     {
-        changeCurrentView(this.GetComponent<CubeView>());
+        this.GetComponent<CircleView>().destroyLines();
+        this.GetComponent<CubeView>().alignContents(getAllContents());
     }
 
     public void lineView()
     {
-        changeCurrentView(this.GetComponent<LineView>());
+        this.GetComponent<CircleView>().destroyLines();
+        this.GetComponent<LineView>().alignContents(getAllContents());
     }
 
 
     public void sunView()
     {
-        changeCurrentView(this.GetComponent<SunView>());
+        this.GetComponent<CircleView>().destroyLines();
+        this.GetComponent<SunView>().alignContents(getAllContents());
     }
 
     public void wordCloud()
@@ -49,15 +50,8 @@ public class ViewKeeper : MonoBehaviour {
 
     public void alignSpiralRotate()
     {
+        this.GetComponent<CircleView>().destroyLines();
         this.GetComponent<SunView>().alignSpiralRotate(getAllContents());
-    }
-
-    private void changeCurrentView(IView newView)
-    {
-        currentView.destroyLines();
-        currentView = newView;
-        currentView.alignContents(getAllContents());
-        currentView.drawLines();
     }
 
     private List<Content> getAllContents()

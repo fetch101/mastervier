@@ -2,7 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 
-public class SunView : MonoBehaviour, IView {
+public class SunView : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
@@ -40,13 +40,4 @@ public class SunView : MonoBehaviour, IView {
         }
     }
 
-    public void drawLines()
-    {
-        Debug.Log("SunView.drawlines not implemented");
-    }
-
-    public void destroyLines()
-    {
-        Debug.Log("SunView.destroyLines not implemented");
-    }
 }

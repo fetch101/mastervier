@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System;
 
-public class CubeView : MonoBehaviour, IView {
+public class CubeView : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
@@ -44,16 +44,6 @@ public class CubeView : MonoBehaviour, IView {
     {
         double degree = Mathf.Pow(numberOfContents, 1f / 3f);
         return (int)Math.Round(degree, MidpointRounding.AwayFromZero);
-    }
-
-    public void drawLines()
-    {
-        Debug.Log("CubeView.drawLines() not implemented!!");
-    }
-
-    public void destroyLines()
-    {
-        Debug.Log("CubeView.destroyLines() not implemented!!");
     }
 
 }

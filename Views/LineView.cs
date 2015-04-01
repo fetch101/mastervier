@@ -2,7 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 
-public class LineView : MonoBehaviour, IView{
+public class LineView : MonoBehaviour{
 
 	// Use this for initialization
 	void Start () {
@@ -22,15 +22,5 @@ public class LineView : MonoBehaviour, IView{
             cont.gameObject.transform.position = start;
             start.z += 60;
         }
-    }
-
-    public void drawLines()
-    {
-        Debug.Log("LineView.drawLines() not implemented!!");
-    }
-
-    public void destroyLines()
-    {
-        Debug.Log("LineView.destroyLines() not implemented!!");
     }
 }

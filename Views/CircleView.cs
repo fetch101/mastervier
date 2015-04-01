@@ -2,7 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 
-public class CircleView : MonoBehaviour, IView {
+public class CircleView : MonoBehaviour {
 
     private List<GameObject> lineList = new List<GameObject>();
     private List<float> radList = new List<float>();
@@ -19,7 +19,7 @@ public class CircleView : MonoBehaviour, IView {
 	}
 
  
-    public void alignContents(Content center)
+    public void alignContentsWithCenter(Content center)
     {
         List<KeyValuePair<Content, int>> simList = getSimKeeper().getSimListForContent(center);
         float currRadius = 0;
@@ -135,14 +135,4 @@ public class CircleView : MonoBehaviour, IView {
         radList.RemoveRange(0, radList.Count);
     }
 
-
-    public void alignContents(List<Content> contentList)
-    {
-        alignContents(center);
-    }
-
-    public void setCenter(Content center)
-    {
-        this.center = center;
-    }
 }
