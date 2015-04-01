@@ -156,7 +156,7 @@ public class SimKeeper : MonoBehaviour {
     {
 
         
-        newThreshold = (int)GUI.HorizontalSlider(new Rect(1040, 35, 300, 25), (float)threshold, 10.0F, 0.0F);
+        newThreshold = (int)GUI.HorizontalSlider(new Rect(1040, 35, 300, 25), (float)threshold, 15.0F, 0.0F);
         
         GUI.contentColor = Color.black;
         GUI.Label(new Rect(1040, 15, 200, Screen.height), "Current Threshold: " + threshold);
