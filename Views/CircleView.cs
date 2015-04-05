@@ -49,7 +49,7 @@ public class CircleView : MonoBehaviour {
         List<KeyValuePair<Content, int>> simList = getSimKeeper().getSimListForContent(center);
         float currRadius = 0;
         center.transform.position = new Vector3(0f, 0f, 0f);
-
+        
         while (simList.Count > 0)
         {
             int currValue = simList[0].Value;
@@ -57,7 +57,6 @@ public class CircleView : MonoBehaviour {
             currRadius = setNewRadius(currRadius, currContentCircle);
             Circle circle = new Circle(currRadius, 20f);
             radList.Add(currRadius);
-
             for (int i = 0; i < currContentCircle.Count; i++)
             {
                 currContentCircle[i].transform.position = circle.getNextPos();
