@@ -11,12 +11,22 @@ public class Circle {
     float currY;
     float currZ;
     Vector3 center = new Vector3(0f, 0f, 0f);
+    float startAngleRad;
+    float xOffset;
+    int currMultiplicator = 1;
 
 
     public Circle(float radius, int numberOfElements)
     {
         this.radius = radius;
         this.numberOfElements = numberOfElements;
+
+    }
+
+    public Circle(float radius, float xOffset)
+    {
+        this.radius = radius;
+        this.startAngleRad = Mathf.Asin(xOffset / radius);
 
     }
 
@@ -32,7 +42,9 @@ public class Circle {
 
     public Vector3 getPosForElement(int elementNumber)
     {
+
         float angle = 360 / numberOfElements * elementNumber;
+
         float angleRad = angle * Mathf.PI / 180;
 
         currX = Mathf.Cos(angleRad) * radius;
@@ -40,6 +52,25 @@ public class Circle {
 
 
         return new Vector3(center.x + currX, center.y + currY, center.z + currZ);
+    }
+
+    public Vector3 getNextPos()
+    {
+
+        float currAngleRad = startAngleRad * currMultiplicator;
+        Debug.Log("before: " + 360 / (Mathf.PI * 2) * currAngleRad);
+        currAngleRad = currAngleRad % (2 * Mathf.PI);
+        Debug.Log("after: " + 360/(Mathf.PI*2) *currAngleRad);
+
+        currX = Mathf.Cos(currAngleRad) * radius;
+        currY = Mathf.Sin(currAngleRad) * radius;
+
+        currMultiplicator++;
+        startAngleRad *= -1;
+        
+
+        return new Vector3(center.x + currX, center.y + currY, center.z + currZ);
+
     }
 
 }
