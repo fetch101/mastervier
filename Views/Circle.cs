@@ -58,9 +58,7 @@ public class Circle {
     {
 
         float currAngleRad = startAngleRad * currMultiplicator;
-        Debug.Log("before: " + 360 / (Mathf.PI * 2) * currAngleRad);
         currAngleRad = currAngleRad % (2 * Mathf.PI);
-        Debug.Log("after: " + 360/(Mathf.PI*2) *currAngleRad);
 
         currX = Mathf.Cos(currAngleRad) * radius;
         currY = Mathf.Sin(currAngleRad) * radius;
