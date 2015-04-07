@@ -43,7 +43,7 @@ public class CircleView : MonoBehaviour {
     //}
 
 
-    //TODO check this
+    //TODO fix start double offset and end too close objects
     public void alignContentsWithCenter(Content center)
     {
         List<KeyValuePair<Content, int>> simList = getSimKeeper().getSimListForContent(center);
@@ -55,7 +55,7 @@ public class CircleView : MonoBehaviour {
             int currValue = simList[0].Value;
             List<Content> currContentCircle = getAndRemoveAllContentsWithValue(simList, currValue);
             currRadius = setNewRadius(currRadius, currContentCircle);
-            Circle circle = new Circle(currRadius, 20f);
+            Circle circle = new Circle(currRadius, 60f);
             radList.Add(currRadius);
             for (int i = 0; i < currContentCircle.Count; i++)
             {
@@ -76,6 +76,7 @@ public class CircleView : MonoBehaviour {
         {
             currRadius += 60;
         }
+        Debug.Log("Draw circle with radius: " + currRadius);
         return currRadius;
     }
 
