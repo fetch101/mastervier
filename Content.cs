@@ -60,12 +60,33 @@ public class Content : MonoBehaviour {
         }
     }
 
+	//TODO: Hover Object to look dynamic
+
+	//public void hoverInPlace()
+	//{
+	//	transform.Translate(Time.deltaTime, 1, 1, Camera.main.transform);
+	//}
+
+
+
+
     public void aligneObjectToCamera()
     {
-        transform.LookAt(Camera.main.transform.position);
-        transform.Rotate(0, 180, 0);
+		int activationDistance = 40; 
+		int speedForRotation = 2;
+
+
+		if((transform.position - Camera.main.transform.position).magnitude < activationDistance)
+		
+		{
+
+			Quaternion targetRotation = Quaternion.LookRotation(Camera.main.transform.position - transform.position);
+			transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, speedForRotation * Time.deltaTime);
+
+		}
     }	
-	
+
+
 	public List<string> getTagList()
 	{
         List<string> tagList = new List<string>();
