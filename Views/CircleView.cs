@@ -55,7 +55,7 @@ public class CircleView : MonoBehaviour {
             int currValue = simList[0].Value;
             List<Content> currContentCircle = getAndRemoveAllContentsWithValue(simList, currValue);
             currRadius = setNewRadius(currRadius, currContentCircle);
-            Circle circle = new Circle(currRadius, 60f);
+            Circle circle = new Circle(currRadius);
             radList.Add(currRadius);
             for (int i = 0; i < currContentCircle.Count; i++)
             {
@@ -76,7 +76,6 @@ public class CircleView : MonoBehaviour {
         {
             currRadius += 60;
         }
-        Debug.Log("Draw circle with radius: " + currRadius);
         return currRadius;
     }
 

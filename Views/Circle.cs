@@ -12,7 +12,7 @@ public class Circle {
     float currZ;
     Vector3 center = new Vector3(0f, 0f, 0f);
     float startAngleRad;
-    float xOffset;
+    float xOffset = 60f;
     int currMultiplicator;
 
 
@@ -23,7 +23,7 @@ public class Circle {
 
     }
 
-    public Circle(float radius, float xOffset)
+    public Circle(float radius)
     {
         this.radius = radius;
         setMinStartAngleRad(radius, xOffset);
