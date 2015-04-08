@@ -12,8 +12,8 @@ public class Circle {
     float currZ;
     Vector3 center = new Vector3(0f, 0f, 0f);
     float startAngleRad;
-    float xOffset = 60f;
-    int currMultiplicator;
+    float xOffset = 30f;
+    float currMultiplicator = 1;
 
 
     public Circle(float radius, int numberOfElements)
@@ -26,14 +26,15 @@ public class Circle {
     public Circle(float radius)
     {
         this.radius = radius;
-        setMinStartAngleRad(radius, xOffset);
+        setStartAngleRad(radius);
+        Debug.Log("startAngle: " + startAngleRad);
 
     }
 
-    private void setMinStartAngleRad(float radius, float xOffset)
+    private void setStartAngleRad(float radius)
     {
 
-        this.startAngleRad = Mathf.Asin(xOffset / radius);
+        this.startAngleRad = Mathf.Asin(this.xOffset / radius);
     }
 
     public Circle(float radius, int numberOfElements, Vector3 center)
@@ -62,21 +63,20 @@ public class Circle {
 
     public Vector3 getNextPos()
     {
-        if (startAngleRad >= 0)
-        {
-            currMultiplicator++;
-        }
 
         float currAngleRad = startAngleRad * currMultiplicator;
-
-
-        //currAngleRad = currAngleRad % (2 * Mathf.PI);
+        Debug.Log("currAngle: " + currAngleRad);
+        Debug.Log("currMulti: " + currMultiplicator);
 
         currX = Mathf.Cos(currAngleRad) * radius;
         currY = Mathf.Sin(currAngleRad) * radius;
 
         startAngleRad *= -1;
         
+        if (startAngleRad >= 0)
+        {
+            currMultiplicator += 2f;
+        }
 
         return new Vector3(center.x + currX, center.y + currY, center.z + currZ);
 
