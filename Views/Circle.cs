@@ -27,7 +27,6 @@ public class Circle {
     {
         this.radius = radius;
         setStartAngleRad(radius);
-        Debug.Log("startAngle: " + startAngleRad);
 
     }
 
@@ -65,8 +64,6 @@ public class Circle {
     {
 
         float currAngleRad = startAngleRad * currMultiplicator;
-        Debug.Log("currAngle: " + currAngleRad);
-        Debug.Log("currMulti: " + currMultiplicator);
 
         currX = Mathf.Cos(currAngleRad) * radius;
         currY = Mathf.Sin(currAngleRad) * radius;
