@@ -17,6 +17,8 @@ public class SimKeeper : MonoBehaviour {
     private int newTagWeight;
     private int newMetaTagWeight;
     private int[,] metaSimTable;
+	public Material materialLineSameStudent;
+
 
 
 
@@ -96,9 +98,25 @@ public class SimKeeper : MonoBehaviour {
                 int score = (int)Math.Round(simTable[x,y] / 100f * tagWeight + metaSimTable[x,y] / 100f * metaTagWeight, MidpointRounding.AwayFromZero);
                 if (score >= threshold)
                 {
-                    LineRenderer line = getNewLine();
-                    contentList[y].addLine(line, vertexY);
-                    contentList[x].addLine(line, vertexX);
+
+					if (contentList[y].Student.Equals(contentList[x].Student) )
+
+					{
+						LineRenderer line = getNewLine();
+						line.SetWidth(0.01f, 0.01f);
+						line.material = materialLineSameStudent;
+
+						contentList[y].addLine(line, vertexY);
+						contentList[x].addLine(line, vertexX);
+
+					}else{
+						LineRenderer line = getNewLine();
+						contentList[y].addLine(line, vertexY);
+						contentList[x].addLine(line, vertexX);
+
+					}
+
+
                 }
             }
         }
@@ -110,7 +128,6 @@ public class SimKeeper : MonoBehaviour {
         LineRenderer linerenderer = lineObject.AddComponent<LineRenderer>();
         linerenderer.SetVertexCount(2);
         linerenderer.SetWidth(0.08f, 0.08f);
-        linerenderer.SetColors(Color.white, Color.white);
         linerenderer.material = new Material(Shader.Find("Unlit/Texture"));
         lineRenderList.Add(lineObject);
         return linerenderer;
