@@ -18,6 +18,8 @@ public class SimKeeper : MonoBehaviour {
     private int newMetaTagWeight;
     private int[,] metaSimTable;
 	public Material materialLineSameStudent;
+	public Material materialLineDifferentStudent;
+
 
 
 
@@ -113,6 +115,7 @@ public class SimKeeper : MonoBehaviour {
 						LineRenderer line = getNewLine();
 						contentList[y].addLine(line, vertexY);
 						contentList[x].addLine(line, vertexX);
+						line.material = materialLineDifferentStudent;
 
 					}
 

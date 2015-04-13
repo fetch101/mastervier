@@ -24,6 +24,8 @@ public class PauseMenu : MonoBehaviour {
 
     }
 
+
+
     void OnGUI()
     {
         if (isPause)
@@ -34,6 +36,9 @@ public class PauseMenu : MonoBehaviour {
             if (GUILayout.Button("Cube View"))
                 ViewKeeper.instance.cubeView();
             if (GUILayout.Button("Circle View"))
+
+				//TODO: "DarioSala_p5_12" mit dem GameObject vom Pickup Script ersetzen
+
                 ViewKeeper.instance.circleView(GameObject.Find("DarioSala_p5_12").GetComponent<Content>());
             if (GUILayout.Button("Spiral View"))
                 ViewKeeper.instance.sunView();

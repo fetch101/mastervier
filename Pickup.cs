@@ -20,12 +20,15 @@ public class Pickup : MonoBehaviour {
 
         RaycastHit hitcheck;
 
+
+
         //Debug.Log("Mouse position: " + Input.mousePosition);
 
         if (Physics.Raycast(raycheck, out hitcheck, 40f) && hitcheck.collider.gameObject.GetComponent<Content>() != null) 
         {
             setLock(true);
             
+
 
 			// TODO: boolean has object damitmer chan zweimal "t"
             if (Input.GetKeyDown("t"))
@@ -45,7 +48,6 @@ public class Pickup : MonoBehaviour {
 	
 	}
 
-
   
 
     void OnGUI()
@@ -55,7 +57,8 @@ public class Pickup : MonoBehaviour {
             if (aimed)
             {
                 GUI.DrawTexture(new Rect((Screen.width - contentMarkedTexture.width * markedTextureScale) / 2, (Screen.height - contentMarkedTexture.height * markedTextureScale) / 2, contentMarkedTexture.width * markedTextureScale, contentMarkedTexture.height * markedTextureScale), contentMarkedTexture);
-            }
+			
+			}
         }
         else
         {

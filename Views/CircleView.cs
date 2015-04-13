@@ -8,6 +8,9 @@ public class CircleView : MonoBehaviour {
     private List<float> radList = new List<float>();
     private Content center;
 
+	public Material materialLineCircleView;
+
+
 	// Use this for initialization
 	void Start () {
 	
@@ -118,6 +121,7 @@ public class CircleView : MonoBehaviour {
         LineRenderer lineRenderer = circleLine.AddComponent<LineRenderer>();
         float theta_scale = 0.1f;
         int size = (int)((2.0 * Mathf.PI) / theta_scale) + 1;
+		lineRenderer.material = materialLineCircleView;
 
 
         lineRenderer.SetWidth(0.2F, 0.2F);
