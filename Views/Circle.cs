@@ -10,7 +10,7 @@ public class Circle {
     float currX;
     float currY;
     float currZ;
-    Vector3 center = new Vector3(0f, 0f, 0f);
+	Vector3 center = new Vector3(Camera.main.transform.position.x, Camera.main.transform.position.y, Camera.main.transform.position.z);
     float startAngleRad;
     float xOffset = 30f;
     float currMultiplicator = 1;

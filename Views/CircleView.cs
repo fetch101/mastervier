@@ -51,7 +51,12 @@ public class CircleView : MonoBehaviour {
     {
         List<KeyValuePair<Content, int>> simList = getSimKeeper().getSimListForContent(center);
         float currRadius = 0;
-        center.transform.position = new Vector3(0f, 0f, 0f);
+
+
+		//center.transform.position = new Vector3(0, 0, 0);
+
+
+		center.transform.position = new Vector3(Camera.main.transform.position.x, Camera.main.transform.position.y, Camera.main.transform.position.z);
         
         while (simList.Count > 0)
         {
@@ -134,9 +139,9 @@ public class CircleView : MonoBehaviour {
             float x = radius * Mathf.Cos(theta);
             float y = radius * Mathf.Sin(theta);
 
-            Vector3 pos = new Vector3(x, y, 0);
+			Vector3 pos = new Vector3(Camera.main.transform.position.x, Camera.main.transform.position.y, Camera.main.transform.position.z);
             lineRenderer.SetPosition(i, pos);
-            if (i == 0)
+			if (i == Camera.main.transform.position.z)
             {
                 lineRenderer.SetPosition(size, pos);
             }
