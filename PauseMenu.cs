@@ -28,32 +28,12 @@ public class PauseMenu : MonoBehaviour {
     {
         if (isPause)
         {
-			
-					Ray raycheck = Camera.main.ViewportPointToRay (new Vector3 (0.5f, 0.5f, 0f));
-					
-					RaycastHit hitcheck;
-			
-					if (Physics.Raycast (raycheck, out hitcheck, 40f) && hitcheck.collider.gameObject.GetComponent<Content> () != null) {
-			
-					Content objectToDisplayTags = hitcheck.collider.gameObject.GetComponent<Content>();
-			
-			
-				}
-
-
-
-
 
             GUILayout.Label("Game is paused!");
             if (GUILayout.Button("Line View"))
                 ViewKeeper.instance.lineView();
             if (GUILayout.Button("Cube View"))
                 ViewKeeper.instance.cubeView();
-            if (GUILayout.Button("Circle View"))
-
-				//TODO: "DarioSala_p5_12" mit dem GameObject vom Pickup Script ersetzen
-
-					ViewKeeper.instance.circleView(hitcheck.collider.gameObject.GetComponent<Content>());
             if (GUILayout.Button("Spiral View"))
                 ViewKeeper.instance.sunView();
             if (GUILayout.Button("TEST Rotated Spiral View"))

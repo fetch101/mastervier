@@ -21,7 +21,7 @@ public class ViewKeeper : MonoBehaviour {
     {
         this.GetComponent<CircleView>().destroyLines();
         this.GetComponent<CircleView>().alignContentsWithCenter(center);
-        this.GetComponent<CircleView>().drawLines();
+        this.GetComponent<CircleView>().drawLines(center);
     }
 
     public void cubeView()

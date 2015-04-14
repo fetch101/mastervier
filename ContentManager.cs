@@ -42,6 +42,8 @@ public class ContentManager : MonoBehaviour {
 	private bool isInSight = false;
 
 
+	Content objectToDisplayTags;
+
 	// Use this for initialization
 	void Start () {
 		
@@ -52,7 +54,11 @@ public class ContentManager : MonoBehaviour {
 
 		isInSight = CheckRay ();
 
+		if(isInSight && Input.GetKeyDown("c")){
 
+			ViewKeeper.instance.circleView(objectToDisplayTags);
+
+		}
 
 	}
 
@@ -65,9 +71,14 @@ public class ContentManager : MonoBehaviour {
 
 		if (Physics.Raycast (raycheck, out hitcheck, 40f) && hitcheck.collider.gameObject.GetComponent<Content> () != null) {
 
-			Content objectToDisplayTags = hitcheck.collider.gameObject.GetComponent<Content>();
+			objectToDisplayTags = hitcheck.collider.gameObject.GetComponent<Content>();
 			buldStringList (objectToDisplayTags);
+
+
 			return true;
+
+
+
 
 		}else{
 			return false;
@@ -163,6 +174,11 @@ public class ContentManager : MonoBehaviour {
 
 	
 	}
+
+
+
+
+
 
 //TODO: Wenn Pause Tags nicht mehr Anzeigen
 

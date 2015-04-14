@@ -21,49 +21,17 @@ public class CircleView : MonoBehaviour {
 	
 	}
 
- 
-    //public void alignContentsWithCenter(Content center)
-    //{
-    //    List<KeyValuePair<Content, int>> simList = getSimKeeper().getSimListForContent(center);
-    //    float currRadius = 0;
-    //    center.transform.position = new Vector3(0f, 0f, 0f);
-
-    //    while (simList.Count > 0)
-    //    {
-    //        int currValue = simList[0].Value;
-    //        List<Content> currContentCircle = getAndRemoveAllContentsWithValue(simList, currValue);
-    //        currRadius = setNewRadius(currRadius, currContentCircle);
-    //        Circle circle = new Circle(currRadius, currContentCircle.Count);
-    //        radList.Add(currRadius);
-
-    //        for (int i = 0; i < currContentCircle.Count; i++ )
-    //        {
-    //            currContentCircle[i].transform.position = circle.getPosForElement(i);
-    //        }
-    //    }
-
-              
-    //}
-
-
-    //TODO fix start double offset and end too close objects
     public void alignContentsWithCenter(Content center)
     {
         List<KeyValuePair<Content, int>> simList = getSimKeeper().getSimListForContent(center);
         float currRadius = 0;
 
-
-		//center.transform.position = new Vector3(0, 0, 0);
-
-
-		center.transform.position = new Vector3(Camera.main.transform.position.x, Camera.main.transform.position.y, Camera.main.transform.position.z);
-        
         while (simList.Count > 0)
         {
             int currValue = simList[0].Value;
             List<Content> currContentCircle = getAndRemoveAllContentsWithValue(simList, currValue);
             currRadius = setNewRadius(currRadius, currContentCircle);
-            Circle circle = new Circle(currRadius);
+			Circle circle = new Circle(currRadius, center.transform.position);
             radList.Add(currRadius);
             for (int i = 0; i < currContentCircle.Count; i++)
             {
@@ -120,7 +88,7 @@ public class CircleView : MonoBehaviour {
         return (SimKeeper)objectSimKeeper[0];
     }
 
-    private void drawCircleLine(float radius)
+    private void drawCircleLine(float radius, Content center)
     {
         GameObject circleLine = new GameObject();
         LineRenderer lineRenderer = circleLine.AddComponent<LineRenderer>();
@@ -139,9 +107,9 @@ public class CircleView : MonoBehaviour {
             float x = radius * Mathf.Cos(theta);
             float y = radius * Mathf.Sin(theta);
 
-			Vector3 pos = new Vector3(Camera.main.transform.position.x, Camera.main.transform.position.y, Camera.main.transform.position.z);
+			Vector3 pos = new Vector3(center.transform.position.x + x, center.transform.position.y + y, center.transform.position.z);
             lineRenderer.SetPosition(i, pos);
-			if (i == Camera.main.transform.position.z)
+			if (i == 0)
             {
                 lineRenderer.SetPosition(size, pos);
             }
@@ -150,11 +118,11 @@ public class CircleView : MonoBehaviour {
         lineList.Add(circleLine);
     }
 
-    public void drawLines()
+    public void drawLines(Content center)
     {
         foreach (float rad in radList)
         {
-            drawCircleLine(rad);
+            drawCircleLine(rad, center);
         }
     }
 
