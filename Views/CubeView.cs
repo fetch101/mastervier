@@ -42,8 +42,10 @@ public class CubeView : MonoBehaviour {
 
     private int getCubeDegree(int numberOfContents)
     {
+
         double degree = Mathf.Pow(numberOfContents, 1f / 3f);
-        return (int)Math.Round(degree, MidpointRounding.AwayFromZero);
+        int roundedDegree = (int)Math.Round(degree, MidpointRounding.AwayFromZero);
+        return degree > roundedDegree ? roundedDegree + 1 : roundedDegree;
     }
 
 }
