@@ -37,6 +37,7 @@ public class ContentManager : MonoBehaviour {
 	public int windowOffset = 0;
 	public int effectiveWindowOffset = 0;
 
+	private float textFieldWidth;
 
 	private bool isInSight = false;
 
@@ -72,6 +73,7 @@ public class ContentManager : MonoBehaviour {
 			return false;
 		}
 	}
+
 
 	void buldStringList (Content contentInSight)
 	{
@@ -163,22 +165,33 @@ public class ContentManager : MonoBehaviour {
 	}
 
 //TODO: Wenn Pause Tags nicht mehr Anzeigen
-	//TODO: Anpassung der Fensterlänge an die Taglänge
 
 	public void OnGUI() {
 
-		if (isInSight == true){
+		if (isInSight == true) {
 
-			numberOfDots = (stringList.Count*20)+5;
-			GUI.TextField (new Rect (10, 10, 300, numberOfDots), "");
-
+		
+			GUI.TextField (new Rect (10, 10, ((6 * textFieldWidth) + 110), numberOfDots), "");
+			numberOfDots = (stringList.Count * 20) + 5;
+	
 			int offsetCounter = 10;
-			foreach(KeyValuePair<String, String> tag in stringList)
-			{
+			foreach (KeyValuePair<String, String> tag in stringList) {
+
 				GUI.Label (new Rect (18, offsetCounter, 300, 300), tag.Key);
 				GUI.Label (new Rect (100, offsetCounter, 3000, 300), tag.Value);
+
+				//Debug.Log ("Current tagvalue length is " + tag.Value.Length + "for " + tag.Value);
+
+				if (tag.Value.Length > textFieldWidth) {
+					textFieldWidth = tag.Value.Length;
+				}
+
 				offsetCounter += 20;
 			}
+		} else {
+			textFieldWidth = 0;
+
+
 		}
 	
 	}
