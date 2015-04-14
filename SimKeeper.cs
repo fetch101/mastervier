@@ -105,7 +105,7 @@ public class SimKeeper : MonoBehaviour {
 
 					{
 						LineRenderer line = getNewLine();
-						line.SetWidth(0.01f, 0.01f);
+						line.SetWidth(0.1f, 0.1f);
 						line.material = materialLineSameStudent;
 
 						contentList[y].addLine(line, vertexY);
@@ -130,7 +130,7 @@ public class SimKeeper : MonoBehaviour {
         GameObject lineObject = new GameObject();
         LineRenderer linerenderer = lineObject.AddComponent<LineRenderer>();
         linerenderer.SetVertexCount(2);
-        linerenderer.SetWidth(0.08f, 0.08f);
+        linerenderer.SetWidth(0.8f, 0.8f);
         linerenderer.material = new Material(Shader.Find("Unlit/Texture"));
         lineRenderList.Add(lineObject);
         return linerenderer;
@@ -148,7 +148,7 @@ public class SimKeeper : MonoBehaviour {
         return contentList;
     }
 
-    //TODO use weight for this? circle view uses this to calculate view
+
     public List<KeyValuePair<Content, int>> getSimListForContent(Content content)
     {
         List<KeyValuePair<Content, int>> simList = new List<KeyValuePair<Content, int>>();
