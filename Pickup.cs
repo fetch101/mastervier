@@ -5,7 +5,8 @@ public class Pickup : MonoBehaviour {
 
     public Texture2D contentMarkedTexture;
     public float markedTextureScale = 10f;
-    private bool aimed = false;
+    private bool contentInSight = false;
+    private bool contentIsGrabbed = false;
 
 
 	// Use this for initialization
@@ -21,28 +22,25 @@ public class Pickup : MonoBehaviour {
         RaycastHit hitcheck;
 
 
-
-        //Debug.Log("Mouse position: " + Input.mousePosition);
-
         if (Physics.Raycast(raycheck, out hitcheck, 40f) && hitcheck.collider.gameObject.GetComponent<Content>() != null) 
         {
-            setLock(true);
-            
-
+            contentInSight = true;
 
 			// TODO: boolean has object damitmer chan zweimal "t"
-            if (Input.GetKeyDown("t"))
+            if (Input.GetKeyDown("t") && !contentIsGrabbed)
             {
                 hitcheck.collider.gameObject.transform.parent = this.transform;
+                contentIsGrabbed = true;
             }
-            else if (Input.GetKeyDown("g"))
+            else if (Input.GetKeyDown("t") && contentIsGrabbed)
             {
                 hitcheck.collider.gameObject.transform.parent = null;
+                contentIsGrabbed = false;
             }
 
         }else{
 
-            setLock(false);
+            contentInSight = false;
         }
 
 	
@@ -52,24 +50,11 @@ public class Pickup : MonoBehaviour {
 
     void OnGUI()
     {
-        if (contentMarkedTexture != null)
-        {
-            if (aimed)
+            if (contentInSight)
             {
                 GUI.DrawTexture(new Rect((Screen.width - contentMarkedTexture.width * markedTextureScale) / 2, (Screen.height - contentMarkedTexture.height * markedTextureScale) / 2, contentMarkedTexture.width * markedTextureScale, contentMarkedTexture.height * markedTextureScale), contentMarkedTexture);
-			
 			}
-        }
-        else
-        {
-            Debug.Log("No crosshair texture set in the Inspector");
-        }
-
-    }
-
-    public void setLock(bool aimed)
-    {
-        this.aimed = aimed;
+      
     }
 
 }
