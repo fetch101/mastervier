@@ -51,7 +51,7 @@ public class ViewKeeper : MonoBehaviour {
     public void alignSpiralRotate()
     {
         this.GetComponent<CircleView>().destroyLines();
-        this.GetComponent<SunView>().alignSpiralRotate(getAllContents());
+        //this.GetComponent<SunView>().alignSpiralRotate(getAllContents());
     }
 
     private List<Content> getAllContents()
