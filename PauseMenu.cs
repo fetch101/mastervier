@@ -74,6 +74,7 @@ public class PauseMenu : MonoBehaviour {
         MouseLook.instance.enabled = true;
         Spectator.instance.enabled = true;
         SimKeeper.instance.enabled = false;
+        ContentManager.instance.enabled = true;
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
         isPause = false;
@@ -84,6 +85,8 @@ public class PauseMenu : MonoBehaviour {
         MouseLook.instance.enabled = false;
         Spectator.instance.enabled = false;
         SimKeeper.instance.enabled = true;
+        ContentManager.instance.enabled = false;
+
         Cursor.lockState = CursorLockMode.Confined;
         Cursor.visible = true;
         isPause = true;

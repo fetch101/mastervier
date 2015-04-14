@@ -5,6 +5,7 @@ using System;
 
 public class ContentManager : MonoBehaviour {
 
+    public static ContentManager instance;
 	private bool aimed = false;
 	private List<KeyValuePair<String, String>> stringList;
 
@@ -46,6 +47,7 @@ public class ContentManager : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
+        instance = this;
 		
 	}
 	
@@ -175,13 +177,7 @@ public class ContentManager : MonoBehaviour {
 	
 	}
 
-
-
-
-
-
-//TODO: Wenn Pause Tags nicht mehr Anzeigen
-
+    
 	public void OnGUI() {
 
 		if (isInSight == true) {
