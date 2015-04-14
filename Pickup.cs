@@ -26,7 +26,6 @@ public class Pickup : MonoBehaviour {
         {
             contentInSight = true;
 
-			// TODO: boolean has object damitmer chan zweimal "t"
             if (Input.GetKeyDown("t") && !contentIsGrabbed)
             {
                 hitcheck.collider.gameObject.transform.parent = this.transform;
