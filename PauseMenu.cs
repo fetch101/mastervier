@@ -2,13 +2,19 @@
 using System.Collections;
 using System.Collections.Generic;
 
+
+
 public class PauseMenu : MonoBehaviour {
+
+	public GameObject PauseMenuObject;
 
     private bool isPause;
 
     // Use this for initialization
     void Start()
     {
+
+		PauseMenuObject = GameObject.Find ("PauseMenuObject");
         Cursor.lockState = CursorLockMode.Confined;
         Cursor.visible = true;
         isPause = true;
@@ -20,6 +26,7 @@ public class PauseMenu : MonoBehaviour {
         if (Input.GetKeyDown(KeyCode.Escape))
         {
             togglePause();
+			ShowPauseMenu();
         }
 
     }
@@ -45,10 +52,20 @@ public class PauseMenu : MonoBehaviour {
             if (GUILayout.Button("TEST Remove Highlight"))
                 Highlighter.instance.removeCurrentHighlight();     
 
-        }
-    }
+				}
+			}
 
-    private List<Content> getAllContents()
+	void ShowPauseMenu (){
+	
+		if (isPause) {
+			PauseMenuObject.SetActive (true);
+		} else {
+			PauseMenuObject.SetActive(false);
+		}
+	}
+
+			
+			private List<Content> getAllContents()
     {
 
         Object[] objectContents = FindObjectsOfType(typeof(Content));
@@ -81,6 +98,7 @@ public class PauseMenu : MonoBehaviour {
         ContentManager.instance.enabled = true;
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
+
         isPause = false;
     }
 
