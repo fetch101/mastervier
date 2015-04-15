@@ -6,13 +6,7 @@ public class SunCircle {
 
 
     float radius;
-    float currX;
-    float currY;
-    float currZ;
-	Vector3 center = new Vector3 (0f, 0f, 0f);
-	float startAngleRad;
-    float xOffset = 30f;
-    float currMultiplicator = 1;
+	Vector3 center;
     int numberOfElements;
 
 	
@@ -31,9 +25,9 @@ public class SunCircle {
 
         float angleRad = angle * Mathf.PI / 180;
 
-        currX = Mathf.Cos(angleRad) * radius;
-        currZ = Mathf.Sin(angleRad) * radius;
-
+        float currY = 0;
+        float currX = Mathf.Cos(angleRad) * radius;
+        float currZ = Mathf.Sin(angleRad) * radius;
 
         return new Vector3(center.x + currX, center.y + currY, center.z + currZ);
     }

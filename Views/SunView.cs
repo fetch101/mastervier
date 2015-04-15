@@ -28,19 +28,20 @@ public class SunView : MonoBehaviour {
             semCircle.Add(studentListYearSem);
         }
 
-        SunCircle circle = new SunCircle(400f, new Vector3(0f, 0f, 0f), semCircle.Count);
+        SunCircle circle = new SunCircle(50f, new Vector3(0f, 0f, 0f), semCircle.Count);
         int i = 0;
         foreach (List<Content> studentList in semCircle)
         {
-            Debug.Log(circle.getPosForElement(i));
-            Debug.Log(circle.getRotationForElement(i));
             alignSpiral(studentList, circle.getPosForElement(i), circle.getRotationForElement(i));
             i++;
         }
     }
 
+
+    //TODO rotation not working properly
     public void alignSpiral(List<Content> contentList, Vector3 startPosition, float rotation)
     {
+        Debug.Log("Spiral startPosition: " + startPosition);
         Spiral spiral = new Spiral(startPosition, rotation);
         int i = 0;
         GameObject lineObj = new GameObject();
@@ -49,6 +50,13 @@ public class SunView : MonoBehaviour {
         foreach (Content content in contentList)
         {
             content.transform.position = spiral.getPosForElement(i);
+            content.transform.RotateAround(startPosition, Vector3.up, rotation);
+            if (i == 0)
+            {
+                Debug.Log("Spiral start: " + content.transform.position);
+                Debug.Log("Spiral rot: " + rotation);
+
+            }
             line.SetPosition(i, content.transform.position);
             i++;
         }
