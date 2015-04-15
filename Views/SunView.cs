@@ -19,6 +19,7 @@ public class SunView : MonoBehaviour {
 
     public void alignContents(List<Content> contentList)
     {
+        semCircle = new List<List<Content>>();
         while (contentList.Count > 0)
         {
             string currStudent = contentList[0].Student;
@@ -27,7 +28,7 @@ public class SunView : MonoBehaviour {
             semCircle.Add(studentListYearSem);
         }
 
-        EqCircle circle = new EqCircle(100f, new Vector3(0f, 0f, 0f), semCircle.Count);
+        SunCircle circle = new SunCircle(400f, new Vector3(0f, 0f, 0f), semCircle.Count);
         int i = 0;
         foreach (List<Content> studentList in semCircle)
         {
@@ -36,16 +37,19 @@ public class SunView : MonoBehaviour {
             alignSpiral(studentList, circle.getPosForElement(i), circle.getRotationForElement(i));
             i++;
         }
-
     }
 
     public void alignSpiral(List<Content> contentList, Vector3 startPosition, float rotation)
     {
         Spiral spiral = new Spiral(startPosition, rotation);
         int i = 0;
+        GameObject lineObj = new GameObject();
+        LineRenderer line = lineObj.AddComponent<LineRenderer>();
+        line.SetVertexCount(contentList.Count);
         foreach (Content content in contentList)
         {
             content.transform.position = spiral.getPosForElement(i);
+            line.SetPosition(i, content.transform.position);
             i++;
         }
     }

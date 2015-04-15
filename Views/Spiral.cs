@@ -10,9 +10,9 @@ public class Spiral {
     float currX;
     float currY;
     float currZ;
-    float zAxisOffset = 30;
+    float zAxisOffset = 20;
     int numberOfElementsPerCircle = 5;
-    float radius = 50;
+    float radius = 20;
 
     public Spiral()
     {
@@ -23,15 +23,7 @@ public class Spiral {
         this.startPosition = startPosition;
         this.rotationYDegree = rotationYDegree;
     }
-
-    public Spiral(float radius, Vector3 startPosition, int numberOfElementsPerCircle, float zAxisOffset)
-    {
-        this.radius = radius;
-        this.startPosition = startPosition;
-        this.numberOfElementsPerCircle = numberOfElementsPerCircle;
-        this.zAxisOffset = zAxisOffset;
-    }
-
+    
     public Vector3 getPosForElement(int elementNumber)
     {
         //TODO currZ calculation needs to be proofed

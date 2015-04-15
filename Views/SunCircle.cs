@@ -2,7 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 
-public class EqCircle {
+public class SunCircle {
 
 
     float radius;
@@ -16,7 +16,7 @@ public class EqCircle {
     int numberOfElements;
 
 	
-    public EqCircle(float radius, Vector3 center, int numberOfElements)
+    public SunCircle(float radius, Vector3 center, int numberOfElements)
     {
         this.radius = radius;
 		this.center = center;
@@ -32,7 +32,7 @@ public class EqCircle {
         float angleRad = angle * Mathf.PI / 180;
 
         currX = Mathf.Cos(angleRad) * radius;
-        currY = Mathf.Sin(angleRad) * radius;
+        currZ = Mathf.Sin(angleRad) * radius;
 
 
         return new Vector3(center.x + currX, center.y + currY, center.z + currZ);

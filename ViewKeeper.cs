@@ -47,13 +47,7 @@ public class ViewKeeper : MonoBehaviour {
     {
         this.GetComponent<WordCloud>().drawCloud(getAllContents());
     }
-
-    public void alignSpiralRotate()
-    {
-        this.GetComponent<CircleView>().destroyLines();
-        //this.GetComponent<SunView>().alignSpiralRotate(getAllContents());
-    }
-
+    
     private List<Content> getAllContents()
     {
 
