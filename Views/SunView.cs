@@ -27,25 +27,18 @@ public class SunView : MonoBehaviour {
             semCircle.Add(studentListYearSem);
         }
 
-        float xOffset = 100;
+        EqCircle circle = new EqCircle(100f, new Vector3(0f, 0f, 0f), semCircle.Count);
+        int i = 0;
         foreach (List<Content> studentList in semCircle)
         {
-            alignSpiral(studentList, new Vector3(0f+xOffset,0f,0f), 0f);
-            xOffset += 200;
-        }
-
-    }
-
-    private void alignSpiralOld(List<Content> contentList)
-    {
-        Spiral spiral = new Spiral();
-        int i = 0;
-        foreach (Content content in contentList)
-        {
-            content.transform.position = spiral.getPosForElement(i);
+            Debug.Log(circle.getPosForElement(i));
+            Debug.Log(circle.getRotationForElement(i));
+            alignSpiral(studentList, circle.getPosForElement(i), circle.getRotationForElement(i));
             i++;
         }
+
     }
+
     public void alignSpiral(List<Content> contentList, Vector3 startPosition, float rotation)
     {
         Spiral spiral = new Spiral(startPosition, rotation);
