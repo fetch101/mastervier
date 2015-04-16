@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using UnityEngine.UI;
 using System.Collections;
 using System.Collections.Generic;
 using System;
@@ -8,20 +9,21 @@ public class SimKeeper : MonoBehaviour {
     List<Content> contentList;
     List<GameObject> lineRenderList = new List<GameObject>();
     int[,] simTable;
-    private int threshold = 3;
+    
 
     public static SimKeeper instance;
-    private int tagWeight = 100;
-    private int metaTagWeight = 100;
+
+	public float threshold = 2.0f;
+	public float tagWeight = 10.0f;
+	public float metaTagWeight = 10.0f;
+   
     private int newThreshold;
     private int newTagWeight;
     private int newMetaTagWeight;
+
     private int[,] metaSimTable;
 	public Material materialLineSameStudent;
 	public Material materialLineDifferentStudent;
-
-
-
 
 
 	void Start () {
@@ -97,7 +99,7 @@ public class SimKeeper : MonoBehaviour {
         {
             for (int y = x + 1; y < contentList.Count; y++)
             {
-                int score = (int)Math.Round(simTable[x,y] / 100f * tagWeight + metaSimTable[x,y] / 100f * metaTagWeight, MidpointRounding.AwayFromZero);
+                int score = (int)Math.Round(simTable[x,y] / 10f * tagWeight + metaSimTable[x,y] / 10f * metaTagWeight, MidpointRounding.AwayFromZero);
                 if (score >= threshold)
                 {
 
@@ -169,35 +171,47 @@ public class SimKeeper : MonoBehaviour {
     }
 	
 	void Update () {
+
+
 	
 	}
 
     void OnGUI()
     {
 
-        
-        newThreshold = (int)GUI.HorizontalSlider(new Rect(1040, 35, 300, 25), (float)threshold, 15.0F, 0.0F);
-        
-        GUI.contentColor = Color.black;
-        GUI.Label(new Rect(1040, 15, 200, Screen.height), "Current Threshold: " + threshold);
-
-        GUI.Label(new Rect(1040, 55, 200, Screen.height), "Tag Weight: " + tagWeight + "%");
-        newTagWeight = (int)GUI.HorizontalSlider(new Rect(1040, 75, 300, 25), (float)tagWeight, 100.0F, 0.0F);
-
-        GUI.Label(new Rect(1040, 95, 200, Screen.height), "Meta Tag Weight: " + metaTagWeight + "%");
-        newMetaTagWeight = (int)GUI.HorizontalSlider(new Rect(1040, 115, 300, 25), (float)metaTagWeight, 100.0F, 0.0F);
-
-        if (threshold != newThreshold || metaTagWeight != newMetaTagWeight || tagWeight != newTagWeight)
-        {
-            threshold = newThreshold;
-            tagWeight = newTagWeight;
-            metaTagWeight = newMetaTagWeight;
-            removeLinesFromContent();
-            destroyLineRenderObjects();
-            spawnLineRenderers();
-        }
-        
     }
+
+	public void addjustThreshold(float newThreshold){
+		if (threshold != newThreshold)
+		{	threshold = newThreshold;
+			removeLinesFromContent();
+			destroyLineRenderObjects();
+			spawnLineRenderers();
+		}
+
+	}
+
+	public void addjustTagWeight(float newTagweight){
+		if (tagWeight != newTagweight)
+		{	tagWeight = newTagweight;
+			removeLinesFromContent();
+			destroyLineRenderObjects();
+			spawnLineRenderers();
+		}
+			
+	}
+
+	public void addjustMetatagweight(float newMetatagweight){
+		if (metaTagWeight != newMetatagweight)
+		{	tagWeight = newMetatagweight;
+			removeLinesFromContent();
+			destroyLineRenderObjects();
+			spawnLineRenderers();
+		}	
+	}
+
+
+
     
     private void destroyLineRenderObjects()
     {
