@@ -43,19 +43,21 @@ public class ContentManager : MonoBehaviour {
 	private bool isInSight = false;
 
 
+
+
 	Content objectToDisplayTags;
 
 	// Use this for initialization
 	void Start () {
         instance = this;
-		
+
+
 	}
 	
 	// Update is called once per frame
 	void Update () {
 
 		isInSight = CheckRay ();
-
 		if(isInSight && Input.GetKeyDown("c")){
 
 			ViewKeeper.instance.circleView(objectToDisplayTags);
@@ -63,6 +65,8 @@ public class ContentManager : MonoBehaviour {
 		}
 
 	}
+
+
 
 
 	public bool CheckRay(){
@@ -207,6 +211,9 @@ public class ContentManager : MonoBehaviour {
 		}
 	
 	}
+
+
+
 
 }
 
