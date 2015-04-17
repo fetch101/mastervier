@@ -1,12 +1,18 @@
 ﻿using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
+using UnityEngine.UI;
+
 
 public class ButtonForTag : MonoBehaviour {
 
 
+	public string tagToHighlight;
+
 	public static Highlighter instance;
 	List<Content> highlightedContents = new List<Content>();
+	List<Content> stringList;
+
 
 	// Use this for initialization
 	void Start () {
@@ -16,16 +22,28 @@ public class ButtonForTag : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
 	
+		//getTagToHighlight ();
+
 	}
 
+//	private PauseMenu getPauseMenu()
+//	{
+//		Object[] objectPauseMenu = FindObjectsOfType(typeof(PauseMenu));
+//		return (PauseMenu)objectPauseMenu[0];
+//
+//	}
+//
+//
+//	public void getTagToHighlight(List<PauseMenu> stringList){
+//
+//
+//		List<KeyValuePair> stringListToHighlight = getPauseMenu().getStringListForContentInSight();
+//		Debug.Log ("I have the Tag " + stringListToHighlight [1].Value + " to highlight");
+//
+//
+//	}
 
 
-	public void getTagToHighlight(){
-
-
-
-	
-	}
 
 
 	public void highlightContentFromStudent(string name)

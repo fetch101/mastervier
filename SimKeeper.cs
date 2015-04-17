@@ -181,7 +181,7 @@ public class SimKeeper : MonoBehaviour {
 
     }
 
-	public void addjustThreshold(float newThreshold){
+	public void adjustThreshold(float newThreshold){
 		if (threshold != newThreshold)
 		{	threshold = newThreshold;
 			removeLinesFromContent();
@@ -191,7 +191,7 @@ public class SimKeeper : MonoBehaviour {
 
 	}
 
-	public void addjustTagWeight(float newTagweight){
+	public void adjustTagWeight(float newTagweight){
 		if (tagWeight != newTagweight)
 		{	tagWeight = newTagweight;
 			removeLinesFromContent();
@@ -201,7 +201,7 @@ public class SimKeeper : MonoBehaviour {
 			
 	}
 
-	public void addjustMetatagweight(float newMetatagweight){
+	public void adjustMetatagweight(float newMetatagweight){
 		if (metaTagWeight != newMetatagweight)
 		{	tagWeight = newMetatagweight;
 			removeLinesFromContent();
