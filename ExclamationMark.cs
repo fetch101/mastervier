@@ -22,6 +22,7 @@ public class ExclamationMark : MonoBehaviour {
 
 		Destroy(this.gameObject);
 
+
 	
 	}
 
