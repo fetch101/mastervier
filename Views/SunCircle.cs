@@ -35,7 +35,7 @@ public class SunCircle {
     public float getRotationForElement(int elementNumber)
     {
 
-        return 360 / numberOfElements * elementNumber;
+        return 360 / numberOfElements * (numberOfElements - elementNumber);
 
     }
 

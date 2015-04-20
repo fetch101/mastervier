@@ -41,8 +41,7 @@ public class SunView : MonoBehaviour {
     //TODO rotation not working properly
     public void alignSpiral(List<Content> contentList, Vector3 startPosition, float rotation)
     {
-        Debug.Log("Spiral startPosition: " + startPosition);
-        Spiral spiral = new Spiral(startPosition, rotation);
+        Spiral spiral = new Spiral(startPosition);
         int i = 0;
         GameObject lineObj = new GameObject();
         LineRenderer line = lineObj.AddComponent<LineRenderer>();
@@ -51,12 +50,7 @@ public class SunView : MonoBehaviour {
         {
             content.transform.position = spiral.getPosForElement(i);
             content.transform.RotateAround(startPosition, Vector3.up, rotation);
-            if (i == 0)
-            {
-                Debug.Log("Spiral start: " + content.transform.position);
-                Debug.Log("Spiral rot: " + rotation);
-
-            }
+           
             line.SetPosition(i, content.transform.position);
             i++;
         }
