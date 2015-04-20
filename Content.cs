@@ -8,9 +8,7 @@ public class Content : MonoBehaviour {
 	public int markOffsetZ = -5;
 
 	public GameObject mark; 
-
-	private bool hasExclamationMark = false;
-
+	
 	public string Student;
 	public string Semester;
 	public string Phase;
@@ -39,16 +37,19 @@ public class Content : MonoBehaviour {
 	
     private List<KeyValuePair<LineRenderer, int>> lineList = new List<KeyValuePair<LineRenderer, int>>();
 
+	private float height;
 	
 	// Use this for initialization
 	void Start () {
 		addBoxCollider();
+		height = gameObject.GetComponent<Renderer> ().bounds.size.y / 2;
+
 	}
 
 
     public void addBoxCollider()
     {
-        this.gameObject.AddComponent<BoxCollider>();
+      BoxCollider collider = this.gameObject.AddComponent<BoxCollider>();
     }
 	
 	
@@ -184,20 +185,22 @@ public class Content : MonoBehaviour {
         lineList.RemoveRange(0, lineList.Count);
     }
 
+
+	// TODO: set Content as Child without orientation to Camera
 	public void spawnHighlightObject(){
 
 		if (markCount > 0) {
 
 			if (markCount % 2 == 0) {
 
-				GameObject markCloneEven = Instantiate (mark, new Vector3 ((this.gameObject.transform.position.x + markOffsetX), this.gameObject.transform.position.y + 20, this.gameObject.transform.position.z), Quaternion.Euler (- 90, 90, 0)) as GameObject;
+				GameObject markCloneEven = Instantiate (mark, new Vector3 ((this.gameObject.transform.position.x + markOffsetX), this.gameObject.transform.position.y + 2 +  height, this.gameObject.transform.position.z), Quaternion.Euler (- 90, 90, 0)) as GameObject;
 			
 				markOffsetX += 5;
 				markCount ++;
 
 			} else {
 
-				GameObject markCloneOdd = Instantiate (mark, new Vector3 ((this.gameObject.transform.position.x + markOffsetZ), this.gameObject.transform.position.y + 20, this.gameObject.transform.position.z), Quaternion.Euler (- 90, 90, 0)) as GameObject;
+				GameObject markCloneOdd = Instantiate (mark, new Vector3 ((this.gameObject.transform.position.x + markOffsetZ), this.gameObject.transform.position.y + 2 +  height , this.gameObject.transform.position.z), Quaternion.Euler (- 90, 90, 0)) as GameObject;
 			
 				markOffsetZ -= 5;
 				markCount ++;
@@ -207,16 +210,11 @@ public class Content : MonoBehaviour {
 
 		} else {
 
-			GameObject markCloneOrigin = Instantiate (mark, new Vector3 ((this.gameObject.transform.position.x), this.gameObject.transform.position.y + 20, this.gameObject.transform.position.z), Quaternion.Euler (- 90, 90, 0)) as GameObject;
+			GameObject markCloneOrigin = Instantiate (mark, new Vector3 ((this.gameObject.transform.position.x), this.gameObject.transform.position.y + 2 +  height , this.gameObject.transform.position.z), Quaternion.Euler (-90, 90, 0)) as GameObject;
 			markCount ++;
+//			markCloneOrigin.transform.parent = this.gameObject.transform;
+
 		}
-//		if (hasExclamationMark == false) {
-//			GameObject markClone =  Instantiate (mark, new Vector3 (this.gameObject.transform.position.x, this.gameObject.transform.position.y + 20, this.gameObject.transform.position.z), Quaternion.Euler (- 90, 90, 0)) as GameObject;
-//			hasExclamationMark = true;
-//	}
-
-
-
 		}
 
 }
