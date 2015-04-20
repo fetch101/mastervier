@@ -284,11 +284,15 @@ public class PauseMenu : MonoBehaviour {
 //            if (GUILayout.Button("TEST Highlight DarioSala"))
 //                Highlighter.instance.highlightContentFromStudent("DarioSala");
 //            if (GUILayout.Button("TEST Highlight AliceGut"))
-//                Highlighter.instance.highlightContentFromStudent("AliceGut");
+////                Highlighter.instance.highlightContentFromStudent("AliceGut");
             if (GUILayout.Button("TEST Remove Highlight"))
                 Highlighter.instance.removeCurrentHighlight();     
 
 				}
+
+	
+
+
 
 		if (isInSight == true && isPause) {
 			

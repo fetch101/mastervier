@@ -21,7 +21,6 @@ public class Highlighter : MonoBehaviour {
 
 	public void highlightContent(string field, string value)
 	{
-		Debug.Log (field);
 
 
 		switch (field) {
@@ -72,8 +71,7 @@ public class Highlighter : MonoBehaviour {
 			if (content.getTagList().Contains(value))
 			{
 				highlightedContents.Add(content);
-				content.transform.localScale *= scaleSize;
-			}
+				spawnExclamationMarkOnContents();			}
 		}
 	}
 
@@ -84,8 +82,7 @@ public class Highlighter : MonoBehaviour {
 			if (content.PUR == value)
 			{
 				highlightedContents.Add(content);
-				content.transform.localScale *= scaleSize;
-			}
+				spawnExclamationMarkOnContents();			}
 		}
 	}
 
@@ -96,8 +93,7 @@ public class Highlighter : MonoBehaviour {
 			if (content.UR == value)
 			{
 				highlightedContents.Add(content);
-				content.transform.localScale *= scaleSize;
-			}
+				spawnExclamationMarkOnContents();			}
 		}
 	}
 
@@ -108,8 +104,7 @@ public class Highlighter : MonoBehaviour {
 			if (content.Verortung == value)
 			{
 				highlightedContents.Add(content);
-				content.transform.localScale *= scaleSize;
-			}
+				spawnExclamationMarkOnContents();			}
 		}
 	}
 
@@ -120,8 +115,7 @@ public class Highlighter : MonoBehaviour {
 			if (content.Autor == value)
 			{
 				highlightedContents.Add(content);
-				content.transform.localScale *= scaleSize;
-			}
+				spawnExclamationMarkOnContents();			}
 		}
 	}
 
@@ -132,8 +126,7 @@ public class Highlighter : MonoBehaviour {
 			if (content.Untertitel == value)
 			{
 				highlightedContents.Add(content);
-				content.transform.localScale *= scaleSize;
-			}
+				spawnExclamationMarkOnContents();			}
 		}
 	}
 
@@ -144,8 +137,7 @@ public class Highlighter : MonoBehaviour {
 			if (content.Titel == value)
 			{
 				highlightedContents.Add(content);
-				content.transform.localScale *= scaleSize;
-			}
+				spawnExclamationMarkOnContents();			}
 		}
 	}
 
@@ -156,8 +148,7 @@ public class Highlighter : MonoBehaviour {
 			if (content.Objecttype == value)
 			{
 				highlightedContents.Add(content);
-				content.transform.localScale *= scaleSize;
-			}
+				spawnExclamationMarkOnContents();			}
 		}
 	}
 
@@ -168,8 +159,7 @@ public class Highlighter : MonoBehaviour {
 			if (content.Year == value)
 			{
 				highlightedContents.Add(content);
-				content.transform.localScale *= scaleSize;
-			}
+				spawnExclamationMarkOnContents();			}
 		}
 	}
 
@@ -180,8 +170,7 @@ public class Highlighter : MonoBehaviour {
 			if (content.Phase == value)
 			{
 				highlightedContents.Add(content);
-				content.transform.localScale *= scaleSize;
-			}
+				spawnExclamationMarkOnContents();			}
 		}
 	}
 
@@ -192,8 +181,7 @@ public class Highlighter : MonoBehaviour {
 			if (content.Semester == value)
 			{
 				highlightedContents.Add(content);
-				content.transform.localScale *= scaleSize;
-			}
+				spawnExclamationMarkOnContents();			}
 		}
 	}
 
@@ -204,8 +192,7 @@ public class Highlighter : MonoBehaviour {
 			if (content.Student == value)
 			{
 				highlightedContents.Add(content);
-				content.transform.localScale *= scaleSize;
-			}
+				spawnExclamationMarkOnContents();			}
 		}
 	}
 
@@ -222,12 +209,24 @@ public class Highlighter : MonoBehaviour {
 
     public void removeCurrentHighlight()
     {
-        foreach (Content content in highlightedContents)
-        {
-            content.transform.localScale /= scaleSize;
-        }
-        highlightedContents.Clear();
-    }
+
+//		Destroy(gameObject.FindWithTag("ExclamationMark"));
+		Object[] objectContents = FindObjectsOfType (typeof(ExclamationMark));
+
+
+		foreach (Object obj in objectContents) {
+			Object.Destroy (obj);
+
+		}
+
+		List<Content> contentList = getAllContents();
+		foreach (Content content in contentList) {
+			content.markCount = 0;
+			content.markOffsetX = 3;
+			content.markOffsetZ = -3;
+
+		}
+	}
 
     private List<Content> findContentFromStudent(string name)
     {
@@ -261,6 +260,17 @@ public class Highlighter : MonoBehaviour {
         }
         return contentList;
     }
+
+
+	public void spawnExclamationMarkOnContents()
+	{
+		foreach (Content content in highlightedContents)
+		{
+			content.spawnHighlightObject();
+		}
+		highlightedContents.Clear();
+	}
+
 
 
 }
