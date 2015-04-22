@@ -32,7 +32,7 @@ public class CubeView : MonoBehaviour {
                     Vector3 pos = new Vector3(x * 100, y * 100, z * 100);
                     if (i < contents.Count)
                     {
-                        contents[i].gameObject.transform.position = pos;
+                        contents[i].moveTo(pos);
                         i++;
                     }
 

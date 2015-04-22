@@ -40,7 +40,7 @@ public class SunView : MonoBehaviour {
 
     public void alignSpiral(List<Content> contentList, Vector3 startPosition, float rotation)
     {
-        Spiral spiral = new Spiral(startPosition);
+        Spiral spiral = new Spiral(startPosition, rotation);
         int i = 0;
         GameObject lineObj = new GameObject();
         LineRenderer line = lineObj.AddComponent<LineRenderer>();
@@ -48,6 +48,7 @@ public class SunView : MonoBehaviour {
         foreach (Content content in contentList)
         {
             content.transform.position = spiral.getPosForElement(i);
+            //TODO move rotation to spiral for content.moveTo() call
             content.transform.RotateAround(startPosition, Vector3.up, rotation);
            
             line.SetPosition(i, content.transform.position);

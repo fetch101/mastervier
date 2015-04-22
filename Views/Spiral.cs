@@ -12,12 +12,15 @@ public class Spiral {
     float zAxisOffset = 20;
     int numberOfElementsPerCircle = 5;
     float radius = 20;
+    private float rotation;
 
-    public Spiral(Vector3 startPosition)
+    public Spiral(Vector3 startPosition, float rotation)
     {
         this.startPosition = startPosition;
+        this.rotation = rotation;
     }
     
+    //TODO rotation needs to take place here
     public Vector3 getPosForElement(int elementNumber)
     {
 
@@ -29,6 +32,7 @@ public class Spiral {
         currZ = startPosition.z + elementNumber * zAxisOffset;
         
         Vector3 currVector = new Vector3(currX, currY, currZ);
+        //currVector = Quaternion.Euler(0, rotation, 0) * currVector;
         return currVector;
 
     }

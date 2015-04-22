@@ -10,7 +10,7 @@ public class PauseMenu : MonoBehaviour {
 
 	public List<KeyValuePair<ButtonForTag, String>> buttonForTagWithTagList;
 
-	private List<KeyValuePair<String, String>> stringList;
+    private List<KeyValuePair<String, String>> stringList = new List<KeyValuePair<String, String>>();
 
 	public List<ButtonForTag> buttonList;
 
@@ -493,7 +493,7 @@ public class PauseMenu : MonoBehaviour {
         SimKeeper.instance.enabled = true;
         ContentManager.instance.enabled = false;
 
-		PauseMenuObject.SetActive (true);
+        PauseMenuObject.SetActive(true);
 
         Cursor.lockState = CursorLockMode.Confined;
         Cursor.visible = true;

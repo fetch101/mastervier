@@ -35,7 +35,7 @@ public class CircleView : MonoBehaviour {
             radList.Add(currRadius);
             for (int i = 0; i < currContentCircle.Count; i++)
             {
-                currContentCircle[i].transform.position = circle.getNextPos();
+                currContentCircle[i].moveTo(circle.getNextPos());
             }
         }
 

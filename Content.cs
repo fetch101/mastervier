@@ -38,6 +38,9 @@ public class Content : MonoBehaviour {
     private List<KeyValuePair<LineRenderer, int>> lineList = new List<KeyValuePair<LineRenderer, int>>();
 
 	private float height;
+    private bool isMoving;
+    private Vector3 moveTowards;
+    public float speed;
 	
 	// Use this for initialization
 	void Start () {
@@ -58,7 +61,26 @@ public class Content : MonoBehaviour {
 	{
 		drawLines();
 		aligneObjectToCamera();
+        if (isMoving)
+        {
+            move();
+        }
 	}
+
+    private void move()
+    {
+        float step = speed * Time.deltaTime;
+        transform.position = Vector3.MoveTowards(transform.position, moveTowards, step);
+        if(transform.position == moveTowards){
+            isMoving = false;
+        }
+    }
+
+    public void moveTo(Vector3 moveTowards)
+    {
+        this.moveTowards = moveTowards;
+        isMoving = true;
+    }
 
     public void drawLines()
     {
