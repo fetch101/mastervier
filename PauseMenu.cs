@@ -94,8 +94,7 @@ public class PauseMenu : MonoBehaviour {
 	public GameObject TagButton20;
 	public GameObject TagButton21;
 
-
-
+	public GUISkin OpenSansGuiSkin;
 
 
 
@@ -269,6 +268,9 @@ public class PauseMenu : MonoBehaviour {
 
     void OnGUI()
     {
+
+		GUI.skin = OpenSansGuiSkin;
+
         if (isPause)
         {
 
@@ -297,14 +299,14 @@ public class PauseMenu : MonoBehaviour {
 		if (isInSight == true && isPause) {
 			
 			
-			GUI.TextField (new Rect (810, 220, ((6 * textFieldWidth) + 110), numberOfDots), "");
+			GUI.TextField (new Rect ((Screen.width / 2) - 280, (Screen.height /2) - 345, ((8 * textFieldWidth) + 125), numberOfDots), "");
 			numberOfDots = (stringList.Count * 20) + 5;
 			
-			int offsetCounter = 10;
+			float offsetCounter = 10f;
 			foreach (KeyValuePair<String, String> tag in stringList) {
 				
-				GUI.Label (new Rect (815, 210 + offsetCounter, 300, 300), tag.Key);
-				GUI.Label (new Rect (915, 210 + offsetCounter, 3000, 300), tag.Value);
+				GUI.Label (new Rect ((Screen.width /2) - 275, ((Screen.height /2) - 355) + offsetCounter, 300, 300), tag.Key);
+				GUI.Label (new Rect ((Screen.width /2) - 165, (Screen.height /2) - 355 + offsetCounter, 3000, 300), tag.Value);
 
 				if (tag.Value.Length > textFieldWidth) {
 					textFieldWidth = tag.Value.Length;
