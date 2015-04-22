@@ -42,6 +42,7 @@ public class ContentManager : MonoBehaviour {
 
 	private bool isInSight = false;
 
+	public GUISkin OpenSansGuiSkin;
 
 
 
@@ -183,6 +184,9 @@ public class ContentManager : MonoBehaviour {
 
     
 	public void OnGUI() {
+
+		GUI.skin = OpenSansGuiSkin;
+
 
 		if (isInSight == true) {
 
