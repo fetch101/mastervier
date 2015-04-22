@@ -32,11 +32,15 @@ public class SunCircle {
         return new Vector3(center.x + currX, center.y + currY, center.z + currZ);
     }
 
+    //this somehow return correct rotations... magic!
     public float getRotationForElement(int elementNumber)
     {
+        if (elementNumber == 1)
+        {
+            return 0f;
+        }
 
-        return 360 / numberOfElements * (numberOfElements - elementNumber);
-
+        return 360 / numberOfElements * (numberOfElements - elementNumber + 1);
     }
 
 }

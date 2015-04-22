@@ -38,7 +38,6 @@ public class SunView : MonoBehaviour {
     }
 
 
-    //TODO rotation not working properly
     public void alignSpiral(List<Content> contentList, Vector3 startPosition, float rotation)
     {
         Spiral spiral = new Spiral(startPosition);

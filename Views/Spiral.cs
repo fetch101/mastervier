@@ -4,7 +4,7 @@ using System.Collections;
 public class Spiral {
 
 
-
+    //TODO this values have to be trimmed to fit the space requirements between contents
     Vector3 startPosition;
     float currX;
     float currY;
@@ -20,11 +20,6 @@ public class Spiral {
     
     public Vector3 getPosForElement(int elementNumber)
     {
-        //TODO currZ calculation needs to be proofed
-        //if (elementNumber == 0)
-        //{
-        //    return startPosition;
-        //}
 
         float angle = 360 / numberOfElementsPerCircle * elementNumber;
         float angleRad = angle * Mathf.PI / 180;
@@ -32,16 +27,8 @@ public class Spiral {
         currX = startPosition.x + Mathf.Cos(angleRad) * radius;
         currY = startPosition.y + Mathf.Sin(angleRad) * radius;
         currZ = startPosition.z + elementNumber * zAxisOffset;
-
-        //currX = startPosition.x + elementNumber * 60;
-        //currY = startPosition.y;
-        //currZ = startPosition.z;
         
         Vector3 currVector = new Vector3(currX, currY, currZ);
-        //Debug.Log("before euler: " + currVector);
-        //currVector = Quaternion.Euler(0, rotationYDegree, 0) * currVector;
-        //Debug.Log("after euler: " + currVector);
-
         return currVector;
 
     }
