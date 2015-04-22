@@ -17,6 +17,7 @@ public class CubeView : MonoBehaviour {
 
     public void alignContents(List<Content> contents)
     {
+        shuffleList(contents);
 
         int numberOfContents = contents.Count;
         int cubeDegree = getCubeDegree(numberOfContents);
@@ -37,6 +38,17 @@ public class CubeView : MonoBehaviour {
 
                 }
             }
+        }
+    }
+
+    private void shuffleList(List<Content> contents)
+    {
+        for (int i = 0; i < contents.Count; i++)
+        {
+            Content temp = contents[i];
+            int randomIndex = UnityEngine.Random.Range(i, contents.Count);
+            contents[i] = contents[randomIndex];
+            contents[randomIndex] = temp;
         }
     }
 
