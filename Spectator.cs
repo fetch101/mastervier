@@ -4,7 +4,8 @@ using System.Collections;
 public class Spectator : MonoBehaviour
 {
 
-    public static Spectator instance;
+
+	public static Spectator instance;
 
     //initial speed
     public int speed = 40;
@@ -19,6 +20,7 @@ public class Spectator : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+
 
         //press shift to move faster
         if (Input.GetKey(KeyCode.LeftShift) || Input.GetKey(KeyCode.RightShift))
@@ -68,4 +70,6 @@ public class Spectator : MonoBehaviour
         }
 
     }
+
+
 }

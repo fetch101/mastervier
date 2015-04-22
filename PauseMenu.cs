@@ -166,7 +166,7 @@ public class PauseMenu : MonoBehaviour {
 			return true;
 
 		}else{
-			return false;
+			return false;			
 		}
 	}
 
@@ -324,73 +324,76 @@ public class PauseMenu : MonoBehaviour {
 		if (isPause) {
 			PauseMenuObject.SetActive (true);
 
-			if (stringList.Count == 0) {
-				TagButton0.SetActive (false);
-			}
-			if (stringList.Count <= 1) {
-				TagButton1.SetActive (false);
-			}
-			if (stringList.Count <= 2) {
-				TagButton2.SetActive (false);
-			}
-			if (stringList.Count <= 3) {
-				TagButton3.SetActive (false);
-			}
-			if (stringList.Count <= 4) {
-				TagButton4.SetActive (false);
-			}
-			if (stringList.Count <= 5) {
-				TagButton5.SetActive (false);
-			}
-			if (stringList.Count <= 6) {
-				TagButton6.SetActive (false);
-			}
-			if (stringList.Count <= 7) {
-				TagButton7.SetActive (false);
-			}
-			if (stringList.Count <= 8) {
-				TagButton8.SetActive (false);
-			}
-			if (stringList.Count <= 9) {
-				TagButton9.SetActive (false);
-			}
-			if (stringList.Count <= 10) {
-				TagButton10.SetActive (false);
-			}
-			if (stringList.Count <= 11) {
-				TagButton11.SetActive (false);
-			}
-			if (stringList.Count <= 12) {
-				TagButton12.SetActive (false);
-			}
-			if (stringList.Count <= 13) {
-				TagButton13.SetActive (false);
-			}
-			if (stringList.Count <= 14) {
-				TagButton14.SetActive (false);
-			}
-			if (stringList.Count <= 15) {
-				TagButton15.SetActive (false);
-			}
-			if (stringList.Count <= 16) {
-				TagButton16.SetActive (false);
-			}
-			if (stringList.Count <= 17) {
-				TagButton17.SetActive (false);
-			}
-			if (stringList.Count <= 18) {
-				TagButton18.SetActive (false);
-			}
-			if (stringList.Count <= 19) {
-				TagButton19.SetActive (false);
-			}
-			if (stringList.Count <= 20) {
-				TagButton20.SetActive (false);
-			}
-			if (stringList.Count <= 21) {
-				TagButton21.SetActive (false);
-			}
+			if (isInSight){
 
+
+			if (stringList.Count >= 0) {
+				TagButton0.SetActive (true);
+			}
+			if (stringList.Count >= 1) {
+				TagButton1.SetActive (true);
+			}
+			if (stringList.Count >= 2) {
+				TagButton2.SetActive (true);
+			}
+			if (stringList.Count >= 3) {
+				TagButton3.SetActive (true);
+			}
+			if (stringList.Count >= 4) {
+				TagButton4.SetActive (true);
+			}
+			if (stringList.Count >= 5) {
+				TagButton5.SetActive (true);
+			}
+			if (stringList.Count >= 6) {
+				TagButton6.SetActive (true);
+			}
+			if (stringList.Count >= 7) {
+				TagButton7.SetActive (true);
+			}
+			if (stringList.Count >= 8) {
+				TagButton8.SetActive (true);
+			}
+			if (stringList.Count >= 9) {
+				TagButton9.SetActive (true);
+			}
+			if (stringList.Count >= 10) {
+				TagButton10.SetActive (true);
+			}
+			if (stringList.Count >= 11) {
+				TagButton11.SetActive (true);
+			}
+			if (stringList.Count >= 12) {
+				TagButton12.SetActive (true);
+			}
+			if (stringList.Count >= 13) {
+				TagButton13.SetActive (true);
+			}
+			if (stringList.Count >= 14) {
+				TagButton14.SetActive (true);
+			}
+			if (stringList.Count >= 15) {
+				TagButton15.SetActive (true);
+			}
+			if (stringList.Count >= 16) {
+				TagButton16.SetActive (true);
+			}
+			if (stringList.Count >= 17) {
+				TagButton17.SetActive (true);
+			}
+			if (stringList.Count >= 18) {
+				TagButton18.SetActive (true);
+			}
+			if (stringList.Count >= 19) {
+				TagButton19.SetActive (true);
+			}
+			if (stringList.Count >= 20) {
+				TagButton20.SetActive (true);
+			}
+			if (stringList.Count >= 21) {
+				TagButton21.SetActive (true);
+			}
+			}
 
 		} else {
 				PauseMenuObject.SetActive (false);
@@ -452,36 +455,39 @@ public class PauseMenu : MonoBehaviour {
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
 
-		stringList.Clear();
 
-		TagButton0.SetActive(true);
-		TagButton1.SetActive(true);
-		TagButton2.SetActive(true);
-		TagButton3.SetActive(true);
-		TagButton4.SetActive(true);
-		TagButton5.SetActive(true);
-		TagButton6.SetActive(true);
-		TagButton7.SetActive(true);
-		TagButton8.SetActive(true);
-		TagButton9.SetActive(true);
-		TagButton10.SetActive(true);
-		TagButton11.SetActive(true);
-		TagButton12.SetActive(true);
-		TagButton13.SetActive(true);
-		TagButton14.SetActive(true);
-		TagButton15.SetActive(true);
-		TagButton16.SetActive(true);
-		TagButton17.SetActive(true);
-		TagButton18.SetActive(true);
-		TagButton19.SetActive(true);
-		TagButton20.SetActive(true);
-		TagButton21.SetActive(true);
+		TagButton0.SetActive(false);
+		TagButton1.SetActive(false);
+		TagButton2.SetActive(false);
+		TagButton3.SetActive(false);
+		TagButton4.SetActive(false);
+		TagButton5.SetActive(false);
+		TagButton6.SetActive(false);
+		TagButton7.SetActive(false);
+		TagButton8.SetActive(false);
+		TagButton9.SetActive(false);
+		TagButton10.SetActive(false);
+		TagButton11.SetActive(false);
+		TagButton12.SetActive(false);
+		TagButton13.SetActive(false);
+		TagButton14.SetActive(false);
+		TagButton15.SetActive(false);
+		TagButton16.SetActive(false);
+		TagButton17.SetActive(false);
+		TagButton18.SetActive(false);
+		TagButton19.SetActive(false);
+		TagButton20.SetActive(false);
+		TagButton21.SetActive(false);
+
+		stringList.Clear();
 
         isPause = false;
     }
 
     private void setPause()
     {
+
+
         MouseLook.instance.enabled = false;
         Spectator.instance.enabled = false;
         SimKeeper.instance.enabled = true;
