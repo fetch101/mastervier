@@ -63,14 +63,11 @@ public class SimKeeper : MonoBehaviour {
     {
         int metaScore = 0;
         List<string> metaTagListY = contentY.getMetaTagList();
-        foreach (string metaTagY in metaTagListY)
-        {
-            metaTagY.ToLower();
-        }
+        metaTagListY = metaTagListY.ConvertAll(item => item.ToLower());
         List<string> metaTagListX = contentX.getMetaTagList();
+        metaTagListX = metaTagListX.ConvertAll(item => item.ToLower());
         foreach (string metaTagX in metaTagListX)
         {
-            metaTagX.ToLower();
             if (metaTagListY.Contains(metaTagX))
             {
                 metaScore++;
@@ -84,14 +81,11 @@ public class SimKeeper : MonoBehaviour {
 
         int score = 0;
         List<string> tagListY = contentY.getTagList();
-        foreach (string tagY in tagListY)
-        {
-            tagY.ToLower();
-        }
+        tagListY = tagListY.ConvertAll(item => item.ToLower());
         List<string> tagListX = contentX.getTagList();
+        tagListX = tagListX.ConvertAll(item => item.ToLower());
         foreach (string tagX in tagListX)
         {
-            tagX.ToLower();
             if (tagListY.Contains(tagX))
             {
                 score++;
@@ -213,7 +207,7 @@ public class SimKeeper : MonoBehaviour {
 
 	public void adjustMetatagweight(float newMetatagweight){
 		if (metaTagWeight != newMetatagweight)
-		{	tagWeight = newMetatagweight;
+		{	metaTagWeight = newMetatagweight;
 			removeLinesFromContent();
 			destroyLineRenderObjects();
 			spawnLineRenderers();
