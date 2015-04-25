@@ -12,12 +12,10 @@ public class Spiral {
     float zAxisOffset = 20;
     int numberOfElementsPerCircle = 5;
     float radius = 20;
-    private float rotation;
 
-    public Spiral(Vector3 startPosition, float rotation)
+    public Spiral(Vector3 startPosition)
     {
         this.startPosition = startPosition;
-        this.rotation = rotation;
     }
     
     //TODO rotation needs to take place here
@@ -27,12 +25,14 @@ public class Spiral {
         float angle = 360 / numberOfElementsPerCircle * elementNumber;
         float angleRad = angle * Mathf.PI / 180;
 
-        currX = startPosition.x + Mathf.Cos(angleRad) * radius;
-        currY = startPosition.y + Mathf.Sin(angleRad) * radius;
-        currZ = startPosition.z + elementNumber * zAxisOffset;
+        //currX = startPosition.x + Mathf.Cos(angleRad) * radius;
+        //currY = startPosition.y + Mathf.Sin(angleRad) * radius;
+        //currZ = startPosition.z + elementNumber * zAxisOffset;
+        currX = startPosition.x + elementNumber * 30;
+        currY = startPosition.y + 20;
+        //currZ = startPosition.z + 20;
         
         Vector3 currVector = new Vector3(currX, currY, currZ);
-        //currVector = Quaternion.Euler(0, rotation, 0) * currVector;
         return currVector;
 
     }

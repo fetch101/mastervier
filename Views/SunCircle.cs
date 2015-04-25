@@ -35,12 +35,7 @@ public class SunCircle {
     //this somehow return correct rotations... magic!
     public float getRotationForElement(int elementNumber)
     {
-        if (elementNumber == 1)
-        {
-            return 0f;
-        }
-
-        return 360 / numberOfElements * (numberOfElements - elementNumber + 1);
+        return 360 / numberOfElements * elementNumber;
     }
 
 }
