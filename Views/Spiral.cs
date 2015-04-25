@@ -29,7 +29,7 @@ public class Spiral {
         //currY = startPosition.y + Mathf.Sin(angleRad) * radius;
         //currZ = startPosition.z + elementNumber * zAxisOffset;
         currX = startPosition.x + elementNumber * 30;
-        currY = startPosition.y + 20;
+        //currY = startPosition.y + 20;
         //currZ = startPosition.z + 20;
         
         Vector3 currVector = new Vector3(currX, currY, currZ);

@@ -42,7 +42,7 @@ public class SunView : MonoBehaviour {
 
     public void alignSpiral(List<Content> contentList, Vector3 circleStart, float rotation)
     {
-        Spiral spiral = new Spiral(new Vector3(0f,0f,0f));
+        Spiral spiral = new Spiral(circleStart);
         int i = 0;
         GameObject lineObj = new GameObject();
         LineRenderer line = lineObj.AddComponent<LineRenderer>();
