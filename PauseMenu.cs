@@ -8,8 +8,6 @@ using UnityEngine.UI;
 
 public class PauseMenu : MonoBehaviour {
 
-    private List<KeyValuePair<String, String>> stringList = new List<KeyValuePair<String, String>>();
-
 	private bool contentIsInSight = false;
 
 	Content contentInSight;
