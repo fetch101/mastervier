@@ -13,7 +13,7 @@ public class SimKeeper : MonoBehaviour {
 
     public static SimKeeper instance;
 
-	public float threshold = 2.0f;
+	public float threshold = 3.0f;
 	public float tagWeight = 10.0f;
 	public float metaTagWeight = 10.0f;
    
