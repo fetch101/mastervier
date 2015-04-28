@@ -89,11 +89,6 @@ public class PauseMenu : MonoBehaviour {
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
 		RuntimeTagCanvas.SetActive (true);
-
-
-
-		stringList.Clear();
-
         isPause = false;
     }
 
