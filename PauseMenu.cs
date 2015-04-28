@@ -33,7 +33,12 @@ public class PauseMenu : MonoBehaviour {
     {
 
         oldContentInSight = contentInSight;
-		contentIsInSight = setContentInSight ();
+		contentIsInSight = setContentInSight();
+
+        if (!contentInSight == oldContentInSight)
+        {
+            PauseMenuCanvas.GetComponent<PauseTagHandler>().setDisplayContent(contentInSight);
+        }
 
         if (contentIsInSight)
         {
