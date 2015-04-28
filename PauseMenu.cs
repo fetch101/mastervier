@@ -14,6 +14,8 @@ public class PauseMenu : MonoBehaviour {
     Content oldContentInSight;
 
     public GameObject RuntimeTagCanvas;
+	public GameObject PauseMenuCanvas;
+
     private bool isPause;
 
     // Use this for initialization
@@ -89,6 +91,9 @@ public class PauseMenu : MonoBehaviour {
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
 		RuntimeTagCanvas.SetActive (true);
+
+		PauseMenuCanvas.SetActive (false);
+
         isPause = false;
     }
 
@@ -102,6 +107,7 @@ public class PauseMenu : MonoBehaviour {
 		Cursor.lockState = CursorLockMode.Confined;
         Cursor.visible = true;
         isPause = true;
+		PauseMenuCanvas.SetActive (true);
     }
 
 }
