@@ -38,14 +38,17 @@ public class PauseMenu : MonoBehaviour {
         if (!contentInSight == oldContentInSight)
         {
             PauseMenuCanvas.GetComponent<PauseTagHandler>().setDisplayContent(contentInSight);
+            RuntimeTagCanvas.GetComponent<RuntimeTagHandler>().setDisplayContent(contentInSight);
         }
 
         if (isInSight)
         {
-            if (!contentInSight.Equals(oldContentInSight))
-            {
-                RuntimeTagCanvas.GetComponent<RuntimeTagHandler>().setDisplayContent(contentInSight);
+            if (!isPause) { 
                 RuntimeTagCanvas.SetActive(true);
+            }
+            if (Input.GetKeyDown(KeyCode.C))
+            {
+                ViewKeeper.instance.circleView(contentInSight);
             }
 
         }else{
@@ -56,11 +59,6 @@ public class PauseMenu : MonoBehaviour {
             togglePause();
 
 		}
-
-        if (Input.GetKeyDown(KeyCode.C) && isInSight)
-        {
-            ViewKeeper.instance.circleView(contentInSight);
-        }
 
     }
 

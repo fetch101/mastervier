@@ -22,6 +22,10 @@ public class RuntimeTagHandler : MonoBehaviour {
 
     public void setDisplayContent(Content c)
     {
+        if (c == null)
+        {
+            return;
+        }
         foreach (GameObject runtimeTag in runtimeTagList)
         {
             GameObject.Destroy(runtimeTag);
