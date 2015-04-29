@@ -53,8 +53,8 @@ public class PauseTagHandler : MonoBehaviour
         childGameObjects["TextTagValue "].GetComponent<Text>().text = value;
         childGameObjects["TextTagCount"].GetComponent<Text>().text = count;
         childGameObjects["Button 0"].GetComponent<Button>().onClick.AddListener(() => Highlighter.instance.highlightContent(key, value));
-        childGameObjects["Button 1"].GetComponent<Button>().onClick.AddListener(() => Filter.instance.addAnd(value));
-        childGameObjects["Button 2"].GetComponent<Button>().onClick.AddListener(() => Filter.instance.addOr(value));
+        childGameObjects["Button 1"].GetComponent<Button>().onClick.AddListener(() => Filter.instance.addOr(value));
+        childGameObjects["Button 2"].GetComponent<Button>().onClick.AddListener(() => Filter.instance.addAnd(value));
 
         return tag;
     }

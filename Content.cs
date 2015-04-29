@@ -90,16 +90,6 @@ public class Content : MonoBehaviour {
         }
     }
 
-	//TODO: Hover Object to look dynamic
-
-	//public void hoverInPlace()
-	//{
-	//	transform.Translate(Time.deltaTime, 1, 1, Camera.main.transform);
-	//}
-
-
-	
-
     public void aligneObjectToCamera()
     {
 		int activationDistance = 150; 
@@ -195,8 +185,19 @@ public class Content : MonoBehaviour {
 
         return metaTagList;
     }
-	
- 	
+
+
+    public List<string> getCombinedTagsToLower()
+    {
+        List<string> metaTag = getMetaTagList();
+        metaTag = metaTag.ConvertAll(item => item.ToLower());
+        List<string> tag = getTagList();
+        tag = tag.ConvertAll(item => item.ToLower());
+        metaTag.AddRange(tag);
+        return metaTag;
+    }
+
+
     public void addLine(LineRenderer linerenderer, int vertex)
     {
         lineList.Add(new KeyValuePair<LineRenderer, int>(linerenderer, vertex));
