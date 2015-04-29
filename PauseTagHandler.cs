@@ -52,7 +52,7 @@ public class PauseTagHandler : MonoBehaviour
         childGameObjects["TextTagKey"].GetComponent<Text>().text = key;
         childGameObjects["TextTagValue "].GetComponent<Text>().text = value;
         childGameObjects["TextTagCount"].GetComponent<Text>().text = count;
-
+        childGameObjects["Button 0"].GetComponent<Button>().onClick.AddListener(() => Highlighter.instance.highlightContent(key, value));
 
         return tag;
     }
