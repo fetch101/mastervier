@@ -59,6 +59,7 @@ public class PauseMenu : MonoBehaviour {
 
         if (Input.GetKeyDown(KeyCode.C) && isInSight)
         {
+            ViewKeeper.instance.circleView(contentInSight);
         }
 
     }
