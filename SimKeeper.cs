@@ -110,7 +110,7 @@ public class SimKeeper : MonoBehaviour {
 					if (contentList[y].Student.Equals(contentList[x].Student) )
 
 					{
-						LineRenderer line = getNewLine();
+						LineRenderer line = getNewLineSame();
 						line.SetWidth(0.1f, 0.1f);
 						line.material = materialLineSameStudent;
 
@@ -118,7 +118,7 @@ public class SimKeeper : MonoBehaviour {
 						contentList[x].addLine(line, vertexX);
 
 					}else{
-						LineRenderer line = getNewLine();
+						LineRenderer line = getNewLineDif();
 						contentList[y].addLine(line, vertexY);
 						contentList[x].addLine(line, vertexX);
 						line.material = materialLineDifferentStudent;
@@ -131,16 +131,29 @@ public class SimKeeper : MonoBehaviour {
         }
     }
 
-    private LineRenderer getNewLine()
+    private LineRenderer getNewLineSame()
     {
         GameObject lineObject = new GameObject();
         LineRenderer linerenderer = lineObject.AddComponent<LineRenderer>();
         linerenderer.SetVertexCount(2);
         linerenderer.SetWidth(0.8f, 0.8f);
-        linerenderer.material = new Material(Shader.Find("Unlit/Texture"));
+//        linerenderer.material = new Material(Shader.Find("Unlit/Texture"));
+		linerenderer.material = materialLineSameStudent;
         lineRenderList.Add(lineObject);
         return linerenderer;
     }
+	private LineRenderer getNewLineDif()
+	{
+		GameObject lineObject = new GameObject();
+		LineRenderer linerenderer = lineObject.AddComponent<LineRenderer>();
+		linerenderer.SetVertexCount(2);
+		linerenderer.SetWidth(0.8f, 0.8f);
+		//        linerenderer.material = new Material(Shader.Find("Unlit/Texture"));
+		linerenderer.material = materialLineDifferentStudent;
+		lineRenderList.Add(lineObject);
+		return linerenderer;
+	}
+
 
     private List<Content> getAllContents()
     {
