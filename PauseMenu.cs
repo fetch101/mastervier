@@ -8,7 +8,7 @@ using UnityEngine.UI;
 
 public class PauseMenu : MonoBehaviour {
 
-	private bool contentIsInSight = false;
+	private bool isInSight = false;
 
 	Content contentInSight;
     Content oldContentInSight;
@@ -33,14 +33,14 @@ public class PauseMenu : MonoBehaviour {
     {
 
         oldContentInSight = contentInSight;
-		contentIsInSight = setContentInSight();
+		isInSight = setContentInSight();
 
         if (!contentInSight == oldContentInSight)
         {
             PauseMenuCanvas.GetComponent<PauseTagHandler>().setDisplayContent(contentInSight);
         }
 
-        if (contentIsInSight)
+        if (isInSight)
         {
             if (!contentInSight.Equals(oldContentInSight))
             {
@@ -56,6 +56,10 @@ public class PauseMenu : MonoBehaviour {
             togglePause();
 
 		}
+
+        if (Input.GetKeyDown(KeyCode.C) && isInSight)
+        {
+        }
 
     }
 
