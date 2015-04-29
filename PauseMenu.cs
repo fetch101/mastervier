@@ -100,7 +100,10 @@ public class PauseMenu : MonoBehaviour {
         SimKeeper.instance.enabled = false;
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
-		RuntimeTagCanvas.SetActive (true);
+        if (isInSight)
+        {
+            RuntimeTagCanvas.SetActive (true);
+        }
 
 		PauseMenuCanvas.SetActive (false);
 
