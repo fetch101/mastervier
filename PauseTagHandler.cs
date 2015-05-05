@@ -10,6 +10,14 @@ public class PauseTagHandler : MonoBehaviour
     public GameObject PauseTagPrefab;
     public Transform PausePrefabContainerPanel;
     private List<GameObject> PauseTagList = new List<GameObject>();
+	public Text TextThresholdNumber;
+	public Slider ThresholdSlider;
+	public Text TextTagSliderNumber;
+	public Slider TagSlider;
+	public Text TextMetaTagSliderNumber;
+	public Slider Metatagslider;
+
+
 
     // Use this for initialization
     void Start()
@@ -20,7 +28,7 @@ public class PauseTagHandler : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-
+		displaySliderNumbers ();
     }
 
     public void setDisplayContent(Content c)
@@ -185,5 +193,15 @@ public class PauseTagHandler : MonoBehaviour
         return displayList;
 
     }
+
+	private void displaySliderNumbers(){
+
+		TextThresholdNumber.text = Convert.ToString (ThresholdSlider.value);
+		float tsv = TagSlider.value * 10;
+		TextTagSliderNumber.text = Convert.ToString (tsv);
+		float mtsv = Metatagslider.value * 10;
+		TextMetaTagSliderNumber.text = Convert.ToString (mtsv);
+
+	}
 
 }
