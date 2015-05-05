@@ -2,8 +2,13 @@
 using System.Collections;
 using System.Collections.Generic;
 using System;
+using UnityEngine.UI;
 
 public class Filter : MonoBehaviour {
+
+	public Text FilterContainsInput;
+	public Text FilterContainsInput2;
+	private string filterContains;
 
     private List<String> andList = new List<String>();
     private List<String> orList = new List<String>();
@@ -18,6 +23,7 @@ public class Filter : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
+		displayFilterElements (andList);
 	
 	}
 
@@ -25,6 +31,7 @@ public class Filter : MonoBehaviour {
     {
         andList.Add(value);
         Debug.Log("Added " + value + " to AND filter");
+		Debug.Log ("andList.Count: " + andList.Count);
     }
 
     public void addOr(string value)
@@ -112,4 +119,34 @@ public class Filter : MonoBehaviour {
         }
         return contentList;
     }
+
+
+//	private void displayFilterElements(List<String> andList){
+//		int i = andList.Count;
+//		if (i == 1) {
+//			FilterContainsInput.text = andList[0];
+//		}
+//		if (i == 2) {
+//			FilterContainsInput.text = + andList [0] + ", " + andList [1];
+//		}
+//		if (i == 3) {
+//			FilterContainsInput.text = andList [0] + ", " + andList [1] + ", " + andList [2];
+//		}
+//		if (i == 4) {
+//			FilterContainsInput.text = andList [0] + ", " + andList [1] + ", " + andList [2] + ", " + andList [3];
+//		}
+//		if (i == 5) {
+//			FilterContainsInput.text = andList [0] + ", " + andList [1] + ", " + andList [2] + ", " + andList [3] + ", " + andList [4];
+//		}
+//		if (i == 6) {
+//			FilterContainsInput.text = andList [0] + ", " + andList [1] + ", " + andList [2] + ", " + andList [3] + ", " + andList [4]  + ", " + andList [5];
+//		}else{			FilterContainsInput.text = "Momentan nichts...";
+//		}
+//
+//
+//
+//		FilterContainsInput2.text = "asdasdasdasdas";
+//		
+//		
+//	}
 }
