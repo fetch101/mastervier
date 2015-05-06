@@ -29,34 +29,55 @@ public class DisplayAllTags : MonoBehaviour {
         List<List<Content>> studentList = getStudentList();
         foreach (List<Content> studentContent in studentList)
         {
-            string studentString = "";
-            studentString += studentContent[0].Student;
-            studentString += "\n";
+            Dictionary<string, int> studentDic = new Dictionary<string, int>();
+            studentDic.Add(studentContent[0].Student, 0);
             foreach (Content content in studentContent)
             {
-                studentString += getContentString(content);
-                studentString += "\n";
+                fillContentToDic(content, studentDic);
             }
-            studentString += "------------Student END-------------";
-            Debug.Log(studentString);
+            string outputstring = "";
+            foreach (KeyValuePair<string, int> pair in studentDic)
+            {
+                outputstring += pair.Value;
+                outputstring += " - ";
+                outputstring += pair.Key;
+                outputstring += "\n";
+            }
+            Debug.Log(outputstring);
         }
     }
 
-    private string getContentString(Content content)
+    private void fillContentToDic(Content content, Dictionary<string, int> studentDic)
     {
-        string contentString = "";
-        //TODO only print tags you wish to have
         List<string> tagList = content.getTagList();
-        List<string> metaTagList = content.getMetaTagList();
-        tagList.AddRange(metaTagList);
+
+        if (content.Autor != "" && !studentDic.ContainsKey(content.Autor))
+        {
+            studentDic.Add(content.Autor, tagDic[content.Autor]);
+        }
+
+        if (content.Verortung != "" && !studentDic.ContainsKey(content.Verortung))
+        {
+            studentDic.Add(content.Verortung, tagDic[content.Verortung]);
+        }
+
+        if (content.UR != "" && !studentDic.ContainsKey(content.UR))
+        {
+            studentDic.Add(content.UR, tagDic[content.UR]);
+        }
+
+        if (content.PUR != "" && !studentDic.ContainsKey(content.PUR))
+        {
+            studentDic.Add(content.PUR, tagDic[content.PUR]);
+        }
+
         foreach (string tag in tagList)
         {
-            contentString += tagDic[tag];
-            contentString += " - ";
-            contentString += tag;
-            contentString += "\n";
+            if (!tagDic.ContainsKey(tag))
+            {
+                tagDic.Add(tag, tagDic[tag]);
+            }
         }
-        return contentString;
     }
 
     private List<List<Content>> getStudentList()
