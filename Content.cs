@@ -187,7 +187,7 @@ public class Content : MonoBehaviour {
     }
 
 
-    public List<string> getCombinedTagsToLower()
+    private List<string> getCombinedTagsToLower()
     {
         List<string> metaTag = getMetaTagList();
         metaTag = metaTag.ConvertAll(item => item.ToLower());
@@ -195,6 +195,19 @@ public class Content : MonoBehaviour {
         tag = tag.ConvertAll(item => item.ToLower());
         metaTag.AddRange(tag);
         return metaTag;
+    }
+
+    public bool contains(string tag)
+    {
+        if (getCombinedTagsToLower().Contains(tag))
+        {
+            return true;
+        }
+        if (this.Student.ToLower() == tag || this.Semester.ToLower() == tag || this.Phase.ToLower() == tag || this.Year.ToLower() == tag || this.Objecttype.ToLower() == tag)
+        {
+            return true;
+        }
+        return false;
     }
 
 

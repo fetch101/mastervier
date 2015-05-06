@@ -34,15 +34,14 @@ public class Filter : MonoBehaviour {
 
     public void addAnd(string value)
     {
-        andList.Add(value);
-        Debug.Log("Added " + value + " to AND filter");
-		Debug.Log ("andList.Count: " + andList.Count);
+        andList.Add(value.ToLower());
+        Debug.Log("Added " + value.ToLower() + " to AND filter");
     }
 
     public void addOr(string value)
     {
-        orList.Add(value);
-        Debug.Log("Added " + value + " to OR filter");
+        orList.Add(value.ToLower());
+        Debug.Log("Added " + value.ToLower() + " to OR filter");
     }
 
     public void removeFilter()
@@ -69,9 +68,9 @@ public class Filter : MonoBehaviour {
 
         }
 
-        Debug.Log("and count" + andList.Count);
-        Debug.Log("or count" + orList.Count);
-        Debug.Log("filtered contents count" + filteredContents.Count);
+        Debug.Log("and count " + andList.Count);
+        Debug.Log("or count " + orList.Count);
+        Debug.Log("filtered contents count " + filteredContents.Count);
 
         foreach (Content c in filteredContents)
         {
@@ -88,7 +87,7 @@ public class Filter : MonoBehaviour {
         }
         foreach (String orString in orList)
         {
-            if (content.getCombinedTagsToLower().Contains(orString))
+            if (content.contains(orString.ToLower()))
             {
                 return true;
             }
@@ -104,7 +103,7 @@ public class Filter : MonoBehaviour {
         }
         foreach (String andString in andList)
         {
-            if (!content.getCombinedTagsToLower().Contains(andString))
+            if (!content.contains(andString.ToLower()))
             {
                 return false;
             }
