@@ -9,7 +9,7 @@ public class PauseTagHandler : MonoBehaviour
 
     public GameObject PauseTagPrefab;
     public Transform PausePrefabContainerPanel;
-    private List<GameObject> PauseTagList = new List<GameObject>();
+    private List<GameObject> pauseTagList = new List<GameObject>();
 	public Text TextThresholdNumber;
 	public Slider ThresholdSlider;
 	public Text TextTagSliderNumber;
@@ -37,15 +37,25 @@ public class PauseTagHandler : MonoBehaviour
         {
             return;
         }
-        foreach (GameObject runtimeTag in PauseTagList)
+        foreach (GameObject runtimeTag in pauseTagList)
         {
             GameObject.Destroy(runtimeTag);
         }
-        PauseTagList.Clear();
+        pauseTagList.Clear();
         List<KeyValuePair<String, String>> displayList = getDisplayList(c);
+        Dictionary<string, int> tagDic = SimKeeper.instance.getTagDic();
         for (int i = 0; i < displayList.Count; i++)
         {
-            PauseTagList.Add(instantiateRuntimeTag(displayList[i].Key, displayList[i].Value, "500"));
+            string tagCount = "";
+            if (displayList[i].Key == "Student" || displayList[i].Key == "Semester" || displayList[i].Key == "Phase" || displayList[i].Key == "Jahr" || displayList[i].Key == "Objekttyp")
+            {
+                pauseTagList.Add(instantiateRuntimeTag(displayList[i].Key, displayList[i].Value, tagCount));
+            }
+            else
+            {
+                tagCount = tagDic[displayList[i].Value].ToString();
+                pauseTagList.Add(instantiateRuntimeTag(displayList[i].Key, displayList[i].Value, tagCount));
+            }
         }
     }
 
