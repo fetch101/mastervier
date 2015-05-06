@@ -61,5 +61,11 @@ public class ViewKeeper : MonoBehaviour {
         return contentList;
     }
 
-  
+
+
+    public void filteredView(List<Content> filteredContents)
+    {
+        this.GetComponent<CircleView>().destroyLines();
+        this.GetComponent<FilteredView>().alignContents(filteredContents);
+    }
 }

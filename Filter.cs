@@ -46,6 +46,11 @@ public class Filter : MonoBehaviour {
 
     public void removeFilter()
     {
+
+        foreach (Content content in filteredContents)
+        {
+            content.shouldAlign = true;
+        }
         andList.Clear();
         orList.Clear();
         filteredContents.Clear();
@@ -68,14 +73,13 @@ public class Filter : MonoBehaviour {
 
         }
 
-        Debug.Log("and count " + andList.Count);
-        Debug.Log("or count " + orList.Count);
-        Debug.Log("filtered contents count " + filteredContents.Count);
-
-        foreach (Content c in filteredContents)
+        foreach (Content content in filteredContents)
         {
-            Debug.Log(c.name);
+            content.shouldAlign = false;
+            content.transform.rotation = Quaternion.LookRotation(Vector3.up);
         }
+
+        ViewKeeper.instance.filteredView(filteredContents);
 
     }
 

@@ -41,6 +41,7 @@ public class Content : MonoBehaviour {
     private bool isMoving;
     private Vector3 moveTowards;
     public float speed;
+    public bool shouldAlign = true;
 	
 	// Use this for initialization
 	void Start () {
@@ -60,7 +61,10 @@ public class Content : MonoBehaviour {
 	void Update()
 	{
 		drawLines();
-		aligneObjectToCamera();
+        if (shouldAlign)
+        {
+		    aligneObjectToCamera();
+        }
         if (isMoving)
         {
             move();
