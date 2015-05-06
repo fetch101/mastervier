@@ -45,6 +45,7 @@ public class DisplayAllTags : MonoBehaviour {
     private string getContentString(Content content)
     {
         string contentString = "";
+        //TODO only print tags you wish to have
         List<string> tagList = content.getTagList();
         List<string> metaTagList = content.getMetaTagList();
         tagList.AddRange(metaTagList);
