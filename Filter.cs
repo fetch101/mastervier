@@ -6,12 +6,12 @@ using UnityEngine.UI;
 
 public class Filter : MonoBehaviour {
 
-	public Text FilterContainsInput;
-	public Text FilterContainsInput2;
+	public Text mustTags;
+	public Text canTags;
 	private string filterContains;
 
-    private List<String> andList = new List<String>();
-    private List<String> orList = new List<String>();
+    private List<String> mustList = new List<String>();
+    private List<String> canList = new List<String>();
     private List<Content> filteredContents = new List<Content>();
 
     public static Filter instance;
@@ -23,7 +23,7 @@ public class Filter : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-        //displayFilterElements(andList);
+        displayFilterElements();
 	
 	}
 
@@ -34,14 +34,12 @@ public class Filter : MonoBehaviour {
 
     public void addAnd(string value)
     {
-        andList.Add(value.ToLower());
-        Debug.Log("Added " + value.ToLower() + " to AND filter");
+        mustList.Add(value);
     }
 
     public void addOr(string value)
     {
-        orList.Add(value.ToLower());
-        Debug.Log("Added " + value.ToLower() + " to OR filter");
+        canList.Add(value);
     }
 
     public void removeFilter()
@@ -51,10 +49,9 @@ public class Filter : MonoBehaviour {
         {
             content.shouldAlign = true;
         }
-        andList.Clear();
-        orList.Clear();
+        mustList.Clear();
+        canList.Clear();
         filteredContents.Clear();
-        Debug.Log("cleared filter");
     }
 
     public void applyFilter()
@@ -85,11 +82,11 @@ public class Filter : MonoBehaviour {
 
     private bool contentContainsOrString(Content content)
     {
-        if (orList.Count == 0)
+        if (canList.Count == 0)
         {
             return true;
         }
-        foreach (String orString in orList)
+        foreach (String orString in canList)
         {
             if (content.contains(orString.ToLower()))
             {
@@ -101,11 +98,11 @@ public class Filter : MonoBehaviour {
 
     private bool contentContainsAllAndStrings(Content content)
     {
-        if (andList.Count == 0)
+        if (mustList.Count == 0)
         {
             return true;
         }
-        foreach (String andString in andList)
+        foreach (String andString in mustList)
         {
             if (!content.contains(andString.ToLower()))
             {
@@ -129,32 +126,33 @@ public class Filter : MonoBehaviour {
     }
 
 
-//	private void displayFilterElements(List<String> andList){
-//		int i = andList.Count;
-//		if (i == 1) {
-//			FilterContainsInput.text = andList[0];
-//		}
-//		if (i == 2) {
-//			FilterContainsInput.text = + andList [0] + ", " + andList [1];
-//		}
-//		if (i == 3) {
-//			FilterContainsInput.text = andList [0] + ", " + andList [1] + ", " + andList [2];
-//		}
-//		if (i == 4) {
-//			FilterContainsInput.text = andList [0] + ", " + andList [1] + ", " + andList [2] + ", " + andList [3];
-//		}
-//		if (i == 5) {
-//			FilterContainsInput.text = andList [0] + ", " + andList [1] + ", " + andList [2] + ", " + andList [3] + ", " + andList [4];
-//		}
-//		if (i == 6) {
-//			FilterContainsInput.text = andList [0] + ", " + andList [1] + ", " + andList [2] + ", " + andList [3] + ", " + andList [4]  + ", " + andList [5];
-//		}else{			FilterContainsInput.text = "Momentan nichts...";
-//		}
-//
-//
-//
-//		FilterContainsInput2.text = "asdasdasdasdas";
-//		
-//		
-//	}
+    private void displayFilterElements()
+    {
+        string mustString = "";
+        string canString = "";
+        int count = 1;
+        foreach (string must in mustList)
+        {
+            mustString += must;
+            if (count < mustList.Count)
+            {
+                mustString += ", ";
+            }
+            count++;
+        }
+        count = 1;
+        foreach (string can in canList)
+        {
+            canString += can; 
+            if (count < canList.Count)
+            {
+                canString += ", ";
+            }
+            count++;
+        }
+
+        mustTags.text = mustString;
+        canTags.text = canString;
+
+    }
 }
