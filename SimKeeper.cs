@@ -25,13 +25,43 @@ public class SimKeeper : MonoBehaviour {
 	public Material materialLineSameStudent;
 	public Material materialLineDifferentStudent;
 
+    private Dictionary<string, int> tagDic = new Dictionary<string, int>();
+
+
 
 	void Start () {
         instance = this;
         contentList = getAllContents();
         buildSimTable();
         buildMetaSimTable();
+        buildTagDic();
         spawnLineRenderers();
+    }
+
+    private void buildTagDic()
+    {
+        foreach (Content content in contentList)
+        {
+            List<string> tagList = content.getTagList();
+            List<string> metaTagList = content.getMetaTagList();
+            tagList.AddRange(metaTagList);
+            addTagsToDic(tagList);
+        }
+    }
+
+    private void addTagsToDic(List<string> tagList)
+    {
+        foreach (string tag in tagList)
+        {
+            if (tagDic.ContainsKey(tag))
+            {
+                tagDic[tag]++;
+            }
+            else
+            {
+                tagDic.Add(tag, 1);
+            }
+        }
     }
 
 
@@ -186,17 +216,15 @@ public class SimKeeper : MonoBehaviour {
 
         return simList;
     }
+
+    public Dictionary<string, int> getTagDic()
+    {
+        return tagDic;
+    }
 	
 	void Update () {
-
-
 	
 	}
-
-    void OnGUI()
-    {
-
-    }
 
 	public void adjustThreshold(float newThreshold){
 		if (threshold != newThreshold)
