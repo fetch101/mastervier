@@ -23,9 +23,14 @@ public class Filter : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-		displayFilterElements (andList);
+        //displayFilterElements(andList);
 	
 	}
+
+    private void displayFilterElements(List<string> andList)
+    {
+        throw new NotImplementedException();
+    }
 
     public void addAnd(string value)
     {
