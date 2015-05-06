@@ -31,10 +31,20 @@ public class RuntimeTagHandler : MonoBehaviour {
             GameObject.Destroy(runtimeTag);
         }
         runtimeTagList.Clear();
+        Dictionary<string, int> tagDic = SimKeeper.instance.getTagDic();
         List<KeyValuePair<String, String>> displayList = getDisplayList(c);
         for (int i = 0; i < displayList.Count; i++)
         {
-            runtimeTagList.Add(instantiateRuntimeTag(displayList[i].Key, displayList[i].Value, "500"));
+            string tagCount = "";
+            if (displayList[i].Key == "Student" || displayList[i].Key == "Semester" || displayList[i].Key == "Phase" || displayList[i].Key == "Jahr" || displayList[i].Key == "Objekttyp")
+            {
+                runtimeTagList.Add(instantiateRuntimeTag(displayList[i].Key, displayList[i].Value, tagCount));
+            }
+            else
+            {
+                tagCount = tagDic[displayList[i].Value].ToString();
+                runtimeTagList.Add(instantiateRuntimeTag(displayList[i].Key, displayList[i].Value, tagCount));
+            }
         }
     }
 
