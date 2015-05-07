@@ -30,13 +30,20 @@ public class DisplayAllTags : MonoBehaviour {
         foreach (List<Content> studentContent in studentList)
         {
             Dictionary<string, int> studentDic = new Dictionary<string, int>();
-            studentDic.Add(studentContent[0].Student, 0);
+            studentDic.Add(studentContent[0].Student, 1000);
             foreach (Content content in studentContent)
             {
                 fillContentToDic(content, studentDic);
             }
-            string outputstring = "";
+
+            List<KeyValuePair<string, int>> sortedStudentList = new List<KeyValuePair<string, int>>();
             foreach (KeyValuePair<string, int> pair in studentDic)
+            {
+                sortedStudentList.Add(pair);
+            }
+            sortedStudentList.Sort((x, y) => y.Value.CompareTo(x.Value));
+            string outputstring = "";
+            foreach (KeyValuePair<string, int> pair in sortedStudentList)
             {
                 outputstring += pair.Value;
                 outputstring += " - ";
@@ -112,46 +119,7 @@ public class DisplayAllTags : MonoBehaviour {
             }
         }
 
-        //if (content.Tag0 != "" && !studentDic.ContainsKey(content.Tag0))
-        //{
-        //    studentDic.Add(content.Tag0, tagDic[content.Tag0]);
-        //}
-        //if (content.Tag1 != "" && !studentDic.ContainsKey(content.Tag1))
-        //{
-        //    studentDic.Add(content.Tag1, tagDic[content.Tag1]);
-        //}
-        //if (content.Tag2 != "" && !studentDic.ContainsKey(content.Tag2))
-        //{
-        //    studentDic.Add(content.Tag2, tagDic[content.Tag2]);
-        //}
-        //if (content.Tag3 != "" && !studentDic.ContainsKey(content.Tag3))
-        //{
-        //    studentDic.Add(content.Tag3, tagDic[content.Tag3]);
-        //}
-        //if (content.Tag4 != "" && !studentDic.ContainsKey(content.Tag4))
-        //{
-        //    studentDic.Add(content.Tag4, tagDic[content.Tag4]);
-        //}
-        //if (content.Tag5 != "" && !studentDic.ContainsKey(content.Tag5))
-        //{
-        //    studentDic.Add(content.Tag5, tagDic[content.Tag5]);
-        //}
-        //if (content.Tag6 != "" && !studentDic.ContainsKey(content.Tag6))
-        //{
-        //    studentDic.Add(content.Tag6, tagDic[content.Tag6]);
-        //}
-        //if (content.Tag7 != "" && !studentDic.ContainsKey(content.Tag7))
-        //{
-        //    studentDic.Add(content.Tag7, tagDic[content.Tag7]);
-        //}
-        //if (content.Tag8 != "" && !studentDic.ContainsKey(content.Tag8))
-        //{
-        //    studentDic.Add(content.Tag8, tagDic[content.Tag8]);
-        //}
-        //if (content.Tag9 != "" && !studentDic.ContainsKey(content.Tag9))
-        //{
-        //    studentDic.Add(content.Tag9, tagDic[content.Tag9]);
-        //}
+
     }
 
     private List<List<Content>> getStudentList()
