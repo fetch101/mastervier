@@ -45,6 +45,11 @@ public class SimKeeper : MonoBehaviour {
             List<string> tagList = content.getTagList();
             List<string> metaTagList = content.getMetaTagList();
             tagList.AddRange(metaTagList);
+            tagList.Add(content.Student);
+            tagList.Add(content.Phase);
+            tagList.Add(content.Semester);
+            tagList.Add(content.Year);
+            tagList.Add(content.Objecttype);
             addTagsToDic(tagList);
         }
     }
