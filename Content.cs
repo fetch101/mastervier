@@ -203,6 +203,7 @@ public class Content : MonoBehaviour {
 
     public bool contains(string tag)
     {
+        tag = tag.ToLower();
         if (getCombinedTagsToLower().Contains(tag))
         {
             return true;
