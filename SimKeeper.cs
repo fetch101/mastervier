@@ -166,8 +166,7 @@ public class SimKeeper : MonoBehaviour {
         GameObject lineObject = new GameObject();
         LineRenderer linerenderer = lineObject.AddComponent<LineRenderer>();
         linerenderer.SetVertexCount(2);
-        linerenderer.SetWidth(0.8f, 0.8f);
-//        linerenderer.material = new Material(Shader.Find("Unlit/Texture"));
+        linerenderer.SetWidth(0.4f, 0.4f);
 		linerenderer.material = materialLineSameStudent;
         lineRenderList.Add(lineObject);
         return linerenderer;
@@ -178,7 +177,6 @@ public class SimKeeper : MonoBehaviour {
 		LineRenderer linerenderer = lineObject.AddComponent<LineRenderer>();
 		linerenderer.SetVertexCount(2);
 		linerenderer.SetWidth(0.4f, 0.4f);
-		//        linerenderer.material = new Material(Shader.Find("Unlit/Texture"));
 		linerenderer.material = materialLineDifferentStudent;
 		lineRenderList.Add(lineObject);
 		return linerenderer;

@@ -96,7 +96,7 @@ public class Content : MonoBehaviour {
 
     public void aligneObjectToCamera()
     {
-		int activationDistance = 150; 
+		int activationDistance = 200; 
 		int speedForRotation = 2;
 
 
