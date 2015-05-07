@@ -6,8 +6,10 @@ using UnityEngine.UI;
 
 public class Filter : MonoBehaviour {
 
-	public Text mustTags;
-	public Text canTags;
+	public Text mustTagsText;
+	public Text canTagsText;
+    public Text NumberOfFilteredElementsNumber;
+
 	private string filterContains;
 
     private List<String> mustList = new List<String>();
@@ -23,23 +25,20 @@ public class Filter : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-        displayFilterElements();
-	
 	}
-
-    private void displayFilterElements(List<string> andList)
-    {
-        throw new NotImplementedException();
-    }
 
     public void addAnd(string value)
     {
         mustList.Add(value);
+        calculateFilteredContents();
+        displayFilterElements();
     }
 
     public void addOr(string value)
     {
         canList.Add(value);
+        calculateFilteredContents();
+        displayFilterElements();
     }
 
     public void removeFilter()
@@ -52,13 +51,29 @@ public class Filter : MonoBehaviour {
         mustList.Clear();
         canList.Clear();
         filteredContents.Clear();
+        displayFilterElements();
     }
 
     public void applyFilter()
     {
+        calculateFilteredContents();
+
+        foreach (Content content in filteredContents)
+        {
+            content.shouldAlign = false;
+            content.transform.rotation = Quaternion.LookRotation(Vector3.up);
+        }
+
+        ViewKeeper.instance.filteredView(filteredContents);
+
+    }
+
+    private void calculateFilteredContents()
+    {
+        filteredContents.Clear();
         List<Content> contents = getAllContents();
 
-        foreach(Content content in contents)
+        foreach (Content content in contents)
         {
             if (contentContainsAllAndStrings(content))
             {
@@ -69,15 +84,6 @@ public class Filter : MonoBehaviour {
             }
 
         }
-
-        foreach (Content content in filteredContents)
-        {
-            content.shouldAlign = false;
-            content.transform.rotation = Quaternion.LookRotation(Vector3.up);
-        }
-
-        ViewKeeper.instance.filteredView(filteredContents);
-
     }
 
     private bool contentContainsOrString(Content content)
@@ -151,8 +157,9 @@ public class Filter : MonoBehaviour {
             count++;
         }
 
-        mustTags.text = mustString;
-        canTags.text = canString;
+        mustTagsText.text = mustString;
+        canTagsText.text = canString;
+        NumberOfFilteredElementsNumber.text = filteredContents.Count.ToString();
 
     }
 }
