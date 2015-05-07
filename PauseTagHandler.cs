@@ -206,11 +206,11 @@ public class PauseTagHandler : MonoBehaviour
 
 	private void displaySliderNumbers(){
 
-        //TextThresholdNumber.text = Convert.ToString (ThresholdSlider.value);
-        //float tsv = TagSlider.value * 10;
-        //TextTagSliderNumber.text = Convert.ToString (tsv);
-        //float mtsv = Metatagslider.value * 10;
-        //TextMetaTagSliderNumber.text = Convert.ToString (mtsv);
+        TextThresholdNumber.text = Convert.ToString (ThresholdSlider.value);
+        float tsv = TagSlider.value * 10;
+        TextTagSliderNumber.text = Convert.ToString (tsv);
+        float mtsv = Metatagslider.value * 10;
+        TextMetaTagSliderNumber.text = Convert.ToString (mtsv);
 
 	}
 
