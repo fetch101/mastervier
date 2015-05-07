@@ -25,7 +25,7 @@ public class Spectator : MonoBehaviour
         //press shift to move faster
         if (Input.GetKey(KeyCode.LeftShift) || Input.GetKey(KeyCode.RightShift))
         {
-            speed = 500;
+            speed = 350;
 
         }
         else

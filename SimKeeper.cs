@@ -15,7 +15,7 @@ public class SimKeeper : MonoBehaviour {
 
 	public float threshold = 3.0f;
 	public float tagWeight = 10.0f;
-	public float metaTagWeight = 10.0f;
+	public float metaTagWeight = 5.0f;
    
     private int newThreshold;
     private int newTagWeight;
@@ -177,7 +177,7 @@ public class SimKeeper : MonoBehaviour {
 		GameObject lineObject = new GameObject();
 		LineRenderer linerenderer = lineObject.AddComponent<LineRenderer>();
 		linerenderer.SetVertexCount(2);
-		linerenderer.SetWidth(0.8f, 0.8f);
+		linerenderer.SetWidth(0.4f, 0.4f);
 		//        linerenderer.material = new Material(Shader.Find("Unlit/Texture"));
 		linerenderer.material = materialLineDifferentStudent;
 		lineRenderList.Add(lineObject);
