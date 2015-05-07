@@ -149,6 +149,7 @@ public class SimKeeper : MonoBehaviour {
 
 					}else{
 						LineRenderer line = getNewLineDif();
+						line.SetWidth(0.2f, 0.2f);
 						contentList[y].addLine(line, vertexY);
 						contentList[x].addLine(line, vertexX);
 						line.material = materialLineDifferentStudent;

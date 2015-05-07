@@ -8,7 +8,7 @@ public class Spectator : MonoBehaviour
 	public static Spectator instance;
 
     //initial speed
-    public int speed = 40;
+    public int speed = 60;
 
     // Use this for initialization
     void Start()
