@@ -22,10 +22,8 @@ public class PauseMenu : MonoBehaviour {
     private bool isPause;
 	public GameObject mainCamera;
 	public GameObject target;
-//	private Vector2 targetPoint;
-//	private Quaternion targetRotation;
-//	private Vector3 lookAtThis;
-//	public Transform targetToLookAt;
+//	private float thresholdFloat = 12.0f;
+
 
     // Use this for initialization
     void Start()
@@ -45,6 +43,8 @@ public class PauseMenu : MonoBehaviour {
 		
 			if (clickCount == 1) {
 				alligneCameraToCOntentInSight1 ();
+
+
 			}
 			if (clickCount == 2) {
 				alligneCameraToCOntentInSight2 ();
@@ -92,16 +92,6 @@ public class PauseMenu : MonoBehaviour {
 		if (Physics.Raycast (raycheck, out hitcheck, 50f) && hitcheck.collider.gameObject.GetComponent<Content>() != null) {
             contentInSight = hitcheck.collider.gameObject.GetComponent<Content>();
 			target.transform.position = hitcheck.collider.gameObject.transform.position;
-
-//			if(clickCount == 1){
-//				Debug.Log("hitcheckobject location: " +"x: "+ hitcheck.collider.gameObject.transform.position.x +"y: "+ hitcheck.collider.gameObject.transform.position.y + "z: "+ hitcheck.collider.gameObject.transform.position.z);
-//				clickCount++;
-//			}
-
-//			target.transform.position.x = hitcheck.collider.gameObject.transform.position.x;
-//			target.transform.position.y = hitcheck.collider.gameObject.transform.position.y;
-//			target.transform.position.z = hitcheck.collider.gameObject.transform.position.z;
-
 			return true;
 
 		}else{
@@ -155,32 +145,18 @@ public class PauseMenu : MonoBehaviour {
 
 	private void alligneCameraToCOntentInSight1 (){
 					FocusOnContentCanvas.SetActive(true);
-					mainCamera.transform.position = new Vector3 (contentInSight.transform.position.x + 30, contentInSight.transform.position.y, contentInSight.transform.position.z); 
-//					lookAtThis = new Vector3 (contentInSight.transform.position.x, contentInSight.transform.position.y, contentInSight.transform.position.z);
-
-
-
-//
-//					targetPoint = new Vector3(target.transform.position.x, transform.position.y, target.transform.position.z) - mainCamera.transform.position;
-//					targetRotation = Quaternion.LookRotation (-targetPoint, Vector3.up);
-//					mainCamera.transform.rotation = Quaternion.Slerp(mainCamera.transform.rotation, targetRotation, Time.deltaTime * 2.0f);
-
-//		Debug.Log ("taget location: " +"x: "+ target.transform.position.x + "y: "+ target.transform.position.y +"z: "+ target.transform.position.z);
-//		mainCamera.transform.LookAt (contentInSight.transform, Vector3.up);
-//		contentInSight.transform.position;
-
+					mainCamera.transform.position = new Vector3 (contentInSight.transform.position.x + 0.01f , contentInSight.transform.position.y  + 35.0f, contentInSight.transform.position.z); 
+					SimKeeper.instance.adjustThreshold (14.0f);
 	}
 	private void alligneCameraToCOntentInSight2 (){
 		RuntimeTagCanvas.SetActive(false);
-
 	}
-	private void alligneCameraToCOntentInSight3 (){
 
+	private void alligneCameraToCOntentInSight3 (){
 					clickCount = 0;
 					FocusOnContentCanvas.SetActive(false);
 					RuntimeTagCanvas.SetActive(true);
-
-
+					SimKeeper.instance.adjustThreshold (3.0f);
 	}
 
 }
