@@ -5,6 +5,7 @@ using System;
 
 public class FilteredView : MonoBehaviour {
 
+
 	// Use this for initialization
 	void Start () {
 	

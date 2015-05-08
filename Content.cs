@@ -2,6 +2,7 @@ using UnityEngine;
 using System.Collections.Generic;
 
 public class Content : MonoBehaviour {
+	public Vector3 finalDestination;
 
 	public int markCount = 0;
 	public int markOffsetX = 5;
@@ -38,7 +39,7 @@ public class Content : MonoBehaviour {
     private List<KeyValuePair<LineRenderer, int>> lineList = new List<KeyValuePair<LineRenderer, int>>();
 
 	private float height;
-    private bool isMoving;
+    public bool isMoving;
     private Vector3 moveTowards;
     public float speed;
     public bool shouldAlign = true;
@@ -84,6 +85,7 @@ public class Content : MonoBehaviour {
     {
         this.moveTowards = moveTowards;
         isMoving = true;
+		finalDestination = moveTowards;
     }
 
     public void drawLines()

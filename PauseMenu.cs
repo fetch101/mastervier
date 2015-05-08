@@ -8,26 +8,29 @@ using UnityEngine.UI;
 
 public class PauseMenu : MonoBehaviour {
 
-	private bool isInSight = false;
+	public static PauseMenu instance;
+	private bool wasMoving = false;
+	public bool isInSight = false;
+	Vector3 goToFinalDestinationVector;
 
 	Content contentInSight;
     Content oldContentInSight;
 	public GameObject FocusOnContentCanvas;
     public GameObject RuntimeTagCanvas;
 	public GameObject PauseMenuCanvas;
-	private bool click1 = false;
-	private bool click2 = false;
-	private bool click3 = false;
+	Vector3 currPosition;
+	float currThreshold = 3.0f;
 	public int clickCount = 0; 
     private bool isPause;
 	public GameObject mainCamera;
 	public GameObject target;
-//	private float thresholdFloat = 12.0f;
+	public bool focusModeOn = false;
 
 
     // Use this for initialization
     void Start()
     {
+		instance = this;
 		FocusOnContentCanvas.SetActive (false);
         Cursor.lockState = CursorLockMode.Confined;
         Cursor.visible = true;
@@ -42,6 +45,7 @@ public class PauseMenu : MonoBehaviour {
 			clickCount++;
 		
 			if (clickCount == 1) {
+				currPosition = mainCamera.transform.position;
 				alligneCameraToCOntentInSight1 ();
 
 
@@ -55,6 +59,7 @@ public class PauseMenu : MonoBehaviour {
 		}
         oldContentInSight = contentInSight;
 		isInSight = setContentInSight();
+
         if (!contentInSight == oldContentInSight && clickCount != 2)
         {
             PauseMenuCanvas.GetComponent<PauseTagHandler>().setDisplayContent(contentInSight);
@@ -96,7 +101,8 @@ public class PauseMenu : MonoBehaviour {
 
 		}else{
             contentInSight = null;
-			return false;			
+			return false;	
+			currPosition = mainCamera.transform.position;
 		}
 	}
 
@@ -144,19 +150,45 @@ public class PauseMenu : MonoBehaviour {
 
 
 	private void alligneCameraToCOntentInSight1 (){
-					FocusOnContentCanvas.SetActive(true);
-					mainCamera.transform.position = new Vector3 (contentInSight.transform.position.x + 0.01f , contentInSight.transform.position.y  + 35.0f, contentInSight.transform.position.z); 
-					SimKeeper.instance.adjustThreshold (14.0f);
-	}
-	private void alligneCameraToCOntentInSight2 (){
-		RuntimeTagCanvas.SetActive(false);
+//		Cursor.visible = false;
+		focusModeOn = true;
+		currThreshold = SimKeeper.instance.threshold;
+		FocusOnContentCanvas.SetActive(true);
+		mainCamera.transform.position = new Vector3 (contentInSight.transform.position.x + 0.01f , contentInSight.transform.position.y  + 35.0f, contentInSight.transform.position.z); 
+		SimKeeper.instance.adjustThreshold (15.0f);
+		if (contentInSight.isMoving) {
+			contentInSight.isMoving = false;
+			wasMoving = true;
+
+		}
+
 	}
 
-	private void alligneCameraToCOntentInSight3 (){
-					clickCount = 0;
-					FocusOnContentCanvas.SetActive(false);
-					RuntimeTagCanvas.SetActive(true);
-					SimKeeper.instance.adjustThreshold (3.0f);
+	private void alligneCameraToCOntentInSight2 (){
+	
+			RuntimeTagCanvas.SetActive(false);
+	}
+
+	public void alligneCameraToCOntentInSight3 (){
+//		Cursor.visible = true;
+		clickCount = 0;
+		FocusOnContentCanvas.SetActive(false);
+		RuntimeTagCanvas.SetActive(true);
+		mainCamera.transform.position = currPosition;
+
+		if(ViewKeeper.instance.FilterViewIsActive == false){
+
+			SimKeeper.instance.adjustThreshold (currThreshold);
+
+		}
+		focusModeOn = false;
+		if(wasMoving == true){
+
+			goToFinalDestinationVector = contentInSight.finalDestination;
+			contentInSight.moveTo(goToFinalDestinationVector);
+			wasMoving = false;
+
+		}
 	}
 
 }

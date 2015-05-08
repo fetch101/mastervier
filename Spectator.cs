@@ -7,6 +7,7 @@ public class Spectator : MonoBehaviour
 
 	public static Spectator instance;
 	public Transform targetToLookAt;
+	public Transform targetToLookAtEmpty;
 	private int clickCount2 = 0;
 
     //initial speed
@@ -34,6 +35,8 @@ public class Spectator : MonoBehaviour
 			transform.LookAt (targetToLookAt);
 
 		} else {
+//			transform.LookAt(targetToLookAtEmpty);
+
 			//press shift to move faster
 			if (Input.GetKey (KeyCode.LeftShift) || Input.GetKey (KeyCode.RightShift)) {
 				speed = 350;
@@ -74,5 +77,8 @@ public class Spectator : MonoBehaviour
 		}
     }
 
+	public void SetClickCountToZero(){
+		clickCount2 = 0;
+	}
 
 }
