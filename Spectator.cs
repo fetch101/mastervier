@@ -6,6 +6,8 @@ public class Spectator : MonoBehaviour
 
 
 	public static Spectator instance;
+	public Transform targetToLookAt;
+	private int clickCount2 = 0;
 
     //initial speed
     public int speed = 60;
@@ -20,55 +22,56 @@ public class Spectator : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+		if (Input.GetMouseButtonDown (0)) {
+			clickCount2++;
+		}
+		if (clickCount2 == 3){
+			clickCount2 = 0;
+		}
 
 
-        //press shift to move faster
-        if (Input.GetKey(KeyCode.LeftShift) || Input.GetKey(KeyCode.RightShift))
-        {
-            speed = 350;
+		if (clickCount2 > 0) {
+			transform.LookAt (targetToLookAt);
 
-        }
-        else
-        {
-            //if shift is not pressed, reset to default speed
-            speed = 40;
-        }
-        //For the following 'if statements' don't include 'else if', so that the user can press multiple buttons at the same time
-        //move camera to the left
-        if (Input.GetKey(KeyCode.A))
-        {
-            transform.position = transform.position + Camera.main.transform.right * -1 * speed * Time.deltaTime;
-        }
+		} else {
+			//press shift to move faster
+			if (Input.GetKey (KeyCode.LeftShift) || Input.GetKey (KeyCode.RightShift)) {
+				speed = 350;
 
-        //move camera backwards
-        if (Input.GetKey(KeyCode.S))
-        {
-            transform.position = transform.position + Camera.main.transform.forward * -1 * speed * Time.deltaTime;
+			} else {
+				//if shift is not pressed, reset to default speed
+				speed = 40;
+			}
+			//For the following 'if statements' don't include 'else if', so that the user can press multiple buttons at the same time
+			//move camera to the left
+			if (Input.GetKey (KeyCode.A)) {
+				transform.position = transform.position + Camera.main.transform.right * -1 * speed * Time.deltaTime;
+			}
 
-        }
-        //move camera to the right
-        if (Input.GetKey(KeyCode.D))
-        {
-            transform.position = transform.position + Camera.main.transform.right * speed * Time.deltaTime;
+			//move camera backwards
+			if (Input.GetKey (KeyCode.S)) {
+				transform.position = transform.position + Camera.main.transform.forward * -1 * speed * Time.deltaTime;
 
-        }
-        //move camera forward
-        if (Input.GetKey(KeyCode.W))
-        {
+			}
+			//move camera to the right
+			if (Input.GetKey (KeyCode.D)) {
+				transform.position = transform.position + Camera.main.transform.right * speed * Time.deltaTime;
 
-            transform.position = transform.position + Camera.main.transform.forward * speed * Time.deltaTime;
-        }
-        //move camera upwards
-        if (Input.GetKey(KeyCode.E))
-        {
-            transform.position = transform.position + Camera.main.transform.up * speed * Time.deltaTime;
-        }
-        //move camera downwards
-        if (Input.GetKey(KeyCode.Q))
-        {
-            transform.position = transform.position + Camera.main.transform.up * -1 * speed * Time.deltaTime;
-        }
+			}
+			//move camera forward
+			if (Input.GetKey (KeyCode.W)) {
 
+				transform.position = transform.position + Camera.main.transform.forward * speed * Time.deltaTime;
+			}
+			//move camera upwards
+			if (Input.GetKey (KeyCode.E)) {
+				transform.position = transform.position + Camera.main.transform.up * speed * Time.deltaTime;
+			}
+			//move camera downwards
+			if (Input.GetKey (KeyCode.Q)) {
+				transform.position = transform.position + Camera.main.transform.up * -1 * speed * Time.deltaTime;
+			}
+		}
     }
 
 
