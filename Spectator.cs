@@ -6,9 +6,9 @@ public class Spectator : MonoBehaviour
 
 
 	public static Spectator instance;
-	public Transform targetToLookAt;
-	public Transform targetToLookAtEmpty;
-	private int clickCount2 = 0;
+//	public Transform targetToLookAt;
+//	public Transform targetToLookAtEmpty;
+//	private int clickCount2 = 0;
 
     //initial speed
     public int speed = 60;
@@ -23,16 +23,19 @@ public class Spectator : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-		if (Input.GetMouseButtonDown (0)) {
-			clickCount2++;
-		}
-		if (clickCount2 == 3){
-			clickCount2 = 0;
-		}
+		if (PauseMenu.instance.clickCount > 0){
+			transform.LookAt (PauseMenu.instance.target.transform);
 
-
-		if (clickCount2 > 0) {
-			transform.LookAt (targetToLookAt);
+//		if (Input.GetMouseButtonDown (0) && PauseMenu.instance.isInSight) {
+//			clickCount2++;
+//		}
+//		if (clickCount2 == 3){
+//			clickCount2 = 0;
+//		}
+//
+//
+//		if (clickCount2 > 0 && PauseMenu.instance.focusModeOn){
+//			transform.LookAt (PauseMenu.instance.target.transform);
 
 		} else {
 //			transform.LookAt(targetToLookAtEmpty);
@@ -77,8 +80,8 @@ public class Spectator : MonoBehaviour
 		}
     }
 
-	public void SetClickCountToZero(){
-		clickCount2 = 0;
-	}
+//	public void SetClickCountToZero(){
+//		clickCount2 = 0;
+//	}
 
 }

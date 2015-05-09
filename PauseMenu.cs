@@ -11,8 +11,9 @@ public class PauseMenu : MonoBehaviour {
 	public static PauseMenu instance;
 	private bool wasMoving = false;
 	public bool isInSight = false;
-	Vector3 goToFinalDestinationVector;
 
+	bool rayCasting = true;
+	Content currContentInSight;
 	Content contentInSight;
     Content oldContentInSight;
 	public GameObject FocusOnContentCanvas;
@@ -35,30 +36,18 @@ public class PauseMenu : MonoBehaviour {
         Cursor.lockState = CursorLockMode.Confined;
         Cursor.visible = true;
         isPause = true;
+		focusModeOn = false;
 
     }
 
     // Update is called once per frame
     void Update()
     {
-		if (Input.GetMouseButtonDown (0) && isInSight && !isPause) {
-			clickCount++;
-		
-			if (clickCount == 1) {
-				currPosition = mainCamera.transform.position;
-				alligneCameraToCOntentInSight1 ();
-
-
-			}
-			if (clickCount == 2) {
-				alligneCameraToCOntentInSight2 ();
-			}
-			if (clickCount == 3) {
-				alligneCameraToCOntentInSight3 ();
-			}
-		}
+	
         oldContentInSight = contentInSight;
-		isInSight = setContentInSight();
+		if(rayCasting){
+			isInSight = setContentInSight();
+		}
 
         if (!contentInSight == oldContentInSight && clickCount != 2)
         {
@@ -84,7 +73,26 @@ public class PauseMenu : MonoBehaviour {
             togglePause();
 
 		}
+		if (Input.GetMouseButtonDown (0) && isInSight && !isPause) {
+			clickCount++;
+			currContentInSight = contentInSight;
+			rayCasting = false;
 
+
+			if (clickCount == 1) {
+				currPosition = mainCamera.transform.position;
+				alligneCameraToCOntentInSight1 ();
+			}
+
+			if (clickCount == 2) {
+				alligneCameraToCOntentInSight2 ();
+			}
+
+			if (clickCount == 3) {
+				alligneCameraToCOntentInSight3 ();
+				rayCasting = true;
+			}
+		}
     }
 
 
@@ -94,7 +102,7 @@ public class PauseMenu : MonoBehaviour {
 
 		RaycastHit hitcheck;
 		
-		if (Physics.Raycast (raycheck, out hitcheck, 50f) && hitcheck.collider.gameObject.GetComponent<Content>() != null) {
+		if (Physics.Raycast (raycheck, out hitcheck, 60.0f) && hitcheck.collider.gameObject.GetComponent<Content>() != null) {
             contentInSight = hitcheck.collider.gameObject.GetComponent<Content>();
 			target.transform.position = hitcheck.collider.gameObject.transform.position;
 			return true;
@@ -137,7 +145,6 @@ public class PauseMenu : MonoBehaviour {
 
     private void setPause()
     {
-
         MouseLook.instance.enabled = false;
         Spectator.instance.enabled = false;
         SimKeeper.instance.enabled = true;
@@ -148,47 +155,39 @@ public class PauseMenu : MonoBehaviour {
 		PauseMenuCanvas.SetActive (true);
     }
 
-
 	private void alligneCameraToCOntentInSight1 (){
-//		Cursor.visible = false;
 		focusModeOn = true;
 		currThreshold = SimKeeper.instance.threshold;
 		FocusOnContentCanvas.SetActive(true);
-		mainCamera.transform.position = new Vector3 (contentInSight.transform.position.x + 0.01f , contentInSight.transform.position.y  + 35.0f, contentInSight.transform.position.z); 
+		mainCamera.transform.position = new Vector3 (currContentInSight.transform.position.x + 0.01f ,  currContentInSight.transform.position.y  + 35.0f, currContentInSight.transform.position.z); 
 		SimKeeper.instance.adjustThreshold (15.0f);
-		if (contentInSight.isMoving) {
-			contentInSight.isMoving = false;
+		if (currContentInSight.isMoving) {
+			currContentInSight.speed = 0.0f;
 			wasMoving = true;
-
 		}
-
 	}
 
 	private void alligneCameraToCOntentInSight2 (){
-	
 			RuntimeTagCanvas.SetActive(false);
 	}
 
 	public void alligneCameraToCOntentInSight3 (){
-//		Cursor.visible = true;
-		clickCount = 0;
 		FocusOnContentCanvas.SetActive(false);
 		RuntimeTagCanvas.SetActive(true);
 		mainCamera.transform.position = currPosition;
 
+		if(wasMoving == true){
+			currContentInSight.speed = 40.0f;
+			wasMoving = false;
+			
+					}
 		if(ViewKeeper.instance.FilterViewIsActive == false){
-
 			SimKeeper.instance.adjustThreshold (currThreshold);
-
 		}
 		focusModeOn = false;
-		if(wasMoving == true){
+		clickCount = 0;
 
-			goToFinalDestinationVector = contentInSight.finalDestination;
-			contentInSight.moveTo(goToFinalDestinationVector);
-			wasMoving = false;
 
-		}
 	}
 
 }
