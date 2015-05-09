@@ -26,19 +26,7 @@ public class Spectator : MonoBehaviour
 		if (PauseMenu.instance.clickCount > 0){
 			transform.LookAt (PauseMenu.instance.target.transform);
 
-//		if (Input.GetMouseButtonDown (0) && PauseMenu.instance.isInSight) {
-//			clickCount2++;
-//		}
-//		if (clickCount2 == 3){
-//			clickCount2 = 0;
-//		}
-//
-//
-//		if (clickCount2 > 0 && PauseMenu.instance.focusModeOn){
-//			transform.LookAt (PauseMenu.instance.target.transform);
-
 		} else {
-//			transform.LookAt(targetToLookAtEmpty);
 
 			//press shift to move faster
 			if (Input.GetKey (KeyCode.LeftShift) || Input.GetKey (KeyCode.RightShift)) {
