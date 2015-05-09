@@ -3,7 +3,6 @@ using System.Collections;
 using System.Collections.Generic;
 
 public class ViewKeeper : MonoBehaviour {
-	public bool FilterViewIsActive = false;
 
     public static ViewKeeper instance;
 
@@ -20,7 +19,7 @@ public class ViewKeeper : MonoBehaviour {
 
     public void circleView(Content center)
     {
-		FilterViewIsActive = false;
+		Filter.instance.filterViewIsActive = false;
 
         this.GetComponent<CircleView>().destroyLines();
         this.GetComponent<CircleView>().alignContentsWithCenter(center);
@@ -28,8 +27,10 @@ public class ViewKeeper : MonoBehaviour {
     }
 
     public void cubeView()
-    {
-		FilterViewIsActive = false;
+	{if (Filter.instance.filterViewIsActive == true){
+			SimKeeper.instance.adjustThreshold (Filter.instance.currThreshold);
+		}
+		Filter.instance.filterViewIsActive = false;
 
         this.GetComponent<CircleView>().destroyLines();
         this.GetComponent<CubeView>().alignContents(getAllContents());
@@ -44,7 +45,10 @@ public class ViewKeeper : MonoBehaviour {
 
     public void sunView()
     {
-		FilterViewIsActive = false;
+		if (Filter.instance.filterViewIsActive == true){
+			SimKeeper.instance.adjustThreshold (Filter.instance.currThreshold);
+					}
+		Filter.instance.filterViewIsActive = false;
 
         this.GetComponent<CircleView>().destroyLines();
         this.GetComponent<SunView>().alignContents(getAllContents());
@@ -72,7 +76,6 @@ public class ViewKeeper : MonoBehaviour {
 
     public void filteredView(List<Content> filteredContents)
     {
-		FilterViewIsActive = true;
 
         this.GetComponent<CircleView>().destroyLines();
         this.GetComponent<FilteredView>().alignContents(filteredContents);

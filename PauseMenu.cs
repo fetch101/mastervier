@@ -181,9 +181,9 @@ public class PauseMenu : MonoBehaviour {
 		if(wasMoving == true){
 			currContentInSight.speed = 40.0f;
 			wasMoving = false;
-			
+
 					}
-		if(ViewKeeper.instance.FilterViewIsActive == false){
+		if(Filter.instance.filterViewIsActive == false){
 			SimKeeper.instance.adjustThreshold (currThreshold);
 		}
 		focusModeOn = false;
