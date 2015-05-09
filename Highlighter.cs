@@ -18,6 +18,11 @@ public class Highlighter : MonoBehaviour {
 	void Update () {
 	
 	}
+	// test
+	public void testsync(){
+
+		Debug.Log ("gahts no?");
+	}
 
 	public void highlightContent(string field, string value)
 	{
