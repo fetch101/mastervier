@@ -53,6 +53,7 @@ public class PauseMenu : MonoBehaviour {
         {
             PauseMenuCanvas.GetComponent<PauseTagHandler>().setDisplayContent(contentInSight);
             RuntimeTagCanvas.GetComponent<RuntimeTagHandler>().setDisplayContent(contentInSight);
+//			currContentInSight.destroyHighlightPlane();
         }
 
         if (isInSight)
@@ -105,6 +106,7 @@ public class PauseMenu : MonoBehaviour {
 		if (Physics.Raycast (raycheck, out hitcheck, 60.0f) && hitcheck.collider.gameObject.GetComponent<Content>() != null) {
             contentInSight = hitcheck.collider.gameObject.GetComponent<Content>();
 			target.transform.position = hitcheck.collider.gameObject.transform.position;
+//			contentInSight.addHighlightPlane();
 			return true;
 
 		}else{

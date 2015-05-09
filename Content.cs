@@ -43,14 +43,33 @@ public class Content : MonoBehaviour {
     private Vector3 moveTowards;
     public float speed;
     public bool shouldAlign = true;
-	
+
+	GameObject highlightPlane;
+	Vector3 scale;
+	Vector3 position;
+	Vector3 rotation;
 	// Use this for initialization
 	void Start () {
 		addBoxCollider();
 		height = gameObject.GetComponent<Renderer> ().bounds.size.y / 2;
-
 	}
 
+//	public void addHighlightPlane(){
+//		GameObject highlightPlane = GameObject.CreatePrimitive(PrimitiveType.Cube);
+////		highlightPlane.transform.parent = this.gameObject.transform;
+////		highlightPlane.transform.localScale = new Vector3((highlightPlane.transform.localScale.x * 0.001f), (highlightPlane.transform.localScale.y * 0.001f), (highlightPlane.transform.localScale.z * 0.001f) );
+////
+//////		scale = new Vector3 (this.gameObject.transform.localScale.x, this.gameObject.transform.localScale.y, this.gameObject.transform.localScale.z);
+//////		position = new Vector3(this.gameObject.transform.position.x, this.gameObject.transform.position.y, this.gameObject.transform.position.z + 1);
+//////		GameObject highlightPlane = GameObject.CreatePrimitive(PrimitiveType.Plane);
+//////		highlightPlane.transform.position = position;
+//////		highlightPlane.transform.localScale = scale;
+//////		highlightPlane.transform.rotation = rotation;
+//	}
+//
+//	public void destroyHighlightPlane(){
+////		Destroy (highlightPlane);
+//	}
 
     public void addBoxCollider()
     {
@@ -61,6 +80,7 @@ public class Content : MonoBehaviour {
 	// Update is called once per frame
 	void Update()
 	{
+		rotation = new Vector3 (this.gameObject.transform.rotation.x, this.gameObject.transform.rotation.y, this.gameObject.transform.rotation.z);
 		drawLines();
         if (shouldAlign)
         {
