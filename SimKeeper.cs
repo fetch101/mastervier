@@ -7,9 +7,10 @@ using System;
 public class SimKeeper : MonoBehaviour {
 
     List<Content> contentList;
-    List<GameObject> lineRenderList = new List<GameObject>();
+    List<GameObject> sameStudentLines = new List<GameObject>();
+    List<GameObject> differentStudentLines = new List<GameObject>();
     int[,] simTable;
-    
+
 
     public static SimKeeper instance;
 
@@ -24,8 +25,13 @@ public class SimKeeper : MonoBehaviour {
     private int[,] metaSimTable;
 	public Material materialLineSameStudent;
 	public Material materialLineDifferentStudent;
+    public float sameStudentLinesWidth;
+    public float differentStudentLinesWidth;
 
     private Dictionary<string, int> tagDic = new Dictionary<string, int>();
+    private bool sameStudentLinesActive = true;
+    private bool differentStudentLinesActive = true;
+    private bool circleLinesActive;
 
 
 
@@ -35,7 +41,7 @@ public class SimKeeper : MonoBehaviour {
         buildSimTable();
         buildMetaSimTable();
         buildTagDic();
-        spawnLineRenderers();
+        spawnLines();
     }
 
     private void buildTagDic()
@@ -130,7 +136,26 @@ public class SimKeeper : MonoBehaviour {
         return score;
     }
 
-    private void spawnLineRenderers()
+    public void redrawLines()
+    {
+        destroyLines();
+        spawnLines();
+    }
+
+    private void spawnLines()
+    {
+        if (sameStudentLinesActive)
+        {
+            spawnSameStudentLines();
+        }
+        if (differentStudentLinesActive)
+        {
+            spawnDifferentStudentLines();
+        }
+
+    }
+
+    private void spawnSameStudentLines()
     {
         int vertexY = 0;
         int vertexX = 1;
@@ -138,55 +163,55 @@ public class SimKeeper : MonoBehaviour {
         {
             for (int y = x + 1; y < contentList.Count; y++)
             {
-                int score = (int)Math.Round(simTable[x,y] / 10f * tagWeight + metaSimTable[x,y] / 10f * metaTagWeight, MidpointRounding.AwayFromZero);
+                int score = (int)Math.Round(simTable[x, y] / 10f * tagWeight + metaSimTable[x, y] / 10f * metaTagWeight, MidpointRounding.AwayFromZero);
                 if (score >= threshold)
                 {
+                    if (contentList[y].Student.Equals(contentList[x].Student))
+                    {
+                        LineRenderer line = getNewLine();
+                        line.SetWidth(sameStudentLinesWidth, sameStudentLinesWidth);
+                        line.material = materialLineSameStudent;
+                        contentList[y].addSameStudentLine(line, vertexY);
+                        contentList[x].addSameStudentLine(line, vertexX);
 
-					if (contentList[y].Student.Equals(contentList[x].Student) )
-
-					{
-						LineRenderer line = getNewLineSame();
-						line.SetWidth(0.1f, 0.1f);
-						line.material = materialLineSameStudent;
-
-						contentList[y].addLine(line, vertexY);
-						contentList[x].addLine(line, vertexX);
-
-					}else{
-						LineRenderer line = getNewLineDif();
-						line.SetWidth(0.2f, 0.2f);
-						contentList[y].addLine(line, vertexY);
-						contentList[x].addLine(line, vertexX);
-						line.material = materialLineDifferentStudent;
-
-					}
-
-
+                    }
                 }
             }
         }
     }
 
-    private LineRenderer getNewLineSame()
+    private void spawnDifferentStudentLines()
+    {
+        int vertexY = 0;
+        int vertexX = 1;
+        for (int x = 0; x < contentList.Count; x++)
+        {
+            for (int y = x + 1; y < contentList.Count; y++)
+            {
+                int score = (int)Math.Round(simTable[x, y] / 10f * tagWeight + metaSimTable[x, y] / 10f * metaTagWeight, MidpointRounding.AwayFromZero);
+                if (score >= threshold)
+                {
+                    if (!contentList[y].Student.Equals(contentList[x].Student))
+                    {
+                        LineRenderer line = getNewLine();
+                        line.SetWidth(differentStudentLinesWidth, differentStudentLinesWidth);
+                        line.material = materialLineDifferentStudent;
+                        contentList[y].addDifferentStudentLine(line, vertexY);
+                        contentList[x].addDifferentStudentLine(line, vertexX);
+                    }
+                }
+            }
+        }
+    }
+
+    private LineRenderer getNewLine()
     {
         GameObject lineObject = new GameObject();
         LineRenderer linerenderer = lineObject.AddComponent<LineRenderer>();
         linerenderer.SetVertexCount(2);
-        linerenderer.SetWidth(0.4f, 0.4f);
-		linerenderer.material = materialLineSameStudent;
-        lineRenderList.Add(lineObject);
+        sameStudentLines.Add(lineObject);
         return linerenderer;
     }
-	private LineRenderer getNewLineDif()
-	{
-		GameObject lineObject = new GameObject();
-		LineRenderer linerenderer = lineObject.AddComponent<LineRenderer>();
-		linerenderer.SetVertexCount(2);
-		linerenderer.SetWidth(0.4f, 0.4f);
-		linerenderer.material = materialLineDifferentStudent;
-		lineRenderList.Add(lineObject);
-		return linerenderer;
-	}
 
 
     private List<Content> getAllContents()
@@ -232,50 +257,112 @@ public class SimKeeper : MonoBehaviour {
 
 	public void adjustThreshold(float newThreshold){
 		if (threshold != newThreshold)
-		{	threshold = newThreshold;
-			removeLinesFromContent();
-			destroyLineRenderObjects();
-			spawnLineRenderers();
+		{	
+            threshold = newThreshold;
+            redrawLines();
 		}
 
 	}
 
 	public void adjustTagWeight(float newTagweight){
 		if (tagWeight != newTagweight)
-		{	tagWeight = newTagweight;
-			removeLinesFromContent();
-			destroyLineRenderObjects();
-			spawnLineRenderers();
+		{	
+            tagWeight = newTagweight;
+            redrawLines();
 		}
 			
 	}
 
 	public void adjustMetatagweight(float newMetatagweight){
 		if (metaTagWeight != newMetatagweight)
-		{	metaTagWeight = newMetatagweight;
-			removeLinesFromContent();
-			destroyLineRenderObjects();
-			spawnLineRenderers();
+		{	
+            metaTagWeight = newMetatagweight;
+            redrawLines();
 		}	
 	}
 
-
-
     
-    private void destroyLineRenderObjects()
+    public void destroyLines()
     {
-        foreach (GameObject lineRenderer in lineRenderList)
+        destroyDifferentStudentLines();
+        destroySameStudentLines();
+    }
+
+    private void destroySameStudentLines()
+    {
+        foreach (GameObject lineRenderer in sameStudentLines)
         {
             GameObject.Destroy(lineRenderer);
         }
-        lineRenderList.RemoveRange(0, lineRenderList.Count);
+        sameStudentLines.Clear();
+        removeSameStudentLinesFromContent();
     }
 
-    private void removeLinesFromContent()
+    private void destroyDifferentStudentLines()
+    {
+        foreach (GameObject lineRenderer in differentStudentLines)
+        {
+            GameObject.Destroy(lineRenderer);
+        }
+        differentStudentLines.Clear();
+        removeDifferentStudentLinesFromContent();
+    }
+
+    private void removeSameStudentLinesFromContent()
     {
         foreach (Content content in contentList)
         {
-            content.removeLines();
+            content.removeSameStudentLines();
         }
+    }
+
+    private void removeDifferentStudentLinesFromContent()
+    {
+        foreach (Content content in contentList)
+        {
+            content.removeDifferentLines();
+        }
+    }
+
+    public void setAllLines(bool active)
+    {
+        setSameStudentLines(active);
+        setDifferentStudentLines(active);
+        setCircleLines(active);
+    }
+
+    public void setSameStudentLines(bool active)
+    {
+        this.sameStudentLinesActive = active;
+        if (active)
+        {
+            destroySameStudentLines();
+            spawnSameStudentLines();
+        }
+        else
+        {
+            destroySameStudentLines();
+        }
+    }
+
+    public void setDifferentStudentLines(bool active)
+    {
+        this.differentStudentLinesActive = active;
+        if (active)
+        {
+            destroyDifferentStudentLines();
+            spawnDifferentStudentLines();
+        }
+        else
+        {
+            destroyDifferentStudentLines();
+        }
+
+    }
+
+    public void setCircleLines(bool active)
+    {
+        this.circleLinesActive = active;
+        Debug.Log("setcirclelines not implemented");
     }
 }

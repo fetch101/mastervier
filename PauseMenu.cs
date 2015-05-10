@@ -112,7 +112,6 @@ public class PauseMenu : MonoBehaviour {
 		}else{
             contentInSight = null;
 			return false;	
-			currPosition = mainCamera.transform.position;
 		}
 	}
 
@@ -162,7 +161,7 @@ public class PauseMenu : MonoBehaviour {
 		currThreshold = SimKeeper.instance.threshold;
 		FocusOnContentCanvas.SetActive(true);
 		mainCamera.transform.position = new Vector3 (currContentInSight.transform.position.x + 0.01f ,  currContentInSight.transform.position.y  + 35.0f, currContentInSight.transform.position.z); 
-		SimKeeper.instance.adjustThreshold (15.0f);
+        SimKeeper.instance.destroyLines();
 		if (currContentInSight.isMoving) {
 			currContentInSight.speed = 0.0f;
 			wasMoving = true;
@@ -181,15 +180,11 @@ public class PauseMenu : MonoBehaviour {
 		if(wasMoving == true){
 			currContentInSight.speed = 40.0f;
 			wasMoving = false;
+	    }
 
-					}
-		if(Filter.instance.filterViewIsActive == false){
-			SimKeeper.instance.adjustThreshold (currThreshold);
-		}
+    	SimKeeper.instance.redrawLines();
 		focusModeOn = false;
 		clickCount = 0;
-
-
 	}
 
 }

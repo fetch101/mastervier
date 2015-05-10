@@ -15,9 +15,7 @@ public class Filter : MonoBehaviour {
     private List<String> mustList = new List<String>();
     private List<String> canList = new List<String>();
     private List<Content> filteredContents = new List<Content>();
-	public bool filterViewIsActive = false;
     public static Filter instance;
-	public float currThreshold = 3.0f;
 
 	// Use this for initialization
 	void Start () {
@@ -44,8 +42,6 @@ public class Filter : MonoBehaviour {
 
     public void removeFilter()
     {
-//		SimKeeper.instance.threshold = currThreshold;
-//		filterViewIsActive = false;
         foreach (Content content in filteredContents)
         {
             content.shouldAlign = true;
@@ -58,11 +54,7 @@ public class Filter : MonoBehaviour {
 
     public void applyFilter()
     {
-		filterViewIsActive = true;
-
-		currThreshold = SimKeeper.instance.threshold;
         calculateFilteredContents();
-
 
         foreach (Content content in filteredContents)
         {

@@ -19,44 +19,31 @@ public class ViewKeeper : MonoBehaviour {
 
     public void circleView(Content center)
     {
-		Filter.instance.filterViewIsActive = false;
-
+        SimKeeper.instance.setAllLines(true);
         this.GetComponent<CircleView>().destroyLines();
         this.GetComponent<CircleView>().alignContentsWithCenter(center);
         this.GetComponent<CircleView>().drawLines(center);
     }
 
     public void cubeView()
-	{if (Filter.instance.filterViewIsActive == true){
-			SimKeeper.instance.adjustThreshold (Filter.instance.currThreshold);
-		}
-		Filter.instance.filterViewIsActive = false;
-
+    {
+        SimKeeper.instance.setAllLines(true);
         this.GetComponent<CircleView>().destroyLines();
         this.GetComponent<CubeView>().alignContents(getAllContents());
     }
 
-    public void lineView()
-    {
-        this.GetComponent<CircleView>().destroyLines();
-        this.GetComponent<LineView>().alignContents(getAllContents());
-    }
-
-
     public void sunView()
     {
-		if (Filter.instance.filterViewIsActive == true){
-			SimKeeper.instance.adjustThreshold (Filter.instance.currThreshold);
-					}
-		Filter.instance.filterViewIsActive = false;
-
+        SimKeeper.instance.setAllLines(true);
         this.GetComponent<CircleView>().destroyLines();
         this.GetComponent<SunView>().alignContents(getAllContents());
     }
 
-    public void wordCloud()
+    public void filteredView(List<Content> filteredContents)
     {
-        this.GetComponent<WordCloud>().drawCloud(getAllContents());
+        SimKeeper.instance.setAllLines(false);
+        this.GetComponent<CircleView>().destroyLines();
+        this.GetComponent<FilteredView>().alignContents(filteredContents);
     }
     
     private List<Content> getAllContents()
@@ -72,12 +59,4 @@ public class ViewKeeper : MonoBehaviour {
         return contentList;
     }
 
-
-
-    public void filteredView(List<Content> filteredContents)
-    {
-
-        this.GetComponent<CircleView>().destroyLines();
-        this.GetComponent<FilteredView>().alignContents(filteredContents);
-    }
 }

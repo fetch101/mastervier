@@ -35,8 +35,9 @@ public class Content : MonoBehaviour {
 	public string Tag7;
 	public string Tag8;
 	public string Tag9;
-	
-    private List<KeyValuePair<LineRenderer, int>> lineList = new List<KeyValuePair<LineRenderer, int>>();
+
+    private List<KeyValuePair<LineRenderer, int>> sameStudentLines = new List<KeyValuePair<LineRenderer, int>>();
+    private List<KeyValuePair<LineRenderer, int>> differentStudentLines = new List<KeyValuePair<LineRenderer, int>>();
 
 	private float height;
     public bool isMoving;
@@ -110,7 +111,11 @@ public class Content : MonoBehaviour {
 
     public void drawLines()
     {
-        foreach (KeyValuePair<LineRenderer, int> pair in lineList)
+        foreach (KeyValuePair<LineRenderer, int> pair in sameStudentLines)
+        {
+            pair.Key.SetPosition(pair.Value, this.transform.position);
+        }
+        foreach (KeyValuePair<LineRenderer, int> pair in differentStudentLines)
         {
             pair.Key.SetPosition(pair.Value, this.transform.position);
         }
@@ -238,14 +243,24 @@ public class Content : MonoBehaviour {
     }
 
 
-    public void addLine(LineRenderer linerenderer, int vertex)
+    public void addSameStudentLine(LineRenderer linerenderer, int vertex)
     {
-        lineList.Add(new KeyValuePair<LineRenderer, int>(linerenderer, vertex));
+        sameStudentLines.Add(new KeyValuePair<LineRenderer, int>(linerenderer, vertex));
     }
 
-    public void removeLines()
+    public void addDifferentStudentLine(LineRenderer linerenderer, int vertex)
     {
-        lineList.RemoveRange(0, lineList.Count);
+        differentStudentLines.Add(new KeyValuePair<LineRenderer, int>(linerenderer, vertex));
+    }
+
+    public void removeDifferentLines()
+    {
+        differentStudentLines.Clear();
+    }
+
+    public void removeSameStudentLines()
+    {
+        sameStudentLines.Clear();
     }
 
 

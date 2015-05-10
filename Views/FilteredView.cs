@@ -23,13 +23,6 @@ public class FilteredView : MonoBehaviour {
 
         moveToSquare(filteredContents);
         moveAway(notFilteredContents);
-        destroyLines();
-
-    }
-
-    private void destroyLines()
-    {
-        SimKeeper.instance.adjustThreshold(15);
     }
 
     private void moveAway(List<Content> notFilteredContents)
