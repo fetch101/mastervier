@@ -20,7 +20,6 @@ public class PauseMenu : MonoBehaviour {
     public GameObject RuntimeTagCanvas;
 	public GameObject PauseMenuCanvas;
 	Vector3 currPosition;
-	float currThreshold = 3.0f;
 	public int clickCount = 0; 
     private bool isPause;
 	public GameObject mainCamera;
@@ -158,7 +157,6 @@ public class PauseMenu : MonoBehaviour {
 
 	private void alligneCameraToCOntentInSight1 (){
 		focusModeOn = true;
-		currThreshold = SimKeeper.instance.threshold;
 		FocusOnContentCanvas.SetActive(true);
 		mainCamera.transform.position = new Vector3 (currContentInSight.transform.position.x + 0.01f ,  currContentInSight.transform.position.y  + 35.0f, currContentInSight.transform.position.z); 
         SimKeeper.instance.destroyLines();
