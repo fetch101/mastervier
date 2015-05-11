@@ -185,6 +185,19 @@ public class PauseMenu : MonoBehaviour {
 		clickCount = 0;
 	}
 
+	public void ActivatePanel1Bool(Animator anim){
+		anim.SetBool ("Panel1_isActive", true);
+	}
+	public void DeactivatePanel1Bool(Animator anim){
+		anim.SetBool ("Panel1_isActive", false);
+	}
+	public void ActivatePanel2Bool(Animator anim){
+		anim.SetBool ("Panel2_isActive", true);
+	}
+	public void DeactivatePanel2Bool(Animator anim){
+		anim.SetBool ("Panel2_isActive", false);
+	}
+
 }
 
 
