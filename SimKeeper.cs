@@ -173,6 +173,7 @@ public class SimKeeper : MonoBehaviour {
                         line.material = materialLineSameStudent;
                         contentList[y].addSameStudentLine(line, vertexY);
                         contentList[x].addSameStudentLine(line, vertexX);
+                        sameStudentLines.Add(line.gameObject);
 
                     }
                 }
@@ -198,6 +199,7 @@ public class SimKeeper : MonoBehaviour {
                         line.material = materialLineDifferentStudent;
                         contentList[y].addDifferentStudentLine(line, vertexY);
                         contentList[x].addDifferentStudentLine(line, vertexX);
+                        differentStudentLines.Add(line.gameObject);
                     }
                 }
             }
@@ -209,7 +211,6 @@ public class SimKeeper : MonoBehaviour {
         GameObject lineObject = new GameObject();
         LineRenderer linerenderer = lineObject.AddComponent<LineRenderer>();
         linerenderer.SetVertexCount(2);
-        sameStudentLines.Add(lineObject);
         return linerenderer;
     }
 
@@ -290,22 +291,22 @@ public class SimKeeper : MonoBehaviour {
 
     private void destroySameStudentLines()
     {
+        removeSameStudentLinesFromContent();
         foreach (GameObject lineRenderer in sameStudentLines)
         {
             GameObject.Destroy(lineRenderer);
         }
         sameStudentLines.Clear();
-        removeSameStudentLinesFromContent();
     }
 
     private void destroyDifferentStudentLines()
     {
+        removeDifferentStudentLinesFromContent();
         foreach (GameObject lineRenderer in differentStudentLines)
         {
             GameObject.Destroy(lineRenderer);
         }
         differentStudentLines.Clear();
-        removeDifferentStudentLinesFromContent();
     }
 
     private void removeSameStudentLinesFromContent()
@@ -363,6 +364,5 @@ public class SimKeeper : MonoBehaviour {
     public void setCircleLines(bool active)
     {
         this.circleLinesActive = active;
-        Debug.Log("setcirclelines not implemented");
     }
 }
