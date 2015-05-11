@@ -28,16 +28,22 @@ public class Filter : MonoBehaviour {
 
     public void addAnd(string value)
     {
-        mustList.Add(value);
-        calculateFilteredContents();
-        displayFilterElements();
+        if (!mustList.Contains(value))
+        {
+            mustList.Add(value);
+            calculateFilteredContents();
+            displayFilterElements();
+        }
     }
 
     public void addOr(string value)
     {
-        canList.Add(value);
-        calculateFilteredContents();
-        displayFilterElements();
+        if (!canList.Contains(value))
+        {
+            canList.Add(value);
+            calculateFilteredContents();
+            displayFilterElements();
+        }
     }
 
     public void removeFilter()
