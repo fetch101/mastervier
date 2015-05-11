@@ -130,7 +130,6 @@ public class PauseMenu : MonoBehaviour {
     {
         MouseLook.instance.enabled = true;
         Spectator.instance.enabled = true;
-        SimKeeper.instance.enabled = false;
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
         if (isInSight && clickCount != 2)
@@ -147,7 +146,6 @@ public class PauseMenu : MonoBehaviour {
     {
         MouseLook.instance.enabled = false;
         Spectator.instance.enabled = false;
-        SimKeeper.instance.enabled = true;
         RuntimeTagCanvas.SetActive(false);
 		Cursor.lockState = CursorLockMode.Confined;
         Cursor.visible = true;
