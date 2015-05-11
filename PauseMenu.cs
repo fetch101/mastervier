@@ -153,6 +153,8 @@ public class PauseMenu : MonoBehaviour {
 		PauseMenuCanvas.SetActive (true);
     }
 
+
+    //TODO move this to viewkeeper, he keeps track of lines and viewchanges (focusmode is basically a view)
 	private void alligneCameraToCOntentInSight1 (){
 		focusModeOn = true;
 		FocusOnContentCanvas.SetActive(true);
