@@ -198,6 +198,13 @@ public class PauseMenu : MonoBehaviour {
 		anim.SetBool ("Panel2_isActive", false);
 	}
 
+	public void restartGame(){
+		Application.LoadLevel (0);
+	}
+	public void quit(){
+		Application.Quit ();
+	}
+
 }
 
 
