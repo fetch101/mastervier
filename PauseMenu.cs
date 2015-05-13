@@ -11,6 +11,9 @@ public class PauseMenu : MonoBehaviour {
 	public static PauseMenu instance;
 	private bool wasMoving = false;
 	public bool isInSight = false;
+	public GameObject ButtonToFIlterMenu;
+	public Button ButtonToFIlterMenu2;
+
 
 	bool rayCasting = true;
 	Content currContentInSight;
@@ -25,7 +28,8 @@ public class PauseMenu : MonoBehaviour {
 	public GameObject mainCamera;
 	public GameObject target;
 	public bool focusModeOn = false;
-
+//	public GameObject Panel1;
+//	public GameObject Panel2;
 
     // Use this for initialization
     void Start()
@@ -197,6 +201,21 @@ public class PauseMenu : MonoBehaviour {
 	public void DeactivatePanel2Bool(Animator anim){
 		anim.SetBool ("Panel2_isActive", false);
 	}
+	public void ActivateTilt(Animator anim){
+		anim.SetBool ("TiltIsActive", true);
+	}
+	public void DeactivateTilt(Animator anim){
+		anim.SetBool ("TiltIsActive", false);
+	}
+
+	public void ActivateTilt2(Animator anim){
+		anim.SetBool ("Panel2_TiltIsActive", true);
+	}
+	public void DeactivateTilt2(Animator anim){
+		anim.SetBool ("Panel2_TiltIsActive", false);
+	}
+
+
 
 	public void restartGame(){
 		Application.LoadLevel (0);
@@ -204,7 +223,6 @@ public class PauseMenu : MonoBehaviour {
 	public void quit(){
 		Application.Quit ();
 	}
-
 }
 
 
