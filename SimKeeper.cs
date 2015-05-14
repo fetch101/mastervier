@@ -13,6 +13,8 @@ public class SimKeeper : MonoBehaviour {
 
 
     public static SimKeeper instance;
+    public Toggle sameLineToggle;
+    public Toggle differentLineToggle;
 
 	public float threshold = 3.0f;
 	public float tagWeight = 10.0f;
@@ -333,6 +335,7 @@ public class SimKeeper : MonoBehaviour {
 
     public void setSameStudentLines(bool active)
     {
+        sameLineToggle.isOn = active;
         this.sameStudentLinesActive = active;
         if (active)
         {
@@ -347,6 +350,7 @@ public class SimKeeper : MonoBehaviour {
 
     public void setDifferentStudentLines(bool active)
     {
+        differentLineToggle.isOn = active;
         this.differentStudentLinesActive = active;
         if (active)
         {
