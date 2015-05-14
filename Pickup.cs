@@ -8,6 +8,7 @@ public class Pickup : MonoBehaviour {
     private bool contentInSight = false;
     private bool contentIsGrabbed = false;
 	private bool isFocusModeOn = false;
+    private Content grabbedContent;
 
 	// Use this for initialization
 	void Start () {
@@ -23,22 +24,26 @@ public class Pickup : MonoBehaviour {
 
         RaycastHit hitcheck;
 
+        if (Input.GetKeyDown("t") && contentIsGrabbed)
+        {
+            grabbedContent.gameObject.transform.parent = null;
+            contentIsGrabbed = false;
+        }
+
 
         if (Physics.Raycast(raycheck, out hitcheck, 40f) && hitcheck.collider.gameObject.GetComponent<Content>() != null) 
         {
             contentInSight = true;
 
-            if (Input.GetKeyDown("t") && !contentIsGrabbed)
+            if (Input.GetKeyDown("t") && !contentIsGrabbed && !hitcheck.collider.gameObject.GetComponent<Content>().isMoving && !PauseMenu.instance.focusModeOn)
             {
-                hitcheck.collider.gameObject.transform.parent = this.transform;
+                grabbedContent = hitcheck.collider.gameObject.GetComponent<Content>();
+                Vector3 p = Camera.main.ScreenToWorldPoint(new Vector3(Camera.main.pixelWidth/2, Camera.main.pixelHeight/2, 100));
+                grabbedContent.gameObject.transform.position = p;
+                grabbedContent.gameObject.transform.parent = this.transform;
                 contentIsGrabbed = true;
             }
-            else if (Input.GetKeyDown("t") && contentIsGrabbed)
-            {
-                hitcheck.collider.gameObject.transform.parent = null;
-                contentIsGrabbed = false;
-            }
-
+            
         }else{
 
             contentInSight = false;
