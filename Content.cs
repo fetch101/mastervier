@@ -45,6 +45,7 @@ public class Content : MonoBehaviour {
     private Vector3 moveTowards;
     public float speed;
     public bool shouldAlign = true;
+    public bool battleMode = false;
 
 	GameObject highlightPlane;
 	Vector3 scale;
@@ -109,6 +110,10 @@ public class Content : MonoBehaviour {
         if (isMoving)
         {
             move();
+        }
+        if (battleMode)
+        {
+            this.moveTo(Camera.main.transform.position);
         }
 	}
 
