@@ -23,6 +23,7 @@ public class CircleView : MonoBehaviour {
 
     public void alignContentsWithCenter(Content center)
     {
+        this.center = center;
         List<KeyValuePair<Content, int>> simList = getSimKeeper().getSimListForContent(center);
         float currRadius = 0;
 
@@ -136,4 +137,14 @@ public class CircleView : MonoBehaviour {
         radList.RemoveRange(0, radList.Count);
     }
 
+
+    public void redrawLines()
+    {
+        destroyLines();
+        if (center != null)
+        {
+            alignContentsWithCenter(center);
+            drawLines(center);
+        }
+    }
 }

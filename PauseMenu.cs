@@ -66,6 +66,7 @@ public class PauseMenu : MonoBehaviour {
             }
             if (Input.GetKeyDown(KeyCode.C))
             {
+                contentInSight.moveTo(contentInSight.transform.position);
                 ViewKeeper.instance.circleView(contentInSight);
             }
 
@@ -94,7 +95,6 @@ public class PauseMenu : MonoBehaviour {
 
 			if (clickCount == 3) {
 				alligneCameraToCOntentInSight3 ();
-				rayCasting = true;
 			}
 		}
     }
@@ -160,6 +160,10 @@ public class PauseMenu : MonoBehaviour {
 
     //TODO move this to viewkeeper, he keeps track of lines and viewchanges (focusmode is basically a view)
 	private void alligneCameraToCOntentInSight1 (){
+        if (ViewKeeper.instance.circleIsActive)
+        {
+            ViewKeeper.instance.GetComponent<CircleView>().destroyLines();
+        }
 		focusModeOn = true;
 		FocusOnContentCanvas.SetActive(true);
 		mainCamera.transform.position = new Vector3 (currContentInSight.transform.position.x + 0.01f ,  currContentInSight.transform.position.y  + 35.0f, currContentInSight.transform.position.z); 
@@ -175,8 +179,15 @@ public class PauseMenu : MonoBehaviour {
 	}
 
 	public void alligneCameraToCOntentInSight3 (){
+        if (ViewKeeper.instance.circleIsActive)
+        {
+            ViewKeeper.instance.GetComponent<CircleView>().redrawLines();
+        }
 		FocusOnContentCanvas.SetActive(false);
-		RuntimeTagCanvas.SetActive(true);
+        if (contentInSight)
+        {
+		    RuntimeTagCanvas.SetActive(true);
+        }
 		mainCamera.transform.position = currPosition;
 
 		if(wasMoving == true){
@@ -186,7 +197,8 @@ public class PauseMenu : MonoBehaviour {
 
     	SimKeeper.instance.redrawLines();
 		focusModeOn = false;
-		clickCount = 0;
+        clickCount = 0;
+        rayCasting = true;
 	}
 
 	public void ActivatePanel1Bool(Animator anim){

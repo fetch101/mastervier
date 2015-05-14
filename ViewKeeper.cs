@@ -5,6 +5,7 @@ using System.Collections.Generic;
 public class ViewKeeper : MonoBehaviour {
 
     public static ViewKeeper instance;
+    public bool circleIsActive = false;
 
 	// Use this for initialization
 	void Start () {
@@ -19,7 +20,13 @@ public class ViewKeeper : MonoBehaviour {
 
     public void circleView(Content center)
     {
+        circleIsActive = true;
         SimKeeper.instance.setAllLines(true);
+        Filter.instance.removeFilter();
+        if (PauseMenu.instance.focusModeOn)
+        {
+            PauseMenu.instance.alligneCameraToCOntentInSight3();
+        } 
         this.GetComponent<CircleView>().destroyLines();
         this.GetComponent<CircleView>().alignContentsWithCenter(center);
         this.GetComponent<CircleView>().drawLines(center);
@@ -27,21 +34,38 @@ public class ViewKeeper : MonoBehaviour {
 
     public void cubeView()
     {
+        circleIsActive = false;
         SimKeeper.instance.setAllLines(true);
+        Filter.instance.removeFilter();
+        if (PauseMenu.instance.focusModeOn)
+        {
+            PauseMenu.instance.alligneCameraToCOntentInSight3();
+        }
         this.GetComponent<CircleView>().destroyLines();
         this.GetComponent<CubeView>().alignContents(getAllContents());
     }
 
     public void sunView()
     {
+        circleIsActive = false;
         SimKeeper.instance.setAllLines(true);
+        Filter.instance.removeFilter();
+        if (PauseMenu.instance.focusModeOn)
+        {
+            PauseMenu.instance.alligneCameraToCOntentInSight3();
+        } 
         this.GetComponent<CircleView>().destroyLines();
         this.GetComponent<SunView>().alignContents(getAllContents());
     }
 
     public void filteredView(List<Content> filteredContents)
     {
+        circleIsActive = false;
         SimKeeper.instance.setAllLines(false);
+        if (PauseMenu.instance.focusModeOn)
+        {
+            PauseMenu.instance.alligneCameraToCOntentInSight3();
+        } 
         this.GetComponent<CircleView>().destroyLines();
         this.GetComponent<FilteredView>().alignContents(filteredContents);
     }

@@ -329,7 +329,6 @@ public class SimKeeper : MonoBehaviour {
     {
         setSameStudentLines(active);
         setDifferentStudentLines(active);
-        setCircleLines(active);
     }
 
     public void setSameStudentLines(bool active)
@@ -361,8 +360,4 @@ public class SimKeeper : MonoBehaviour {
 
     }
 
-    public void setCircleLines(bool active)
-    {
-        this.circleLinesActive = active;
-    }
 }
