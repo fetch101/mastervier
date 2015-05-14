@@ -22,8 +22,8 @@ public class Spiral {
     public Vector3 getPosForElement(int elementNumber, float rotationY)
     {
 
-        float angle = 360 / numberOfElementsPerCircle * elementNumber;
-        float angleRad = angle * Mathf.PI / 180;
+        //float angle = 360 / numberOfElementsPerCircle * elementNumber;
+        //float angleRad = angle * Mathf.PI / 180;
 
         //currX = startPosition.x + Mathf.Cos(angleRad) * radius;
         //currY = startPosition.y + Mathf.Sin(angleRad) * radius;
@@ -40,11 +40,6 @@ public class Spiral {
         //currZ = r * Mathf.Sin(phi2);
         //currX = r * Mathf.Cos(phi2);
         Vector3 currVector = new Vector3(currX, currY, currZ);
-
-        float localRotY = rotationY + 5;
-        float localRotZ = 5;
-        float rotationZ = -5;
-        float corr = elementNumber * 0.2f;
 
         if (elementNumber % 4 == 0)
         {
@@ -63,7 +58,6 @@ public class Spiral {
         {
             currVector = Quaternion.Euler(0, rotationY - 5, 0) * currVector;
         }
-
 
         return currVector;
 

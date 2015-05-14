@@ -7,6 +7,10 @@ public class SunView : MonoBehaviour {
     List<Content> studentListYearSem;
     List<List<Content>> semCircle = new List<List<Content>>();
 
+
+    public Material spiralLine;
+    public float spiralLineWidth;
+
 	// Use this for initialization
 	void Start () {
 	
@@ -46,6 +50,8 @@ public class SunView : MonoBehaviour {
         GameObject lineObj = new GameObject();
         LineRenderer line = lineObj.AddComponent<LineRenderer>();
         line.SetVertexCount(contentList.Count);
+        line.SetWidth(spiralLineWidth, spiralLineWidth);
+        line.material = spiralLine;
 
         Spiral spiral = new Spiral(circleStart);
         foreach (Content content in contentList)
@@ -55,8 +61,7 @@ public class SunView : MonoBehaviour {
             line.SetPosition(i, pos);
             i++;
         }
-    }
 
-   
+    }
 
 }
