@@ -5,7 +5,7 @@ using System.Collections.Generic;
 public class SunView : MonoBehaviour {
 
     List<Content> studentListYearSem;
-    List<List<Content>> semCircle = new List<List<Content>>();
+    List<List<Content>> studentList = new List<List<Content>>();
 
 	// Use this for initialization
 	void Start () {
@@ -19,23 +19,28 @@ public class SunView : MonoBehaviour {
 
     public void alignContents(List<Content> contentList)
     {
-        semCircle = new List<List<Content>>();
+        buildStudentList(contentList);
+
+        SunCircle circle = new SunCircle(50f, new Vector3(0f, 0f, 0f), studentList.Count);
+        Vector3 circleStart = circle.getPosForElement(0);
+        drawCircleLine(50f, new Vector3(0f, 0f, 0f));
+        int i = 0;
+        foreach (List<Content> student in studentList)
+        {
+            alignSpiral(student, circleStart, circle.getRotationForElement(i));
+            i++;
+        }
+    }
+
+    private void buildStudentList(List<Content> contentList)
+    {
+        studentList = new List<List<Content>>();
         while (contentList.Count > 0)
         {
             string currStudent = contentList[0].Student;
             studentListYearSem = contentList.FindAll(content => content.Student == currStudent);
             contentList.RemoveAll(content => content.Student == currStudent);
-            semCircle.Add(studentListYearSem);
-        }
-
-        SunCircle circle = new SunCircle(50f, new Vector3(0f, 0f, 0f), semCircle.Count);
-        Vector3 circleStart = circle.getPosForElement(0);
-        drawCircleLine(50f, new Vector3(0f, 0f, 0f));
-        int i = 0;
-        foreach (List<Content> studentList in semCircle)
-        {
-            alignSpiral(studentList, circleStart, circle.getRotationForElement(i));
-            i++;
+            studentList.Add(studentListYearSem);
         }
     }
 
@@ -47,6 +52,7 @@ public class SunView : MonoBehaviour {
         GameObject lineObj = new GameObject();
         LineRenderer line = lineObj.AddComponent<LineRenderer>();
         line.SetVertexCount(contentList.Count);
+
         foreach (Content content in contentList)
         {
             Vector3 unrotatedPos = spiral.getPosForElement(i);
