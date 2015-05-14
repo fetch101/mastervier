@@ -158,7 +158,6 @@ public class PauseMenu : MonoBehaviour {
     }
 
 
-    //TODO move this to viewkeeper, he keeps track of lines and viewchanges (focusmode is basically a view)
 	private void alligneCameraToCOntentInSight1 (){
         if (ViewKeeper.instance.circleIsActive)
         {

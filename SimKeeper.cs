@@ -229,7 +229,6 @@ public class SimKeeper : MonoBehaviour {
         return contentList;
     }
 
-	//TODO: Werden die Linien ohne den Angaben "Student", "Jahr", "Phase", "Semester" und "Objecttype" gezeichnet?????? Müssten sie ja, sonst hats zuviele übereinstimmungen
     public List<KeyValuePair<Content, int>> getSimListForContent(Content content)
     {
         List<KeyValuePair<Content, int>> simList = new List<KeyValuePair<Content, int>>();

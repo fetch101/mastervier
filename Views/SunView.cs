@@ -38,6 +38,7 @@ public class SunView : MonoBehaviour {
         int i = 0;
         foreach (List<Content> studentList in semCircle)
         {
+            //TODO studentList needs to be sorted by phase
             Vector3 circleStart = circle.getPosForElement(0);
             alignSpiral(studentList, circleStart, circle.getRotationForElement(i));
             i++;

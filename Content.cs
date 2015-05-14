@@ -55,6 +55,8 @@ public class Content : MonoBehaviour {
 		height = gameObject.GetComponent<Renderer> ().bounds.size.y / 2;
 	}
 
+    //TODO delete whitespaces after tags
+
 //	public void addHighlightPlane(){
 //		GameObject highlightPlane = GameObject.CreatePrimitive(PrimitiveType.Cube);
 ////		highlightPlane.transform.parent = this.gameObject.transform;

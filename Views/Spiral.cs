@@ -4,7 +4,6 @@ using System.Collections;
 public class Spiral {
 
 
-    //TODO this values have to be trimmed to fit the space requirements between contents
     Vector3 startPosition;
     float currX;
     float currY;
@@ -18,7 +17,6 @@ public class Spiral {
         this.startPosition = startPosition;
     }
     
-    //TODO rotation needs to take place here
     public Vector3 getPosForElement(int elementNumber, float rotationY)
     {
 
