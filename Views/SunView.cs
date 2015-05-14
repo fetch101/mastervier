@@ -6,6 +6,7 @@ public class SunView : MonoBehaviour {
 
     List<Content> studentListYearSem;
     List<List<Content>> semCircle = new List<List<Content>>();
+    List<GameObject> lineList = new List<GameObject>();
 
 
     public Material spiralLine;
@@ -59,9 +60,21 @@ public class SunView : MonoBehaviour {
             Vector3 pos = spiral.getPosForElement(i, rotation);
             content.moveTo(pos);
             line.SetPosition(i, pos);
+            lineList.Add(lineObj);
             i++;
         }
 
     }
 
+
+    public void destroyLines()
+    {
+        foreach (GameObject line in lineList)
+        {
+            GameObject.Destroy(line);
+        }
+        lineList.Clear();
+    }
+
+   
 }

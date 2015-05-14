@@ -163,6 +163,10 @@ public class PauseMenu : MonoBehaviour {
         if (ViewKeeper.instance.circleIsActive)
         {
             ViewKeeper.instance.GetComponent<CircleView>().destroyLines();
+        } 
+        if (ViewKeeper.instance.sunIsActive)
+        {
+            ViewKeeper.instance.GetComponent<SunView>().destroyLines();
         }
 		focusModeOn = true;
 		FocusOnContentCanvas.SetActive(true);
@@ -182,6 +186,10 @@ public class PauseMenu : MonoBehaviour {
         if (ViewKeeper.instance.circleIsActive)
         {
             ViewKeeper.instance.GetComponent<CircleView>().redrawLines();
+        } 
+        if (ViewKeeper.instance.sunIsActive)
+        {
+            ViewKeeper.instance.redrawSpiralLines();
         }
 		FocusOnContentCanvas.SetActive(false);
         if (contentInSight)

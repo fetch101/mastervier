@@ -6,6 +6,7 @@ public class ViewKeeper : MonoBehaviour {
 
     public static ViewKeeper instance;
     public bool circleIsActive = false;
+    public bool sunIsActive = false;
 
 	// Use this for initialization
 	void Start () {
@@ -21,6 +22,7 @@ public class ViewKeeper : MonoBehaviour {
     public void circleView(Content center)
     {
         circleIsActive = true;
+        sunIsActive = false;
         SimKeeper.instance.setAllLines(true);
         Filter.instance.removeFilter();
         if (PauseMenu.instance.focusModeOn)
@@ -28,6 +30,7 @@ public class ViewKeeper : MonoBehaviour {
             PauseMenu.instance.alligneCameraToCOntentInSight3();
         } 
         this.GetComponent<CircleView>().destroyLines();
+        this.GetComponent<SunView>().destroyLines();
         this.GetComponent<CircleView>().alignContentsWithCenter(center);
         this.GetComponent<CircleView>().drawLines(center);
     }
@@ -35,6 +38,7 @@ public class ViewKeeper : MonoBehaviour {
     public void cubeView()
     {
         circleIsActive = false;
+        sunIsActive = false;
         SimKeeper.instance.setAllLines(true);
         Filter.instance.removeFilter();
         if (PauseMenu.instance.focusModeOn)
@@ -42,32 +46,42 @@ public class ViewKeeper : MonoBehaviour {
             PauseMenu.instance.alligneCameraToCOntentInSight3();
         }
         this.GetComponent<CircleView>().destroyLines();
+        this.GetComponent<SunView>().destroyLines();
         this.GetComponent<CubeView>().alignContents(getAllContents());
     }
 
     public void sunView()
     {
         circleIsActive = false;
+        sunIsActive = true;
         SimKeeper.instance.setAllLines(true);
         Filter.instance.removeFilter();
         if (PauseMenu.instance.focusModeOn)
         {
             PauseMenu.instance.alligneCameraToCOntentInSight3();
-        } 
+        }
         this.GetComponent<CircleView>().destroyLines();
+        this.GetComponent<SunView>().destroyLines();
         this.GetComponent<SunView>().alignContents(getAllContents());
     }
 
     public void filteredView(List<Content> filteredContents)
     {
         circleIsActive = false;
+        sunIsActive = false;
         SimKeeper.instance.setAllLines(false);
         if (PauseMenu.instance.focusModeOn)
         {
             PauseMenu.instance.alligneCameraToCOntentInSight3();
-        } 
+        }
         this.GetComponent<CircleView>().destroyLines();
+        this.GetComponent<SunView>().destroyLines();
         this.GetComponent<FilteredView>().alignContents(filteredContents);
+    }
+
+    public void redrawSpiralLines()
+    {
+        this.GetComponent<SunView>().alignContents(getAllContents());
     }
     
     private List<Content> getAllContents()
