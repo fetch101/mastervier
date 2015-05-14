@@ -30,6 +30,7 @@ public class SunView : MonoBehaviour {
             string currStudent = contentList[0].Student;
             studentListYearSem = contentList.FindAll(content => content.Student == currStudent);
             contentList.RemoveAll(content => content.Student == currStudent);
+            studentListYearSem.Sort((x, y) => x.phaseNumber.CompareTo(y.phaseNumber));
             semCircle.Add(studentListYearSem);
         }
 
@@ -38,7 +39,6 @@ public class SunView : MonoBehaviour {
         int i = 0;
         foreach (List<Content> studentList in semCircle)
         {
-            //TODO studentList needs to be sorted by phase
             Vector3 circleStart = circle.getPosForElement(0);
             alignSpiral(studentList, circleStart, circle.getRotationForElement(i));
             i++;

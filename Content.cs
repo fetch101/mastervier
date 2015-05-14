@@ -35,6 +35,7 @@ public class Content : MonoBehaviour {
 	public string Tag7;
 	public string Tag8;
 	public string Tag9;
+    public int phaseNumber;
 
     private List<KeyValuePair<LineRenderer, int>> sameStudentLines = new List<KeyValuePair<LineRenderer, int>>();
     private List<KeyValuePair<LineRenderer, int>> differentStudentLines = new List<KeyValuePair<LineRenderer, int>>();
@@ -53,9 +54,25 @@ public class Content : MonoBehaviour {
 	void Start () {
 		addBoxCollider();
 		height = gameObject.GetComponent<Renderer> ().bounds.size.y / 2;
+        trimStrings();
+        extractPhase();
 	}
 
-    //TODO delete whitespaces after tags
+    private void extractPhase()
+    {
+        string[] phaseNumber = Phase.Split(new char[] { 'P' }, 2);
+        this.phaseNumber = int.Parse(phaseNumber[1]);
+    }
+
+    private void trimStrings()
+    {
+        Student = Student.Trim();
+        Semester = Semester.Trim();
+        Phase = Phase.Trim();
+        Year = Year.Trim();
+        Objecttype = Objecttype.Trim();
+    }
+
 
 //	public void addHighlightPlane(){
 //		GameObject highlightPlane = GameObject.CreatePrimitive(PrimitiveType.Cube);
@@ -145,43 +162,43 @@ public class Content : MonoBehaviour {
         List<string> tagList = new List<string>();
         if (Tag0 != "")
         {
-            tagList.Add(Tag0);
+            tagList.Add(Tag0.Trim());
         }
         if (Tag1 != "")
         {
-            tagList.Add(Tag1);
+            tagList.Add(Tag1.Trim());
         }
         if (Tag2 != "")
         {
-            tagList.Add(Tag2);
+            tagList.Add(Tag2.Trim());
         }
         if (Tag3 != "")
         {
-            tagList.Add(Tag3);
+            tagList.Add(Tag3.Trim());
         }
         if (Tag4 != "")
         {
-            tagList.Add(Tag4);
+            tagList.Add(Tag4.Trim());
         }
         if (Tag5 != "")
         {
-            tagList.Add(Tag5);
+            tagList.Add(Tag5.Trim());
         }
         if (Tag6 != "")
         {
-            tagList.Add(Tag6);
+            tagList.Add(Tag6.Trim());
         }
         if (Tag7 != "")
         {
-            tagList.Add(Tag7);
+            tagList.Add(Tag7.Trim());
         }
         if (Tag8 != "")
         {
-            tagList.Add(Tag8);
+            tagList.Add(Tag8.Trim());
         }
         if (Tag9 != "")
         {
-            tagList.Add(Tag9);
+            tagList.Add(Tag9.Trim());
         }
 
 		return tagList;
@@ -193,27 +210,27 @@ public class Content : MonoBehaviour {
         List<string> metaTagList = new List<string>();
         if (Titel != "")
         {
-            metaTagList.Add(Titel);
+            metaTagList.Add(Titel.Trim());
         }
         if (Untertitel != "")
         {
-            metaTagList.Add(Untertitel);
+            metaTagList.Add(Untertitel.Trim());
         }
         if (Autor != "")
         {
-            metaTagList.Add(Autor);
+            metaTagList.Add(Autor.Trim());
         }
         if (Verortung != "")
         {
-            metaTagList.Add(Verortung);
+            metaTagList.Add(Verortung.Trim());
         }
         if (UR != "")
         {
-            metaTagList.Add(UR);
+            metaTagList.Add(UR.Trim());
         }
         if (PUR != "")
         {
-            metaTagList.Add(PUR);
+            metaTagList.Add(PUR.Trim());
         }
 
         return metaTagList;
