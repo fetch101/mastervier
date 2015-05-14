@@ -40,15 +40,14 @@ public class BattleMode : MonoBehaviour
 
         foreach (Content content in contents)
         {
-            //content.battleMode = true;
+            content.battleMode = true;
         }
 
     }
 
     private void fire()
     {
-        GameObject bullet = Instantiate(bulletClone, Camera.main.transform.position, Camera.main.transform.rotation) as GameObject;
-        bullet.GetComponent<Rigidbody>().AddForce(bullet.transform.forward * 1000);
+
     }
 
     public void alignContents(List<Content> contentList)
