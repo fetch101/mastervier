@@ -6,11 +6,18 @@ public class BattleMode : MonoBehaviour
 {
 
     public static BattleMode instance;
-    public GameObject bulletClone;
 
 
     public bool battleMode = false;
     private List<Content> contents;
+
+    public float range = 200.0f;
+
+    public float cooldown = 0.02f;
+    public float cooldownRemaining = 0;
+
+    public GameObject debrisPrefab;
+
 
     // Use this for initialization
     void Start()
@@ -24,9 +31,32 @@ public class BattleMode : MonoBehaviour
 
         if (battleMode)
         {
-            if (Input.GetMouseButtonDown(0))
+            cooldownRemaining -= Time.deltaTime;
+
+            if (Input.GetMouseButton(0) && cooldownRemaining <= 0)
             {
-                fire();
+                cooldownRemaining = cooldown;
+
+                Ray ray = new Ray(Camera.main.transform.position, Camera.main.transform.forward);
+                RaycastHit hitInfo;
+
+                if (Physics.Raycast(ray, out hitInfo, range))
+                {
+                    Vector3 hitPoint = hitInfo.point;
+                    GameObject go = hitInfo.collider.gameObject;
+                    Debug.Log("Hit Object: " + go.name);
+                    Debug.Log("Hit Point: " + hitPoint);
+
+                    if (go.GetComponent<Content>() != null)
+                    {
+                        if (debrisPrefab != null)
+                        {
+                            Instantiate(debrisPrefab, hitPoint, Quaternion.identity);
+                        }
+                    }
+
+                }
+
             }
         }
 
@@ -47,6 +77,7 @@ public class BattleMode : MonoBehaviour
 
     private void fire()
     {
+
 
     }
 
