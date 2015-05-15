@@ -208,31 +208,20 @@ public class PauseMenu : MonoBehaviour {
         rayCasting = true;
 	}
 
-	public void ActivatePanel1Bool(Animator anim){
-		anim.SetBool ("Panel1_isActive", true);
+	
+	public void activatePanel1(Animator anim){
+		anim.SetBool ("Panel1_IsActive", true);
+		anim.SetBool ("Panel2_IsActive", false);
+
 	}
-	public void DeactivatePanel1Bool(Animator anim){
-		anim.SetBool ("Panel1_isActive", false);
-	}
-	public void ActivatePanel2Bool(Animator anim){
-		anim.SetBool ("Panel2_isActive", true);
-	}
-	public void DeactivatePanel2Bool(Animator anim){
-		anim.SetBool ("Panel2_isActive", false);
-	}
-	public void ActivateTilt(Animator anim){
-		anim.SetBool ("TiltIsActive", true);
-	}
-	public void DeactivateTilt(Animator anim){
-		anim.SetBool ("TiltIsActive", false);
+	
+	public void activatePanel2(Animator anim){
+		anim.SetBool ("Panel1_IsActive", false);
+		anim.SetBool ("Panel2_IsActive", true);
+
 	}
 
-	public void ActivateTilt2(Animator anim){
-		anim.SetBool ("Panel2_TiltIsActive", true);
-	}
-	public void DeactivateTilt2(Animator anim){
-		anim.SetBool ("Panel2_TiltIsActive", false);
-	}
+	
 
 
 
