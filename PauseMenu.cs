@@ -212,22 +212,25 @@ public class PauseMenu : MonoBehaviour {
 	public void activatePanel1(Animator anim){
 		anim.SetBool ("Panel1_IsActive", true);
 		anim.SetBool ("Panel2_IsActive", false);
-
 	}
 	
 	public void activatePanel2(Animator anim){
 		anim.SetBool ("Panel1_IsActive", false);
 		anim.SetBool ("Panel2_IsActive", true);
-
 	}
 
+	public void bigSizeButton(Animator anim){
+		anim.SetBool ("ButtonIsSmall", false);
+	}
+
+	public void samllSizeButton(Animator anim){
+		anim.SetBool ("ButtonIsSmall", true);
+	}
 	
-
-
-
 	public void restartGame(){
 		Application.LoadLevel (0);
 	}
+
 	public void quit(){
 		Application.Quit ();
 	}

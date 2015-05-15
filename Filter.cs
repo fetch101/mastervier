@@ -65,7 +65,9 @@ public class Filter : MonoBehaviour {
         foreach (Content content in filteredContents)
         {
             content.shouldAlign = false;
-            content.transform.rotation = Quaternion.LookRotation(Vector3.up);
+//            content.transform.rotation = Quaternion.LookRotation(Vector3.up);
+			content.transform.rotation = Quaternion.LookRotation( new Vector3 (0,90,0));
+
         }
 
         ViewKeeper.instance.filteredView(filteredContents);
