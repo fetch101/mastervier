@@ -17,6 +17,7 @@ public class BattleMode : MonoBehaviour
     public float cooldownRemaining = 0;
 
     public GameObject debrisPrefab;
+    public GameObject weapon;
 
 
     // Use this for initialization
@@ -44,8 +45,6 @@ public class BattleMode : MonoBehaviour
                 {
                     Vector3 hitPoint = hitInfo.point;
                     GameObject go = hitInfo.collider.gameObject;
-                    Debug.Log("Hit Object: " + go.name);
-                    Debug.Log("Hit Point: " + hitPoint);
 
                     if (go.GetComponent<Content>() != null)
                     {
@@ -67,10 +66,13 @@ public class BattleMode : MonoBehaviour
         SimKeeper.instance.setAllLines(false);
         contents = getAllContents();
         battleMode = active;
+        Camera.main.gameObject.SetActiveRecursively(true);
+        
 
         foreach (Content content in contents)
         {
             content.battleMode = true;
+            content.shouldAlign = false;
         }
 
     }
