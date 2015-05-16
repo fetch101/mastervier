@@ -11,8 +11,6 @@ public class PauseMenu : MonoBehaviour {
 	public static PauseMenu instance;
 	private bool wasMoving = false;
 	public bool isInSight = false;
-	public GameObject ButtonToFIlterMenu;
-	public Button ButtonToFIlterMenu2;
 
 	bool rayCasting = true;
 	Content currContentInSight;
