@@ -14,7 +14,6 @@ public class PauseMenu : MonoBehaviour {
 	public GameObject ButtonToFIlterMenu;
 	public Button ButtonToFIlterMenu2;
 
-
 	bool rayCasting = true;
 	Content currContentInSight;
 	Content contentInSight;
@@ -28,8 +27,6 @@ public class PauseMenu : MonoBehaviour {
 	public GameObject mainCamera;
 	public GameObject target;
 	public bool focusModeOn = false;
-//	public GameObject Panel1;
-//	public GameObject Panel2;
 
     // Use this for initialization
     void Start()
@@ -218,7 +215,6 @@ public class PauseMenu : MonoBehaviour {
 		anim.SetBool ("Panel1_IsActive", false);
 		anim.SetBool ("Panel2_IsActive", true);
 	}
-
 	public void bigSizeButton(Animator anim){
 		anim.SetBool ("ButtonIsSmall", false);
 	}
