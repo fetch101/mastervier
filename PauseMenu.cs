@@ -172,6 +172,9 @@ public class PauseMenu : MonoBehaviour {
 			currContentInSight.speed = 0.0f;
 			wasMoving = true;
 		}
+		if (ViewKeeper.instance.filterIsActive){
+			currContentInSight.shouldAlign = true;
+		}
 	}
 
 	private void alligneCameraToCOntentInSight2 (){
@@ -203,8 +206,13 @@ public class PauseMenu : MonoBehaviour {
 		focusModeOn = false;
         clickCount = 0;
         rayCasting = true;
-	}
+		if (ViewKeeper.instance.filterIsActive){
+			currContentInSight.shouldAlign = false;
+			currContentInSight.transform.rotation = Quaternion.LookRotation(Vector3.up);
 
+		}
+	}
+	
 	
 	public void activatePanel1(Animator anim){
 		anim.SetBool ("Panel1_IsActive", true);

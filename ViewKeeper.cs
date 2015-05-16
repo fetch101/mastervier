@@ -7,6 +7,8 @@ public class ViewKeeper : MonoBehaviour {
     public static ViewKeeper instance;
     public bool circleIsActive = false;
     public bool sunIsActive = false;
+	public bool filterIsActive = false;
+
 
 	// Use this for initialization
 	void Start () {
@@ -23,6 +25,7 @@ public class ViewKeeper : MonoBehaviour {
     {
         circleIsActive = true;
         sunIsActive = false;
+		filterIsActive = false;
         SimKeeper.instance.setAllLines(true);
         Filter.instance.removeFilter();
         if (PauseMenu.instance.focusModeOn)
@@ -39,6 +42,8 @@ public class ViewKeeper : MonoBehaviour {
     {
         circleIsActive = false;
         sunIsActive = false;
+		filterIsActive = false;
+
         SimKeeper.instance.setAllLines(true);
         Filter.instance.removeFilter();
         if (PauseMenu.instance.focusModeOn)
@@ -54,6 +59,8 @@ public class ViewKeeper : MonoBehaviour {
     {
         circleIsActive = false;
         sunIsActive = true;
+		filterIsActive = false;
+
         SimKeeper.instance.setAllLines(true);
         Filter.instance.removeFilter();
         if (PauseMenu.instance.focusModeOn)
@@ -69,6 +76,8 @@ public class ViewKeeper : MonoBehaviour {
     {
         circleIsActive = false;
         sunIsActive = false;
+		filterIsActive = true;
+
         SimKeeper.instance.setAllLines(false);
         if (PauseMenu.instance.focusModeOn)
         {
