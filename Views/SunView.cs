@@ -7,6 +7,8 @@ public class SunView : MonoBehaviour {
     List<Content> studentListYearSem;
     List<List<Content>> semCircle = new List<List<Content>>();
     List<GameObject> lineList = new List<GameObject>();
+    List<GameObject> studentNameList = new List<GameObject>();
+    public GameObject studentNamePrefab;
 
 
     public Material spiralLine;
@@ -60,6 +62,12 @@ public class SunView : MonoBehaviour {
         {
             Vector3 pos = spiral.getPosForElement(i, rotation);
             content.moveTo(pos);
+            if(i == 0){
+                Vector3 namePos = new Vector3(pos.x, -40, pos.z);
+                GameObject studentName = Instantiate(studentNamePrefab, namePos, Quaternion.Euler(-90, rotation, 0)) as GameObject;
+                studentName.GetComponent<TextMesh>().text = content.Student;
+                studentNameList.Add(studentName);
+            }
             line.SetPosition(i, pos);
             lineList.Add(lineObj);
             i++;
@@ -75,6 +83,11 @@ public class SunView : MonoBehaviour {
             GameObject.Destroy(line);
         }
         lineList.Clear();
+        foreach (GameObject studentName in studentNameList)
+        {
+            GameObject.Destroy(studentName);
+        }
+        studentNameList.Clear();
     }
 
    

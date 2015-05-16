@@ -101,7 +101,7 @@ public class Content : MonoBehaviour {
 	// Update is called once per frame
 	void Update()
 	{
-		rotation = new Vector3 (this.gameObject.transform.rotation.x, this.gameObject.transform.rotation.y, this.gameObject.transform.rotation.z);
+        //rotation = new Vector3(this.gameObject.transform.rotation.x, this.gameObject.transform.rotation.y, this.gameObject.transform.rotation.z);
 		drawLines();
         if (shouldAlign)
         {
