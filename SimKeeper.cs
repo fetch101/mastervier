@@ -44,6 +44,8 @@ public class SimKeeper : MonoBehaviour {
         buildMetaSimTable();
         buildTagDic();
         spawnLines();
+        ViewKeeper.instance.gameObject.GetComponent<SunView>().alignContents(getAllContents());
+        ViewKeeper.instance.sunIsActive = true;
     }
 
     private void buildTagDic()

@@ -13,7 +13,6 @@ public class ViewKeeper : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
         instance = this;
-		this.GetComponent<SunView> ().alignContents (getAllContents ());
 	}
 	
 	// Update is called once per frame
