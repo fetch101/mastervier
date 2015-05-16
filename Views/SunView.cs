@@ -9,6 +9,8 @@ public class SunView : MonoBehaviour {
     List<GameObject> lineList = new List<GameObject>();
     List<GameObject> studentNameList = new List<GameObject>();
     public GameObject studentNamePrefab;
+    public int namePositionNearFar = 10;
+    public float namePositionUpDown = -60;
 
 
     public Material spiralLine;
@@ -58,16 +60,20 @@ public class SunView : MonoBehaviour {
         line.material = spiralLine;
 
         Spiral spiral = new Spiral(circleStart);
+
+
+        Vector3 namePos = spiral.getPosForElement(namePositionNearFar, rotation);
+        namePos = new Vector3(namePos.x, namePositionUpDown, namePos.z);
+        GameObject studentName = Instantiate(studentNamePrefab, namePos, Quaternion.Euler(-90, rotation, 0)) as GameObject;
+        studentName.GetComponent<TextMesh>().text = contentList[0].Student;
+        studentNameList.Add(studentName);
+
+
         foreach (Content content in contentList)
         {
             Vector3 pos = spiral.getPosForElement(i, rotation);
             content.moveTo(pos);
-            if(i == 0){
-                Vector3 namePos = new Vector3(pos.x, -40, pos.z);
-                GameObject studentName = Instantiate(studentNamePrefab, namePos, Quaternion.Euler(-90, rotation, 0)) as GameObject;
-                studentName.GetComponent<TextMesh>().text = content.Student;
-                studentNameList.Add(studentName);
-            }
+            
             line.SetPosition(i, pos);
             lineList.Add(lineObj);
             i++;
