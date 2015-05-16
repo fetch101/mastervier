@@ -13,7 +13,7 @@ public class ViewKeeper : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
         instance = this;
-        this.GetComponent<CubeView>().alignContents(getAllContents());
+		this.GetComponent<SunView> ().alignContents (getAllContents ());
 	}
 	
 	// Update is called once per frame
@@ -61,7 +61,8 @@ public class ViewKeeper : MonoBehaviour {
         sunIsActive = true;
 		filterIsActive = false;
 
-        SimKeeper.instance.setAllLines(true);
+		SimKeeper.instance.setSameStudentLines(false);
+		SimKeeper.instance.setDifferentStudentLines(true);
         Filter.instance.removeFilter();
         if (PauseMenu.instance.focusModeOn)
         {

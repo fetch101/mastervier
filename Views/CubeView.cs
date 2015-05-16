@@ -29,7 +29,7 @@ public class CubeView : MonoBehaviour {
 
                 for (int z = 0; z < cubeDegree; z++)
                 {
-                    Vector3 pos = new Vector3(x * 100, y * 100, z * 100);
+                    Vector3 pos = new Vector3(x * 100 - 400, y * 100 - 400, z * 100 - 400);
                     if (i < contents.Count)
                     {
                         contents[i].moveTo(pos);

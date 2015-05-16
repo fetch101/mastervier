@@ -29,19 +29,21 @@ public class FilteredView : MonoBehaviour {
     {
         foreach (Content content in notFilteredContents)
         {
-            content.moveTo(new Vector3(500f, 500f, 500f));
+            content.moveTo(new Vector3(0, 150, 0));
         }
     }
 
     private void moveToSquare(List<Content> filteredContents)
     {
-        int degree = getSquareDegree(filteredContents.Count);
+        float degree = getSquareDegree(filteredContents.Count);
+		float startX = degree * (-30);
+		float startY = degree * (-30);
         int i = 0;
         for(float x = 0; x < degree; x++)
         {
             for (float z = 0; z < degree; z++)
             {
-                Vector3 pos = new Vector3(x*60f, 0f, z*60f);
+                Vector3 pos = new Vector3((startX + (x*60f)), 0f, (startY + (z*60f)));
                 if (i < filteredContents.Count)
                 {
                     filteredContents[i].moveTo(pos);

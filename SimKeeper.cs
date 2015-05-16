@@ -31,7 +31,7 @@ public class SimKeeper : MonoBehaviour {
     public float differentStudentLinesWidth;
 
     private Dictionary<string, int> tagDic = new Dictionary<string, int>();
-    private bool sameStudentLinesActive = true;
+    private bool sameStudentLinesActive = false;
     private bool differentStudentLinesActive = true;
     private bool circleLinesActive;
 
