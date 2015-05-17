@@ -20,8 +20,9 @@ public class WordCloud : MonoBehaviour {
 	}
 
 
-    public void drawCloud(List<Content> contentList, Vector3 startPos){
+    public void drawCloud(List<Content> contentList, Vector3 startPos, float rotation){
         this.startPos = startPos;
+        this.rotation = rotation;
         SortedDictionary<string, int> tagDic = generateTagList(contentList);
         generateObjects(tagDic);
     }
@@ -37,11 +38,13 @@ public class WordCloud : MonoBehaviour {
 
     private void generateObjects(SortedDictionary<string, int> tagDic)
     {
-        float currX = startPos.x;
-        float currY = startPos.y;
-        float currZ = startPos.z;
-        float offsetX = 5;
-        float offsetY = 12;
+        startPos = new Vector3(startPos.x, -90, startPos.z);
+        GameObject parentObject = Instantiate(new GameObject(), startPos, Quaternion.Euler(0, 0, 0)) as GameObject;
+        float currX = parentObject.transform.position.x;
+        float currY = parentObject.transform.position.y;
+        float currZ = parentObject.transform.position.z;
+        float offsetX = 10;
+        float offsetY = 15;
         int pos = 0;
         foreach (KeyValuePair<string,int> tag in tagDic)
         {
@@ -50,15 +53,17 @@ public class WordCloud : MonoBehaviour {
 
             GameObject currTag = createTag(currX, currY, currZ, tag.Key, percent);
             currX += currTag.GetComponent<BoxCollider>().size.x + offsetX;
+            currTag.transform.SetParent(parentObject.transform, true);
             if (pos > Mathf.Sqrt(tagDic.Count))
             {
-                currY += offsetY;
+                currY -= offsetY;
                 pos = 0;
-                currX = 100;
+                currX = parentObject.transform.position.x;
             }
             pos++;
             
         }
+        parentObject.transform.rotation = Quaternion.Euler(0f, rotation, 0f);
     }
 
     private GameObject createTag(float currX, float currY, float currZ, string tag, float percent)

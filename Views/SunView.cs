@@ -73,7 +73,7 @@ public class SunView : MonoBehaviour {
     private void createStudentCloud(List<Content> contentList, float rotation, Spiral spiral)
     {
         WordCloud studentCloud = new WordCloud();
-        studentCloud.drawCloud(contentList, spiral.getPosForElement(20, rotation));
+        studentCloud.drawCloud(contentList, spiral.getPosForElement(10, rotation), rotation);
         wordCloudList.Add(studentCloud);
     }
 
@@ -81,7 +81,7 @@ public class SunView : MonoBehaviour {
     {
         Vector3 namePos = spiral.getPosForElement(namePositionNearFar, rotation);
         namePos = new Vector3(namePos.x, namePositionUpDown, namePos.z);
-        GameObject studentName = Instantiate(studentNamePrefab, namePos, Quaternion.Euler(-90, rotation, 0)) as GameObject;
+        GameObject studentName = Instantiate(studentNamePrefab, namePos, Quaternion.Euler(-90, rotation, 180f)) as GameObject;
         studentName.GetComponent<TextMesh>().text = contentList[0].Student;
         studentNameList.Add(studentName);
     }
@@ -104,11 +104,13 @@ public class SunView : MonoBehaviour {
             GameObject.Destroy(line);
         }
         lineList.Clear();
+        Debug.Log("studenlist: " + studentNameList.Count);
         foreach (GameObject studentName in studentNameList)
         {
             GameObject.Destroy(studentName);
         }
         studentNameList.Clear();
+        Debug.Log("clouds: " + wordCloudList.Count);
         foreach (WordCloud cloud in wordCloudList)
         {
             cloud.destroyCloud();
