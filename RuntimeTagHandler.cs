@@ -8,6 +8,7 @@ public class RuntimeTagHandler : MonoBehaviour {
 
     public GameObject RTTagPrefab;
     public Transform RTPrefabContainerPanel;
+    public GameObject RTTagPrefabOther;
     private List<GameObject> runtimeTagList = new List<GameObject>();
 
 	// Use this for initialization
@@ -36,9 +37,28 @@ public class RuntimeTagHandler : MonoBehaviour {
         for (int i = 0; i < displayList.Count; i++)
         {
             string tagCount = "";
-                tagCount = tagDic[displayList[i].Value].ToString();
+            tagCount = tagDic[displayList[i].Value].ToString();
+            if (displayList[i].Key == "Student" || displayList[i].Key == "Phase" || displayList[i].Key == "Semester")
+            {
+                runtimeTagList.Add(instantiateOtherRuntimeTag(displayList[i].Value));
+            }
+            else
+            {
                 runtimeTagList.Add(instantiateRuntimeTag(displayList[i].Key, displayList[i].Value, tagCount));
+            }
         }
+    }
+
+    private GameObject instantiateOtherRuntimeTag(string value)
+    {
+
+        GameObject tag = Instantiate(RTTagPrefabOther);
+        tag.transform.SetParent(RTPrefabContainerPanel, false);
+
+        Dictionary<string, GameObject> childGameObjects = getChildDict(tag);
+        childGameObjects["TextTagValue "].GetComponent<Text>().text = value;
+
+        return tag;
     }
 
 
