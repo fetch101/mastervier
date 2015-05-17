@@ -8,6 +8,7 @@ public class SunView : MonoBehaviour {
     List<List<Content>> semCircle = new List<List<Content>>();
     List<GameObject> lineList = new List<GameObject>();
     List<GameObject> studentNameList = new List<GameObject>();
+    List<WordCloud> wordCloudList = new List<WordCloud>();
     public GameObject studentNamePrefab;
     public int namePositionNearFar = 10;
     public float namePositionUpDown = -60;
@@ -53,32 +54,46 @@ public class SunView : MonoBehaviour {
     public void alignSpiral(List<Content> contentList, Vector3 circleStart, float rotation)
     {
         int i = 0;
-        GameObject lineObj = new GameObject();
-        LineRenderer line = lineObj.AddComponent<LineRenderer>();
-        line.SetVertexCount(contentList.Count);
-        line.SetWidth(spiralLineWidth, spiralLineWidth);
-        line.material = spiralLine;
-
         Spiral spiral = new Spiral(circleStart);
-
-
-        Vector3 namePos = spiral.getPosForElement(namePositionNearFar, rotation);
-        namePos = new Vector3(namePos.x, namePositionUpDown, namePos.z);
-        GameObject studentName = Instantiate(studentNamePrefab, namePos, Quaternion.Euler(-90, rotation, 0)) as GameObject;
-        studentName.GetComponent<TextMesh>().text = contentList[0].Student;
-        studentNameList.Add(studentName);
-
-
+        LineRenderer line = createLine(contentList.Count);
+        createStudentName(contentList, rotation, spiral);
+        createStudentCloud(contentList, rotation, spiral);
         foreach (Content content in contentList)
         {
             Vector3 pos = spiral.getPosForElement(i, rotation);
             content.moveTo(pos);
             
             line.SetPosition(i, pos);
-            lineList.Add(lineObj);
+            lineList.Add(line.gameObject);
             i++;
         }
 
+    }
+
+    private void createStudentCloud(List<Content> contentList, float rotation, Spiral spiral)
+    {
+        WordCloud studentCloud = new WordCloud();
+        studentCloud.drawCloud(contentList, spiral.getPosForElement(20, rotation));
+        wordCloudList.Add(studentCloud);
+    }
+
+    private void createStudentName(List<Content> contentList, float rotation, Spiral spiral)
+    {
+        Vector3 namePos = spiral.getPosForElement(namePositionNearFar, rotation);
+        namePos = new Vector3(namePos.x, namePositionUpDown, namePos.z);
+        GameObject studentName = Instantiate(studentNamePrefab, namePos, Quaternion.Euler(-90, rotation, 0)) as GameObject;
+        studentName.GetComponent<TextMesh>().text = contentList[0].Student;
+        studentNameList.Add(studentName);
+    }
+
+    private LineRenderer createLine(int vertexCount)
+    {
+        GameObject lineObj = new GameObject();
+        LineRenderer line = lineObj.AddComponent<LineRenderer>();
+        line.SetVertexCount(vertexCount);
+        line.SetWidth(spiralLineWidth, spiralLineWidth);
+        line.material = spiralLine;
+        return line;
     }
 
 
@@ -94,6 +109,11 @@ public class SunView : MonoBehaviour {
             GameObject.Destroy(studentName);
         }
         studentNameList.Clear();
+        foreach (WordCloud cloud in wordCloudList)
+        {
+            cloud.destroyCloud();
+        }
+        wordCloudList.Clear();
     }
 
    

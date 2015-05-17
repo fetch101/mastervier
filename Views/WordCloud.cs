@@ -4,6 +4,11 @@ using System.Collections.Generic;
 
 public class WordCloud : MonoBehaviour {
 
+    private List<GameObject> wordList = new List<GameObject>();
+    private Vector3 startPos;
+    private float rotation;
+
+
 	// Use this for initialization
 	void Start () {
 	
@@ -15,16 +20,26 @@ public class WordCloud : MonoBehaviour {
 	}
 
 
-    public void drawCloud(List<Content> contentList){
+    public void drawCloud(List<Content> contentList, Vector3 startPos){
+        this.startPos = startPos;
         SortedDictionary<string, int> tagDic = generateTagList(contentList);
         generateObjects(tagDic);
     }
 
+    public void destroyCloud()
+    {
+        foreach (GameObject word in wordList)
+        {
+            GameObject.Destroy(word);
+        }
+        wordList.Clear();
+    }
+
     private void generateObjects(SortedDictionary<string, int> tagDic)
     {
-        float currX = 100;
-        float currY = 100;
-        float currZ = 0;
+        float currX = startPos.x;
+        float currY = startPos.y;
+        float currZ = startPos.z;
         float offsetX = 5;
         float offsetY = 12;
         int pos = 0;
@@ -52,9 +67,10 @@ public class WordCloud : MonoBehaviour {
         TextMesh currMesh = currTag.AddComponent<TextMesh>();
         currMesh.text = tag;
         currMesh.fontSize = calculateFontSize(percent);
-        currMesh.color = Color.black;
+        currMesh.color = Color.white;
         currTag.transform.position = new Vector3(currX, currY, currZ);
         BoxCollider collider = currTag.AddComponent<BoxCollider>();
+        wordList.Add(currTag);
         return currTag;
     }
 
