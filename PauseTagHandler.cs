@@ -16,7 +16,7 @@ public class PauseTagHandler : MonoBehaviour
 	public Slider TagSlider;
 	public Text TextMetaTagSliderNumber;
 	public Slider Metatagslider;
-
+	public Text Tooltip0;
 
 
     // Use this for initialization
@@ -205,6 +205,59 @@ public class PauseTagHandler : MonoBehaviour
         float mtsv = Metatagslider.value * 10;
         TextMetaTagSliderNumber.text = Convert.ToString (mtsv);
 
+	}
+
+	public void displayTooltip0(){
+		Tooltip0.text = "";
+	}
+	public void displayTooltip1(){
+		Tooltip0.text = 
+			"Jedes Objekt ist mit verschiedenen Tags versehen." + "\n" +
+			"Mit diesem Regler wird die Anzahl der benötigten" + "\n" +
+			"übereinsitmmenden Tag's zweier Objekte festgelegt," + "\n" +
+			"damit eine Linie zwischen ihnen gezeichnet wird";
+	}
+	public void displayTooltip2(){
+		Tooltip0.text = 
+			"Mit diesem regler wird Gewichtung "+ "\n" + 
+			"der allgemeinen Tag's festgelegt." + "\n" +
+			"Die Allgemeinen Tags sind:" + "\n" + "\n" +
+			
+
+				"Student" + "\n" +
+				"Semester" + "\n" +
+				"Jahr" + "\n" +
+				"Phase" + "\n" +
+				"Objekttyp" + "\n" +
+				"Titel" + "\n" +
+				"Autor" + "\n" +
+				"Verortung";
+
+
+//		"Mit diesem regler wird Gewichtung" + "\n" + 
+//			"der allgemeinen Tag's festgelegt." + "\n" +
+//				"Die Allgemeinen Tags sind:" + "\n" +
+//				"Student / Semester / Jahr  " + "\n" +
+//				"Phase / Objekttyp / Titel" + "\n" +
+//				"Autor / Verortung";
+	}
+
+	public void displayTooltip3(){
+		Tooltip0.text = 
+				"Mit diesem regler wird Gewichtung der " + "\n" + 
+				"Tag's «Keywords» festgelegt." ;
+	}
+
+	public void displayTooltip4(){
+		Tooltip0.text = 
+			"In der Studentenansicht werden alle Objekte" + "\n" +
+			"nach Studenten sortiert und angeordnet.";
+	}
+
+	public void displayTooltip5(){
+		Tooltip0.text = 
+			"In der Zufallsansicht werden alle" + "\n" +
+			"Objekte zufällig angeordnet.";
 	}
 
 }

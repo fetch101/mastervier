@@ -38,7 +38,7 @@ public class RuntimeTagHandler : MonoBehaviour {
         {
             string tagCount = "";
             tagCount = tagDic[displayList[i].Value].ToString();
-            if (displayList[i].Key == "Student" || displayList[i].Key == "Phase" || displayList[i].Key == "Semester")
+			if (displayList[i].Key == "Student" || displayList[i].Key == "Phase" || displayList[i].Key == "Semester" || displayList[i].Key == "Phase" || displayList[i].Key == "Jahr" || displayList[i].Key == "Objekttyp")
             {
                 runtimeTagList.Add(instantiateOtherRuntimeTag(displayList[i].Value));
             }

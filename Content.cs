@@ -46,6 +46,7 @@ public class Content : MonoBehaviour {
     public float speed;
     public bool shouldAlign = true;
     public bool battleMode = false;
+	new Vector3 modifiedCollider;
 
 	GameObject highlightPlane;
 	Vector3 scale;
@@ -95,7 +96,16 @@ public class Content : MonoBehaviour {
     public void addBoxCollider()
     {
       BoxCollider collider = this.gameObject.AddComponent<BoxCollider>();
-    }
+
+		if (collider.size.y < 5000 && Objecttype != "Image") {
+			collider.size = new Vector3(collider.size.x, 5000, collider.size.z);
+
+		}
+		if (collider.size.x < 5000 && Objecttype != "Image") {
+			collider.size = new Vector3(5000, collider.size.y, collider.size.z);
+			
+		}
+	}
 	
 	
 	// Update is called once per frame

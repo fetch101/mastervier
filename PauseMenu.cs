@@ -21,7 +21,7 @@ public class PauseMenu : MonoBehaviour {
 	public GameObject PauseMenuCanvas;
 	Vector3 currPosition;
 	public int clickCount = 0; 
-    private bool isPause;
+    public bool isPause;
 	public GameObject mainCamera;
 	public GameObject target;
 	public bool focusModeOn = false;
@@ -42,6 +42,11 @@ public class PauseMenu : MonoBehaviour {
     void Update()
     {
 	
+//		if (Input.GetKeyDown (KeyCode.Z)) {
+//			Application.CaptureScreenshot("/Users/itz/Desktop/Screenshots4/Screenshot4_1.png", 5);		
+//		}
+
+
         oldContentInSight = contentInSight;
 		if(rayCasting){
 			isInSight = setContentInSight();
@@ -68,7 +73,7 @@ public class PauseMenu : MonoBehaviour {
         }else{
             RuntimeTagCanvas.SetActive(false);
         }
-		if (Input.GetKeyDown(KeyCode.Escape))
+		if (Input.GetKeyDown(KeyCode.Escape) || Input.GetMouseButtonDown(1))
         {
             togglePause();
 
@@ -101,7 +106,7 @@ public class PauseMenu : MonoBehaviour {
 
 		RaycastHit hitcheck;
 		
-		if (Physics.Raycast (raycheck, out hitcheck, 60.0f) && hitcheck.collider.gameObject.GetComponent<Content>() != null) {
+		if (Physics.Raycast (raycheck, out hitcheck, 80.0f) && hitcheck.collider.gameObject.GetComponent<Content>() != null) {
             contentInSight = hitcheck.collider.gameObject.GetComponent<Content>();
 			target.transform.position = hitcheck.collider.gameObject.transform.position;
 //			contentInSight.addHighlightPlane();

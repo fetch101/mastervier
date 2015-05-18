@@ -57,7 +57,7 @@ public class SunView : MonoBehaviour {
         Spiral spiral = new Spiral(circleStart);
         LineRenderer line = createLine(contentList.Count);
         createStudentName(contentList, rotation, spiral);
-        createStudentCloud(contentList, rotation, spiral);
+//        createStudentCloud(contentList, rotation, spiral);
         foreach (Content content in contentList)
         {
             Vector3 pos = spiral.getPosForElement(i, rotation);
@@ -70,12 +70,12 @@ public class SunView : MonoBehaviour {
 
     }
 
-    private void createStudentCloud(List<Content> contentList, float rotation, Spiral spiral)
-    {
-        WordCloud studentCloud = new WordCloud();
-        studentCloud.drawCloud(contentList, spiral.getPosForElement(10, rotation), rotation);
-        wordCloudList.Add(studentCloud);
-    }
+//    private void createStudentCloud(List<Content> contentList, float rotation, Spiral spiral)
+//    {
+//        WordCloud studentCloud = new WordCloud();
+//        studentCloud.drawCloud(contentList, spiral.getPosForElement(10, rotation), rotation);
+//        wordCloudList.Add(studentCloud);
+//    }
 
     private void createStudentName(List<Content> contentList, float rotation, Spiral spiral)
     {

@@ -12,7 +12,7 @@ public class SunCircle {
 	
     public SunCircle(Vector3 center, int numberOfElements)
     {
-        this.radius = (numberOfElements * 60) / (2 * Mathf.PI);
+        this.radius = (numberOfElements * 100) / (2 * Mathf.PI);
 		this.center = center;
         this.numberOfElements = numberOfElements;
     }

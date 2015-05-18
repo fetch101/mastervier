@@ -4,11 +4,13 @@ using System.Collections;
 public class Pickup : MonoBehaviour {
 
     public Texture2D contentMarkedTexture;
-    public float markedTextureScale = 10f;
+    public float markedTextureScale = 1f;
     private bool contentInSight = false;
     private bool contentIsGrabbed = false;
 	private bool isFocusModeOn = false;
     private Content grabbedContent;
+	public Texture2D DefaultCursor;
+	private bool isPaused = false;
 
 	// Use this for initialization
 	void Start () {
@@ -19,6 +21,7 @@ public class Pickup : MonoBehaviour {
 	void Update () {
 
 		isFocusModeOn = PauseMenu.instance.focusModeOn;
+		isPaused = PauseMenu.instance.isPause;
 
         Ray raycheck = Camera.main.ViewportPointToRay(new Vector3(0.5f, 0.5f, 0f));
 
@@ -31,7 +34,7 @@ public class Pickup : MonoBehaviour {
         }
 
 
-        if (Physics.Raycast(raycheck, out hitcheck, 40f) && hitcheck.collider.gameObject.GetComponent<Content>() != null) 
+        if (Physics.Raycast(raycheck, out hitcheck, 80) && hitcheck.collider.gameObject.GetComponent<Content>() != null) 
         {
             contentInSight = true;
 
@@ -56,10 +59,14 @@ public class Pickup : MonoBehaviour {
 
     void OnGUI()
     {
-		if(!isFocusModeOn && contentInSight)
-            {
-                GUI.DrawTexture(new Rect((Screen.width - contentMarkedTexture.width * markedTextureScale) / 2, (Screen.height - contentMarkedTexture.height * markedTextureScale) / 2, contentMarkedTexture.width * markedTextureScale, contentMarkedTexture.height * markedTextureScale), contentMarkedTexture);
-			}
+
+		if (!isFocusModeOn && contentInSight && !isPaused) {
+			GUI.DrawTexture (new Rect ((Screen.width - contentMarkedTexture.width * markedTextureScale) / 2, (Screen.height - contentMarkedTexture.height * markedTextureScale) / 2, contentMarkedTexture.width * markedTextureScale, contentMarkedTexture.height * markedTextureScale), contentMarkedTexture);
+		} else if(!isFocusModeOn && !isPaused)
+		{
+			GUI.DrawTexture (new Rect ((Screen.width - DefaultCursor.width * markedTextureScale) / 2, (Screen.height - DefaultCursor.height * markedTextureScale) / 2,
+			                           DefaultCursor.width * markedTextureScale, DefaultCursor.height * markedTextureScale), DefaultCursor);
+		}
       
     }
 
