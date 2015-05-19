@@ -64,7 +64,7 @@ public class PauseMenu : MonoBehaviour {
             if (!isPause && clickCount != 2) { 
                 RuntimeTagCanvas.SetActive(true);
             }
-            if (Input.GetKeyDown(KeyCode.C))
+			if (Input.GetKeyDown(KeyCode.C)|| Input.GetMouseButtonDown(3))
             {
                 contentInSight.moveTo(contentInSight.transform.position);
                 ViewKeeper.instance.circleView(contentInSight);

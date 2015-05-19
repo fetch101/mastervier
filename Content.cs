@@ -3,6 +3,8 @@ using System.Collections.Generic;
 
 public class Content : MonoBehaviour {
 	public Vector3 finalDestination;
+	public Quaternion currRotation = Quaternion.Euler(new Vector3(0, 0, 0));
+//	private Vector3 currRotation;
 
 	public int markCount = 0;
 	public int markOffsetX = 5;
@@ -299,6 +301,9 @@ public class Content : MonoBehaviour {
 
 
 	public void spawnHighlightObject(){
+		if (this.transform.rotation != Quaternion.Euler (0, 0, 0)) {
+			currRotation = this.transform.rotation;
+		}
 		float scale = 0.02f;
 		float textscale = 500.0f;
 
@@ -315,6 +320,7 @@ public class Content : MonoBehaviour {
 					
 				}				markOffsetX += 5;
 				markCount ++;
+				this.transform.rotation = currRotation;
 			} else {
 				this.transform.rotation = Quaternion.Euler (0, 0, 0);
 				GameObject markCloneOdd = Instantiate (mark, new Vector3 ((this.gameObject.transform.position.x + markOffsetZ), this.gameObject.transform.position.y + 2 +  height , this.gameObject.transform.position.z), Quaternion.Euler (- 90, 90, 0)) as GameObject;
@@ -326,6 +332,8 @@ public class Content : MonoBehaviour {
 					
 				}				markOffsetZ -= 5;
 				markCount ++;
+				this.transform.rotation = currRotation;
+
 					}
 		} else {
 			this.transform.rotation = Quaternion.Euler (0, 0, 0);
@@ -340,7 +348,7 @@ public class Content : MonoBehaviour {
 
 //			markCloneOrigin.transform.localScale = new Vector3(scale, scale, scale);
 			markCount ++;
-
+			this.transform.rotation = currRotation;
 				}
 		}
 }

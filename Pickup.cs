@@ -27,7 +27,7 @@ public class Pickup : MonoBehaviour {
 
         RaycastHit hitcheck;
 
-        if (Input.GetKeyDown("t") && contentIsGrabbed)
+		if (Input.GetKeyDown("t")|| Input.GetMouseButtonDown(4) && contentIsGrabbed)
         {
             grabbedContent.gameObject.transform.parent = null;
             contentIsGrabbed = false;
@@ -38,7 +38,7 @@ public class Pickup : MonoBehaviour {
         {
             contentInSight = true;
 
-            if (Input.GetKeyDown("t") && !contentIsGrabbed && !hitcheck.collider.gameObject.GetComponent<Content>().isMoving && !PauseMenu.instance.focusModeOn)
+			if (Input.GetKeyDown("t")|| Input.GetMouseButtonDown(4) && !contentIsGrabbed && !hitcheck.collider.gameObject.GetComponent<Content>().isMoving && !PauseMenu.instance.focusModeOn)
             {
                 grabbedContent = hitcheck.collider.gameObject.GetComponent<Content>();
                 Vector3 p = Camera.main.ScreenToWorldPoint(new Vector3(Camera.main.pixelWidth/2, Camera.main.pixelHeight/2, 100));

@@ -10,6 +10,8 @@ public class RuntimeTagHandler : MonoBehaviour {
     public Transform RTPrefabContainerPanel;
     public GameObject RTTagPrefabOther;
     private List<GameObject> runtimeTagList = new List<GameObject>();
+	private List<string> otherList  = new List<string>();
+
 
 	// Use this for initialization
 	void Start () {
@@ -32,35 +34,40 @@ public class RuntimeTagHandler : MonoBehaviour {
             GameObject.Destroy(runtimeTag);
         }
         runtimeTagList.Clear();
+		runtimeTagList.Add (instantiateOtherRuntimeTag(c));
+
         Dictionary<string, int> tagDic = SimKeeper.instance.getTagDic();
         List<KeyValuePair<String, String>> displayList = getDisplayList(c);
+
         for (int i = 0; i < displayList.Count; i++)
         {
             string tagCount = "";
             tagCount = tagDic[displayList[i].Value].ToString();
-			if (displayList[i].Key == "Student" || displayList[i].Key == "Phase" || displayList[i].Key == "Semester" || displayList[i].Key == "Phase" || displayList[i].Key == "Jahr" || displayList[i].Key == "Objekttyp")
-            {
-                runtimeTagList.Add(instantiateOtherRuntimeTag(displayList[i].Value));
-            }
-            else
-            {
+			if (displayList[i].Key != "Student" && displayList[i].Key != "Phase" && displayList[i].Key != "Semester" && displayList[i].Key != "Objekttyp" && displayList[i].Key != "Jahr")
+			{
                 runtimeTagList.Add(instantiateRuntimeTag(displayList[i].Key, displayList[i].Value, tagCount));
             }
         }
     }
 
-    private GameObject instantiateOtherRuntimeTag(string value)
+	private GameObject instantiateOtherRuntimeTag(Content contentInSight2)
     {
+
 
         GameObject tag = Instantiate(RTTagPrefabOther);
         tag.transform.SetParent(RTPrefabContainerPanel, false);
+        Dictionary<string, GameObject> childGameObjects = getChildDictOther(tag);
 
-        Dictionary<string, GameObject> childGameObjects = getChildDict(tag);
-        childGameObjects["TextTagValue "].GetComponent<Text>().text = value;
+		List<string> otherlist  = getDisplayListOther(contentInSight2);
+
+		childGameObjects["TextStudent"].GetComponent<Text>().text = otherlist[0];
+		childGameObjects["TextSemester"].GetComponent<Text>().text = otherlist[1];
+		childGameObjects["TextPhase"].GetComponent<Text>().text = otherlist[2];
+		childGameObjects["TextJahr"].GetComponent<Text>().text = otherlist[3];
+		childGameObjects["TextObjekttyp"].GetComponent<Text>().text = otherlist[4];
 
         return tag;
     }
-
 
     private GameObject instantiateRuntimeTag(string key, string value, string count)
     {
@@ -87,6 +94,15 @@ public class RuntimeTagHandler : MonoBehaviour {
         return childGameObjects;
     }
 
+	private Dictionary<string, GameObject> getChildDictOther(GameObject runtimeTagOther)
+	{
+		Dictionary<string, GameObject> childGameObjects = new Dictionary<string, GameObject>();
+		foreach (Transform t in runtimeTagOther.transform)
+		{
+			childGameObjects.Add(t.name, t.gameObject);
+		}
+		return childGameObjects;
+	}
 
 
     private List<KeyValuePair<string, string>> getDisplayList(Content contentInSight)
@@ -97,27 +113,27 @@ public class RuntimeTagHandler : MonoBehaviour {
         if (contentInSight.Student != "")
         {
             KeyValuePair<String, String> curTag = new KeyValuePair<String, String>("Student", contentInSight.Student);
-            displayList.Add(curTag);
+			displayList.Add(curTag);
         }
         if (contentInSight.Semester != "")
         {
             KeyValuePair<String, String> curTag = new KeyValuePair<String, String>("Semester", contentInSight.Semester);
-            displayList.Add(curTag);
+			displayList.Add(curTag);
         }
         if (contentInSight.Phase != "")
         {
             KeyValuePair<String, String> curTag = new KeyValuePair<String, String>("Phase", contentInSight.Phase);
-            displayList.Add(curTag);
+			displayList.Add(curTag);
         }
         if (contentInSight.Year != "")
         {
             KeyValuePair<String, String> curTag = new KeyValuePair<String, String>("Jahr", contentInSight.Year);
-            displayList.Add(curTag);
+			displayList.Add(curTag);
         }
         if (contentInSight.Objecttype != "")
         {
             KeyValuePair<String, String> curTag = new KeyValuePair<String, String>("Objekttyp", contentInSight.Objecttype);
-            displayList.Add(curTag);
+			displayList.Add(curTag);
         }
         if (contentInSight.Titel != "")
         {
@@ -203,5 +219,37 @@ public class RuntimeTagHandler : MonoBehaviour {
         return displayList;
 
     }
+
+	private List<string> getDisplayListOther(Content contentInSight)
+	{
+		
+		List<String> displayListOther = new List<String>();
+
+		if (contentInSight.Student != "")
+		{
+			displayListOther.Add(contentInSight.Student);
+		}
+		if (contentInSight.Semester != "")
+		{
+			displayListOther.Add(contentInSight.Semester);;
+		}
+		if (contentInSight.Phase != "")
+		{
+			displayListOther.Add(contentInSight.Phase);;
+		}
+		if (contentInSight.Year != "")
+		{
+			displayListOther.Add(contentInSight.Year);
+		}
+		if (contentInSight.Objecttype != "")
+		{
+			displayListOther.Add(contentInSight.Objecttype);
+		}
+
+		
+		return displayListOther;
+		
+	}
+
 
 }
