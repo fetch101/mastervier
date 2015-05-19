@@ -57,18 +57,30 @@ public class Pickup : MonoBehaviour {
 
   
 
-    void OnGUI()
-    {
-
+	void OnGUI()
+	{
+		
 		if (!isFocusModeOn && contentInSight && !isPaused) {
-			GUI.DrawTexture (new Rect ((Screen.width - contentMarkedTexture.width * markedTextureScale) / 2, (Screen.height - contentMarkedTexture.height * markedTextureScale) / 2, contentMarkedTexture.width * markedTextureScale, contentMarkedTexture.height * markedTextureScale), contentMarkedTexture);
+			GUI.DrawTexture (new Rect ((Screen.width - contentMarkedTexture.width) / 2, (Screen.height - contentMarkedTexture.height) / 2, contentMarkedTexture.width, contentMarkedTexture.height), contentMarkedTexture);
 		} else if(!isFocusModeOn && !isPaused)
 		{
-			GUI.DrawTexture (new Rect ((Screen.width - DefaultCursor.width * markedTextureScale) / 2, (Screen.height - DefaultCursor.height * markedTextureScale) / 2,
-			                           DefaultCursor.width * markedTextureScale, DefaultCursor.height * markedTextureScale), DefaultCursor);
+			GUI.DrawTexture (new Rect ((Screen.width - DefaultCursor.width) / 2, (Screen.height - DefaultCursor.height + 8) / 2,
+			                           DefaultCursor.width, DefaultCursor.height), DefaultCursor);
 		}
-      
-    }
+		
+	}
+//	void OnGUI()
+//	{
+//		
+//		if (!isFocusModeOn && contentInSight && !isPaused) {
+//			GUI.DrawTexture (new Rect ((Screen.width - contentMarkedTexture.width * markedTextureScale) / 2, (Screen.height - contentMarkedTexture.height * markedTextureScale) / 2, contentMarkedTexture.width * markedTextureScale, contentMarkedTexture.height * markedTextureScale), contentMarkedTexture);
+//		} else if(!isFocusModeOn && !isPaused)
+//		{
+//			GUI.DrawTexture (new Rect ((Screen.width - DefaultCursor.width * markedTextureScale) / 2, (Screen.height - DefaultCursor.height * markedTextureScale) / 2,
+//			                           DefaultCursor.width * markedTextureScale, DefaultCursor.height * markedTextureScale), DefaultCursor);
+//		}
+//		
+//	}
 
 }
 

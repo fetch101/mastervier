@@ -73,9 +73,15 @@ public class PauseMenu : MonoBehaviour {
         }else{
             RuntimeTagCanvas.SetActive(false);
         }
+
+
 		if (Input.GetKeyDown(KeyCode.Escape) || Input.GetMouseButtonDown(1))
         {
-            togglePause();
+			if (focusModeOn) {
+				alligneCameraToCOntentInSight3();
+			}
+			togglePause();
+
 
 		}
 		if (Input.GetMouseButtonDown (0) && isInSight && !isPause) {
