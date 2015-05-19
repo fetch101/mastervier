@@ -12,6 +12,7 @@ public class Spectator : MonoBehaviour
 
     //initial speed
     public int speed = 60;
+	public float mouseWheel = 0;
 
     // Use this for initialization
     void Start()
@@ -47,6 +48,12 @@ public class Spectator : MonoBehaviour
 				transform.position = transform.position + Camera.main.transform.forward * -1 * speed * Time.deltaTime;
 
 			}
+			//move camera backwards
+			if (Input.GetAxis("Mouse ScrollWheel") < 0) {
+				transform.position = transform.position + Camera.main.transform.forward * -10 * speed * Time.deltaTime;
+				
+			}
+
 			//move camera to the right
 			if (Input.GetKey (KeyCode.D)) {
 				transform.position = transform.position + Camera.main.transform.right * speed * Time.deltaTime;
@@ -56,6 +63,10 @@ public class Spectator : MonoBehaviour
 			if (Input.GetKey (KeyCode.W)) {
 
 				transform.position = transform.position + Camera.main.transform.forward * speed * Time.deltaTime;
+			}
+			if (Input.GetAxis("Mouse ScrollWheel") > 0) {
+				
+				transform.position = transform.position + Camera.main.transform.forward * speed * 10 * Time.deltaTime;
 			}
 			//move camera upwards
 			if (Input.GetKey (KeyCode.E)) {
