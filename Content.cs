@@ -300,6 +300,7 @@ public class Content : MonoBehaviour {
 
 	public void spawnHighlightObject(){
 		float scale = 0.02f;
+		float textscale = 500.0f;
 
 		if (markCount > 0) {
 
@@ -307,22 +308,37 @@ public class Content : MonoBehaviour {
 				this.transform.rotation = Quaternion.Euler (0, 0, 0);
 				GameObject markCloneEven = Instantiate (mark, new Vector3 ((this.gameObject.transform.position.x + markOffsetX), this.gameObject.transform.position.y + 2 +  height, this.gameObject.transform.position.z), Quaternion.Euler (- 90, 90, 0)) as GameObject;
 				markCloneEven.transform.parent = transform;
-				markCloneEven.transform.localScale = new Vector3(scale, scale, scale);
-				markOffsetX += 5;
+				if (Objecttype == "Image"){
+					markCloneEven.transform.localScale = new Vector3(scale, scale, scale);
+				} else {
+					markCloneEven.transform.localScale = new Vector3(textscale, textscale, textscale);
+					
+				}				markOffsetX += 5;
 				markCount ++;
 			} else {
 				this.transform.rotation = Quaternion.Euler (0, 0, 0);
 				GameObject markCloneOdd = Instantiate (mark, new Vector3 ((this.gameObject.transform.position.x + markOffsetZ), this.gameObject.transform.position.y + 2 +  height , this.gameObject.transform.position.z), Quaternion.Euler (- 90, 90, 0)) as GameObject;
 				markCloneOdd.transform.parent = transform;
-				markCloneOdd.transform.localScale = new Vector3(scale, scale, scale);
-				markOffsetZ -= 5;
+				if (Objecttype == "Image"){
+					markCloneOdd.transform.localScale = new Vector3(scale, scale, scale);
+				} else {
+					markCloneOdd.transform.localScale = new Vector3(textscale, textscale, textscale);
+					
+				}				markOffsetZ -= 5;
 				markCount ++;
 					}
 		} else {
 			this.transform.rotation = Quaternion.Euler (0, 0, 0);
 			GameObject markCloneOrigin = Instantiate (mark, new Vector3 ((this.gameObject.transform.position.x), this.gameObject.transform.position.y + 2 +  height , this.gameObject.transform.position.z), Quaternion.Euler (-90, 90, 0)) as GameObject;
 			markCloneOrigin.transform.parent = transform;
-			markCloneOrigin.transform.localScale = new Vector3(scale, scale, scale);
+			if (Objecttype == "Image"){
+				markCloneOrigin.transform.localScale = new Vector3(scale, scale, scale);
+			} else {
+				markCloneOrigin.transform.localScale = new Vector3(textscale, textscale, textscale);
+
+			}
+
+//			markCloneOrigin.transform.localScale = new Vector3(scale, scale, scale);
 			markCount ++;
 
 				}

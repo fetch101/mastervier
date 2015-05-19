@@ -8,7 +8,7 @@ public class SunView : MonoBehaviour {
     List<List<Content>> semCircle = new List<List<Content>>();
     List<GameObject> lineList = new List<GameObject>();
     List<GameObject> studentNameList = new List<GameObject>();
-    List<WordCloud> wordCloudList = new List<WordCloud>();
+//    List<WordCloud> wordCloudList = new List<WordCloud>();
     public GameObject studentNamePrefab;
     public int namePositionNearFar = 10;
     public float namePositionUpDown = -60;
@@ -104,18 +104,18 @@ public class SunView : MonoBehaviour {
             GameObject.Destroy(line);
         }
         lineList.Clear();
-        Debug.Log("studenlist: " + studentNameList.Count);
+//        Debug.Log("studenlist: " + studentNameList.Count);
         foreach (GameObject studentName in studentNameList)
         {
             GameObject.Destroy(studentName);
         }
         studentNameList.Clear();
-        Debug.Log("clouds: " + wordCloudList.Count);
-        foreach (WordCloud cloud in wordCloudList)
-        {
-            cloud.destroyCloud();
-        }
-        wordCloudList.Clear();
+//        Debug.Log("clouds: " + wordCloudList.Count);
+//        foreach (WordCloud cloud in wordCloudList)
+//        {
+//            cloud.destroyCloud();
+//        }
+//        wordCloudList.Clear();
     }
 
    
