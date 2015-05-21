@@ -17,6 +17,7 @@ public class PauseTagHandler : MonoBehaviour
 	public Text TextMetaTagSliderNumber;
 	public Slider Metatagslider;
 	public Text Tooltip0;
+	public Text Tooltip1;
 
 
     // Use this for initialization
@@ -209,6 +210,8 @@ public class PauseTagHandler : MonoBehaviour
 
 	public void displayTooltip0(){
 		Tooltip0.text = "";
+		Tooltip1.text = "";
+
 	}
 	public void displayTooltip1(){
 		Tooltip0.text = 
@@ -258,6 +261,13 @@ public class PauseTagHandler : MonoBehaviour
 		Tooltip0.text = 
 			"In der Zufallsansicht werden alle" + "\n" +
 			"Objekte zufällig angeordnet.";
+	}
+
+	public void displayTooltip6(){
+		Tooltip1.text = 
+			"Dies ist die Anzahl von Objekten," + "\n" +
+			"welche ebenfalls mit diesem Tag" + "\n" +
+			"versehen sind.";
 	}
 
 }
