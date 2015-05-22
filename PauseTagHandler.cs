@@ -254,7 +254,7 @@ public class PauseTagHandler : MonoBehaviour
 	public void displayTooltip4(){
 		Tooltip0.text = 
 			"In der Studentenansicht werden alle Objekte" + "\n" +
-			"nach Studenten sortiert und angeordnet.";
+			"nach den Studenten sortiert und angeordnet.";
 	}
 
 	public void displayTooltip5(){
@@ -265,7 +265,7 @@ public class PauseTagHandler : MonoBehaviour
 
 	public void displayTooltip6(){
 		Tooltip1.text = 
-			"Dies ist die Anzahl von Objekten," + "\n" +
+			"Dies ist die Anzahl der Objekte," + "\n" +
 			"welche ebenfalls mit diesem Tag" + "\n" +
 			"versehen sind.";
 	}

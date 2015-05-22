@@ -29,7 +29,7 @@ public class FilteredView : MonoBehaviour {
     {
         foreach (Content content in notFilteredContents)
         {
-            content.moveTo(new Vector3(0, 150, 0));
+            content.moveTo(new Vector3(0, 250, 0));
         }
     }
 

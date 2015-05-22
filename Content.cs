@@ -4,7 +4,7 @@ using System.Collections.Generic;
 public class Content : MonoBehaviour {
 	public Vector3 finalDestination;
 	public Quaternion currRotation = Quaternion.Euler(new Vector3(0, 0, 0));
-//	private Vector3 currRotation;
+	private Vector3 currScale;
 
 	public int markCount = 0;
 	public int markOffsetX = 5;
@@ -304,6 +304,10 @@ public class Content : MonoBehaviour {
 		if (this.transform.rotation != Quaternion.Euler (0, 0, 0)) {
 			currRotation = this.transform.rotation;
 		}
+//		if (this.transform.localScale != new Vector3 (1, 1, 1)) {
+//			currScale = this.transform.localScale;
+//		}
+
 		float scale = 0.02f;
 		float textscale = 500.0f;
 
@@ -311,6 +315,7 @@ public class Content : MonoBehaviour {
 
 			if (markCount % 2 == 0) {
 				this.transform.rotation = Quaternion.Euler (0, 0, 0);
+//				this.transform.localScale = new Vector3 (1, 1, 1);
 				GameObject markCloneEven = Instantiate (mark, new Vector3 ((this.gameObject.transform.position.x + markOffsetX), this.gameObject.transform.position.y + 2 +  height, this.gameObject.transform.position.z), Quaternion.Euler (- 90, 90, 0)) as GameObject;
 				markCloneEven.transform.parent = transform;
 				if (Objecttype == "Image"){
@@ -321,8 +326,11 @@ public class Content : MonoBehaviour {
 				}				markOffsetX += 5;
 				markCount ++;
 				this.transform.rotation = currRotation;
+//				this.transform.localScale = currScale;
 			} else {
 				this.transform.rotation = Quaternion.Euler (0, 0, 0);
+//				this.transform.localScale = new Vector3 (1, 1, 1);
+
 				GameObject markCloneOdd = Instantiate (mark, new Vector3 ((this.gameObject.transform.position.x + markOffsetZ), this.gameObject.transform.position.y + 2 +  height , this.gameObject.transform.position.z), Quaternion.Euler (- 90, 90, 0)) as GameObject;
 				markCloneOdd.transform.parent = transform;
 				if (Objecttype == "Image"){
@@ -333,10 +341,12 @@ public class Content : MonoBehaviour {
 				}				markOffsetZ -= 5;
 				markCount ++;
 				this.transform.rotation = currRotation;
+//				this.transform.localScale = currScale;
 
 					}
 		} else {
 			this.transform.rotation = Quaternion.Euler (0, 0, 0);
+//			this.transform.localScale = new Vector3 (1, 1, 1);
 			GameObject markCloneOrigin = Instantiate (mark, new Vector3 ((this.gameObject.transform.position.x), this.gameObject.transform.position.y + 2 +  height , this.gameObject.transform.position.z), Quaternion.Euler (-90, 90, 0)) as GameObject;
 			markCloneOrigin.transform.parent = transform;
 			if (Objecttype == "Image"){
@@ -349,6 +359,8 @@ public class Content : MonoBehaviour {
 //			markCloneOrigin.transform.localScale = new Vector3(scale, scale, scale);
 			markCount ++;
 			this.transform.rotation = currRotation;
+//			this.transform.localScale = currScale;
+
 				}
 		}
 }
