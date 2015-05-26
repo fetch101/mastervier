@@ -60,9 +60,9 @@ public class Pickup : MonoBehaviour {
 	void OnGUI()
 	{
 		
-		if (!isFocusModeOn && contentInSight && !isPaused) {
+		if (!isFocusModeOn && contentInSight && !isPaused && Spectator.instance.screenSaverIsActive == false) {
 			GUI.DrawTexture (new Rect ((Screen.width - contentMarkedTexture.width) / 2, (Screen.height - contentMarkedTexture.height) / 2, contentMarkedTexture.width, contentMarkedTexture.height), contentMarkedTexture);
-		} else if(!isFocusModeOn && !isPaused)
+		} else if(!isFocusModeOn && !isPaused && Spectator.instance.screenSaverIsActive == false)
 		{
 			GUI.DrawTexture (new Rect ((Screen.width - DefaultCursor.width) / 2, (Screen.height - DefaultCursor.height + 8) / 2,
 			                           DefaultCursor.width, DefaultCursor.height), DefaultCursor);

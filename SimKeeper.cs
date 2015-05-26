@@ -46,7 +46,16 @@ public class SimKeeper : MonoBehaviour {
         spawnLines();
         ViewKeeper.instance.gameObject.GetComponent<SunView>().alignContents(getAllContents());
         ViewKeeper.instance.sunIsActive = true;
+//		errorLog ();
     }
+
+	public void errorLog(){
+		foreach (Content content in contentList) {
+			if (content.Phase != "P1" || content.Phase != "P2" || content.Phase != "P3" || content.Phase != "P4" || content.Phase != "P5" ){
+				Debug.Log(content.Student + "  " + content.Phase + "   " + content.Objecttype);
+			}
+		}
+	}
 
     private void buildTagDic()
     {

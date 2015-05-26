@@ -41,69 +41,77 @@ public class PauseMenu : MonoBehaviour {
     // Update is called once per frame
     void Update()
     {
+		if (Input.anyKey || Input.GetAxis ("Mouse ScrollWheel") != 0 || Input.GetAxis ("Mouse X") != 0 || Input.GetAxis ("Mouse Y") != 0) {
+			Spectator.instance.current = 0;
+			Spectator.instance.ScreensaverCanvas.SetActive (false);
+			Spectator.instance.ScreensaverCanvas1.SetActive (false);
+			Spectator.instance.ScreensaverCanvas2.SetActive (false);
+			Spectator.instance.ScreensaverCanvas3.SetActive (false);
+			Spectator.instance.ScreensaverCanvas4.SetActive (false);
+			Spectator.instance.ScreensaverCanvas5.SetActive(false);
+
+		}
 	
-//		if (Input.GetKeyDown (KeyCode.Z)) {
-//			Application.CaptureScreenshot("/Users/itz/Desktop/Screenshots4/Screenshot4_1.png", 5);		
-//		}
+			if (Input.GetKeyDown (KeyCode.Z)) {
+				Application.CaptureScreenshot ("/Users/itz/Desktop/Screenshots4/Screenshot4_1.png", 10);		
+			}
 
 
-        oldContentInSight = contentInSight;
-		if(rayCasting){
-			isInSight = setContentInSight();
-		}
 
-        if (!contentInSight == oldContentInSight && clickCount != 2)
-        {
-            PauseMenuCanvas.GetComponent<PauseTagHandler>().setDisplayContent(contentInSight);
-            RuntimeTagCanvas.GetComponent<RuntimeTagHandler>().setDisplayContent(contentInSight);
+			oldContentInSight = contentInSight;
+			if (rayCasting) {
+				isInSight = setContentInSight ();
+			}
+
+			if (!contentInSight == oldContentInSight && clickCount != 2) {
+				PauseMenuCanvas.GetComponent<PauseTagHandler> ().setDisplayContent (contentInSight);
+				RuntimeTagCanvas.GetComponent<RuntimeTagHandler> ().setDisplayContent (contentInSight);
 //			currContentInSight.destroyHighlightPlane();
-        }
-
-        if (isInSight)
-        {
-            if (!isPause && clickCount != 2) { 
-                RuntimeTagCanvas.SetActive(true);
-            }
-			if (Input.GetKeyDown(KeyCode.C)|| Input.GetMouseButtonDown(3))
-            {
-                contentInSight.moveTo(contentInSight.transform.position);
-                ViewKeeper.instance.circleView(contentInSight);
-            }
-
-        }else{
-            RuntimeTagCanvas.SetActive(false);
-        }
-
-
-		if (Input.GetKeyDown(KeyCode.Escape) || Input.GetMouseButtonDown(1))
-        {
-			if (focusModeOn) {
-				alligneCameraToCOntentInSight3();
-			}
-			togglePause();
-
-
-		}
-		if (Input.GetMouseButtonDown (0) && isInSight && !isPause) {
-			clickCount++;
-			currContentInSight = contentInSight;
-			rayCasting = false;
-
-
-			if (clickCount == 1) {
-				currPosition = mainCamera.transform.position;
-				alligneCameraToCOntentInSight1 ();
 			}
 
-			if (clickCount == 2) {
-				alligneCameraToCOntentInSight2 ();
+			if (isInSight) {
+				if (!isPause && clickCount != 2) { 
+					RuntimeTagCanvas.SetActive (true);
+				}
+				if (Input.GetKeyDown (KeyCode.C) || Input.GetMouseButtonDown (3)) {
+					contentInSight.moveTo (contentInSight.transform.position);
+					ViewKeeper.instance.circleView (contentInSight);
+				}
+
+			} else {
+				RuntimeTagCanvas.SetActive (false);
 			}
 
-			if (clickCount == 3) {
-				alligneCameraToCOntentInSight3 ();
+
+			if (Input.GetKeyDown (KeyCode.Escape) || Input.GetMouseButtonDown (1)) {
+				if (focusModeOn) {
+					alligneCameraToCOntentInSight3 ();
+				}
+				togglePause ();
+
+
 			}
-		}
-    }
+			if (Input.GetMouseButtonDown (0) && isInSight && !isPause) {
+				clickCount++;
+				currContentInSight = contentInSight;
+				rayCasting = false;
+
+
+				if (clickCount == 1) {
+					currPosition = mainCamera.transform.position;
+					alligneCameraToCOntentInSight1 ();
+				}
+
+				if (clickCount == 2) {
+					alligneCameraToCOntentInSight2 ();
+				}
+
+				if (clickCount == 3) {
+					alligneCameraToCOntentInSight3 ();
+				}
+			}
+
+	}
 
 
 	public bool setContentInSight(){
