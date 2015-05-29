@@ -27,18 +27,23 @@ public class Pickup : MonoBehaviour {
 
         RaycastHit hitcheck;
 
-		if (Input.GetKeyDown("g")|| Input.GetMouseButtonDown(4) && contentIsGrabbed)
+		if (Input.GetKeyDown(KeyCode.G)&& contentIsGrabbed)
         {
             grabbedContent.gameObject.transform.parent = null;
             contentIsGrabbed = false;
         }
+		if (Input.GetMouseButtonDown(4) && contentIsGrabbed)
+		{
+			grabbedContent.gameObject.transform.parent = null;
+			contentIsGrabbed = false;
+		}
 
 
         if (Physics.Raycast(raycheck, out hitcheck, 80) && hitcheck.collider.gameObject.GetComponent<Content>() != null) 
         {
             contentInSight = true;
 
-			if (Input.GetKeyDown("g")|| Input.GetMouseButtonDown(4) && !contentIsGrabbed && !hitcheck.collider.gameObject.GetComponent<Content>().isMoving && !PauseMenu.instance.focusModeOn)
+			if (Input.GetKeyDown(KeyCode.G) || Input.GetMouseButtonDown(4) && !contentIsGrabbed && !hitcheck.collider.gameObject.GetComponent<Content>().isMoving && !PauseMenu.instance.focusModeOn)
             {
                 grabbedContent = hitcheck.collider.gameObject.GetComponent<Content>();
                 Vector3 p = Camera.main.ScreenToWorldPoint(new Vector3(Camera.main.pixelWidth/2, Camera.main.pixelHeight/2, 100));
@@ -47,7 +52,19 @@ public class Pickup : MonoBehaviour {
                 contentIsGrabbed = true;
             }
             
-        }else{
+        }
+//		if (Input.GetMouseButtonDown(4) && !contentIsGrabbed && !hitcheck.collider.gameObject.GetComponent<Content>().isMoving && !PauseMenu.instance.focusModeOn)
+//		{
+//			grabbedContent = hitcheck.collider.gameObject.GetComponent<Content>();
+//			Vector3 p = Camera.main.ScreenToWorldPoint(new Vector3(Camera.main.pixelWidth/2, Camera.main.pixelHeight/2, 100));
+//			grabbedContent.gameObject.transform.position = p;
+//			grabbedContent.gameObject.transform.parent = this.transform;
+//			contentIsGrabbed = true;
+//		}
+		
+	
+
+		else{
 
             contentInSight = false;
         }
@@ -60,9 +77,9 @@ public class Pickup : MonoBehaviour {
 	void OnGUI()
 	{
 		
-		if (!isFocusModeOn && contentInSight && !isPaused && Spectator.instance.screenSaverIsActive == false) {
+		if (!isFocusModeOn && contentInSight && !isPaused && !Spectator.instance.screenSaverIsActive) {
 			GUI.DrawTexture (new Rect ((Screen.width - contentMarkedTexture.width) / 2, (Screen.height - contentMarkedTexture.height) / 2, contentMarkedTexture.width, contentMarkedTexture.height), contentMarkedTexture);
-		} else if(!isFocusModeOn && !isPaused && Spectator.instance.screenSaverIsActive == false)
+		} else if(!isFocusModeOn && !isPaused && !Spectator.instance.screenSaverIsActive)
 		{
 			GUI.DrawTexture (new Rect ((Screen.width - DefaultCursor.width) / 2, (Screen.height - DefaultCursor.height + 8) / 2,
 			                           DefaultCursor.width, DefaultCursor.height), DefaultCursor);

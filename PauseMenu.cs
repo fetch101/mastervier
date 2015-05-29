@@ -102,7 +102,7 @@ public class PauseMenu : MonoBehaviour {
 			}
 
 			if (isInSight) {
-				if (!isPause && clickCount != 2 && Spectator.instance.screenSaverIsActive == false) { 
+				if (!isPause && clickCount != 2 && !Spectator.instance.screenSaverIsActive) { 
 					RuntimeTagCanvas.SetActive (true);
 				}
 				if (Input.GetKeyDown (KeyCode.C) || Input.GetMouseButtonDown (3)) {
