@@ -24,8 +24,12 @@ public class Spectator : MonoBehaviour
 	public Sprite Image1;
 	public Image myPanel;
 	private float delay = 300;
-	private float offset = 25;
+	private float offset = 10;
 	public bool loopEnd = false;
+	public bool screensaverReachedLoopEnd = false;
+	public bool screensaverReachedLoopEnd2 = false;
+
+
 
 	public GameObject ScreensaverCanvas;
 	public GameObject ScreensaverCanvas1;
@@ -39,6 +43,7 @@ public class Spectator : MonoBehaviour
 	public GameObject ScreensaverCanvas9;
 	public GameObject ScreensaverCanvas10;
 	public GameObject ScreensaverCanvas11;
+	public GameObject ScreensaverCanvasBackground;
 
 
 
@@ -124,8 +129,8 @@ public class Spectator : MonoBehaviour
 
 			if (Input.anyKey || Input.GetAxis ("Mouse ScrollWheel") != 0 ||  Input.GetAxis("Mouse X")!= 0 ||  Input.GetAxis("Mouse Y")!=0)
 			{
-				timer = 0;
-				current = 0;
+			timer = 0;
+			current = 0;
 			ScreensaverCanvas.SetActive(false);
 			ScreensaverCanvas1.SetActive(false);
 			ScreensaverCanvas2.SetActive(false);
@@ -138,7 +143,10 @@ public class Spectator : MonoBehaviour
 			ScreensaverCanvas9.SetActive(false);
 			ScreensaverCanvas10.SetActive(false);
 			ScreensaverCanvas11.SetActive(false);
+			ScreensaverCanvasBackground.SetActive(false);
 			screenSaverIsActive = false;
+			screensaverReachedLoopEnd = false;
+			screensaverReachedLoopEnd2 = false;
 
 			}
 
@@ -153,16 +161,33 @@ public class Spectator : MonoBehaviour
 		if (loopEnd) {
 			current = delay;
 			loopEnd = false;
+			screensaverReachedLoopEnd = true;
 		}
 
-		if ( current == delay){
+		if (current == delay) {
 			screenSaverIsActive = true;
-			ScreensaverCanvas5.SetActive(true);
-			ScreensaverCanvas.SetActive (true);
-			ScreensaverCanvas.GetComponent<Image>().canvasRenderer.SetAlpha(0.0f);
-			ScreensaverCanvas.GetComponent<Image>().CrossFadeAlpha(1, 2, false);
-			ScreensaverCanvas5.GetComponent<Image>().canvasRenderer.SetAlpha(0.0f);
-			ScreensaverCanvas5.GetComponent<Image>().CrossFadeAlpha(1, 2, false);
+			ScreensaverCanvasBackground.SetActive (true);
+
+			if(screensaverReachedLoopEnd == true){
+
+				ScreensaverCanvas.GetComponent<Image>().canvasRenderer.SetAlpha(0.0f);
+				ScreensaverCanvas.GetComponent<Image> ().CrossFadeAlpha (1, 2, false);
+				ScreensaverCanvas11.GetComponent<Image>().CrossFadeAlpha(0, 2, false);
+				screensaverReachedLoopEnd = false;
+				screensaverReachedLoopEnd2 = true;
+
+			}else{
+
+				ScreensaverCanvas.SetActive (true);
+				ScreensaverCanvas.GetComponent<Image>().canvasRenderer.SetAlpha(0.0f);
+				ScreensaverCanvas.GetComponent<Image>().CrossFadeAlpha(1, 2, false);
+				ScreensaverCanvasBackground.GetComponent<Image>().canvasRenderer.SetAlpha(0.0f);
+				ScreensaverCanvasBackground.GetComponent<Image>().CrossFadeAlpha(1, 2, false);}
+		}
+
+		if(current == delay + 5 || screensaverReachedLoopEnd2 == true){
+			ScreensaverCanvas11.SetActive (false);
+			screensaverReachedLoopEnd2 = false;
 		}
 
 		if(current == delay + offset){
@@ -207,13 +232,81 @@ public class Spectator : MonoBehaviour
 		if(current == delay + offset + offset + offset + offset + 5){
 			ScreensaverCanvas3.SetActive (false);
 		}
+
 		if(current == delay + offset + offset + offset + offset + offset){
 			ScreensaverCanvas4.GetComponent<Image>().CrossFadeAlpha(0, 2, false);;
-			loopEnd = true;
+			ScreensaverCanvas5.SetActive (true);
+			ScreensaverCanvas5.GetComponent<Image>().canvasRenderer.SetAlpha(0.0f);
+			ScreensaverCanvas5.GetComponent<Image>().CrossFadeAlpha(1, 2, false);
 		}
-		
-		if(current == delay + 5){
+		if(current == delay + offset + offset + offset + offset + offset + 5){
 			ScreensaverCanvas4.SetActive (false);
 		}
+
+		if(current == delay + offset + offset + offset + offset + offset + offset){
+			ScreensaverCanvas5.GetComponent<Image>().CrossFadeAlpha(0, 2, false);;
+			ScreensaverCanvas6.SetActive (true);
+			ScreensaverCanvas6.GetComponent<Image>().canvasRenderer.SetAlpha(0.0f);
+			ScreensaverCanvas6.GetComponent<Image>().CrossFadeAlpha(1, 2, false);
+		}
+		if(current == delay + offset + offset + offset + offset + offset + offset + 5){
+			ScreensaverCanvas5.SetActive (false);
+		}
+
+		if(current == delay + offset + offset + offset + offset + offset + offset + offset){
+			ScreensaverCanvas6.GetComponent<Image>().CrossFadeAlpha(0, 2, false);;
+			ScreensaverCanvas7.SetActive (true);
+			ScreensaverCanvas7.GetComponent<Image>().canvasRenderer.SetAlpha(0.0f);
+			ScreensaverCanvas7.GetComponent<Image>().CrossFadeAlpha(1, 2, false);
+		}
+		if(current == delay + offset + offset + offset + offset + offset  + offset + offset+ 5){
+			ScreensaverCanvas6.SetActive (false);
+		}
+
+		if(current == delay + offset + offset + offset + offset + offset + offset + offset + offset){
+			ScreensaverCanvas7.GetComponent<Image>().CrossFadeAlpha(0, 2, false);;
+			ScreensaverCanvas8.SetActive (true);
+			ScreensaverCanvas8.GetComponent<Image>().canvasRenderer.SetAlpha(0.0f);
+			ScreensaverCanvas8.GetComponent<Image>().CrossFadeAlpha(1, 2, false);
+		}
+		if(current == delay + offset + offset + offset + offset + offset + offset + offset + offset + 5){
+			ScreensaverCanvas7.SetActive (false);
+		}
+
+		if(current == delay + offset + offset + offset + offset + offset + offset + offset + offset + offset){
+			ScreensaverCanvas8.GetComponent<Image>().CrossFadeAlpha(0, 2, false);;
+			ScreensaverCanvas9.SetActive (true);
+			ScreensaverCanvas9.GetComponent<Image>().canvasRenderer.SetAlpha(0.0f);
+			ScreensaverCanvas9.GetComponent<Image>().CrossFadeAlpha(1, 2, false);
+		}
+		if(current == delay + offset + offset + offset + offset + offset  + offset + offset + offset + offset+ 5){
+			ScreensaverCanvas8.SetActive (false);
+		}
+
+		if(current == delay + offset + offset + offset + offset + offset + offset + offset + offset + offset + offset){
+			ScreensaverCanvas9.GetComponent<Image>().CrossFadeAlpha(0, 2, false);;
+			ScreensaverCanvas10.SetActive (true);
+			ScreensaverCanvas10.GetComponent<Image>().canvasRenderer.SetAlpha(0.0f);
+			ScreensaverCanvas10.GetComponent<Image>().CrossFadeAlpha(1, 2, false);
+		}
+		if(current == delay + offset + offset + offset + offset + offset  + offset + offset + offset + offset + offset+ 5){
+			ScreensaverCanvas9.SetActive (false);
+		}
+
+		if(current == delay + offset + offset + offset + offset + offset + offset + offset + offset + offset + offset + offset){
+			ScreensaverCanvas10.GetComponent<Image>().CrossFadeAlpha(0, 2, false);;
+			ScreensaverCanvas11.SetActive (true);
+			ScreensaverCanvas11.GetComponent<Image>().canvasRenderer.SetAlpha(0.0f);
+			ScreensaverCanvas11.GetComponent<Image>().CrossFadeAlpha(1, 2, false);
+		}
+		if(current == delay + offset + offset + offset + offset + offset  + offset + offset + offset + offset + offset + offset+ 5){
+			ScreensaverCanvas10.SetActive (false);
+		}
+	
+		if(current == delay + offset + offset + offset + offset + offset  + offset + offset + offset + offset + offset + offset + offset){
+			loopEnd = true;
+
+		}
 	}
+
 }
