@@ -181,10 +181,10 @@ public class PauseMenu : MonoBehaviour {
     }
 
     private void setUnPause()
-    {
+	{
+		Cursor.lockState = CursorLockMode.Locked;
         MouseLook.instance.enabled = true;
         Spectator.instance.enabled = true;
-        Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
 		currentPauseMenu = 0;
 
