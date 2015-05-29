@@ -16,12 +16,12 @@ public class DisplayAllTags : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
 
-        if (i == 100)
-        {
-//            tagDic = SimKeeper.instance.getTagDic();
-//            printTags();
-        }
-        i++;
+//        if (i == 100)
+//        {
+////            tagDic = SimKeeper.instance.getTagDic();
+////            printTags();
+//        }
+//        i++;
 	}
 
     private void printTags()

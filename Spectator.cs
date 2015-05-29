@@ -33,6 +33,12 @@ public class Spectator : MonoBehaviour
 	public GameObject ScreensaverCanvas3;
 	public GameObject ScreensaverCanvas4;
 	public GameObject ScreensaverCanvas5;
+	public GameObject ScreensaverCanvas6;
+	public GameObject ScreensaverCanvas7;
+	public GameObject ScreensaverCanvas8;
+	public GameObject ScreensaverCanvas9;
+	public GameObject ScreensaverCanvas10;
+	public GameObject ScreensaverCanvas11;
 
 
 
@@ -126,6 +132,12 @@ public class Spectator : MonoBehaviour
 			ScreensaverCanvas3.SetActive(false);
 			ScreensaverCanvas4.SetActive(false);
 			ScreensaverCanvas5.SetActive(false);
+			ScreensaverCanvas6.SetActive(false);
+			ScreensaverCanvas7.SetActive(false);
+			ScreensaverCanvas8.SetActive(false);
+			ScreensaverCanvas9.SetActive(false);
+			ScreensaverCanvas10.SetActive(false);
+			ScreensaverCanvas11.SetActive(false);
 			screenSaverIsActive = false;
 
 			}

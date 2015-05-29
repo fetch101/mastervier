@@ -49,12 +49,18 @@ public class PauseMenu : MonoBehaviour {
 			Spectator.instance.ScreensaverCanvas3.SetActive (false);
 			Spectator.instance.ScreensaverCanvas4.SetActive (false);
 			Spectator.instance.ScreensaverCanvas5.SetActive(false);
+			Spectator.instance.ScreensaverCanvas6.SetActive(false);
+			Spectator.instance.ScreensaverCanvas7.SetActive(false);
+			Spectator.instance.ScreensaverCanvas8.SetActive(false);
+			Spectator.instance.ScreensaverCanvas9.SetActive(false);
+			Spectator.instance.ScreensaverCanvas10.SetActive(false);
+			Spectator.instance.ScreensaverCanvas11.SetActive(false);
 
 		}
 	
-			if (Input.GetKeyDown (KeyCode.Z)) {
-				Application.CaptureScreenshot ("/Users/itz/Desktop/Screenshots4/Screenshot4_1.png", 10);		
-			}
+//			if (Input.GetKeyDown (KeyCode.Z)) {
+//				Application.CaptureScreenshot ("/Users/itz/Desktop/Screenshots4/Screenshot4_.png", 10);		
+//			}
 
 
 
