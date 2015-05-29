@@ -28,6 +28,7 @@ public class PauseMenu : MonoBehaviour {
 	public float timerPauseMenu = 0;
 	public int currentPauseMenu = 0;
 	public bool iWillRaycast = true;
+	public bool setPauseWithButton = false;
 
 	private float delayPauseMenu = 5;
 
@@ -293,6 +294,12 @@ public class PauseMenu : MonoBehaviour {
 	public void quit(){
 		Application.Quit ();
 	}
+
+	public void togglePauseWithButton(){
+
+			togglePause();
+		}
+
 }
 
 

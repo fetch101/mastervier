@@ -24,7 +24,7 @@ public class Spectator : MonoBehaviour
 	public Sprite Image1;
 	public Image myPanel;
 	public float delay = 5;
-	private float offset = 25;
+	private float offset = 6;
 	public bool loopEnd = false;
 	public bool screensaverReachedLoopEnd = false;
 	public bool screensaverReachedLoopEnd2 = false;
@@ -186,25 +186,28 @@ public class Spectator : MonoBehaviour
 
 			ScreensaverCanvasBackground.SetActive (true);
 
-			if(screensaverReachedLoopEnd == true){
+			if (screensaverReachedLoopEnd == true) {
 				ScreensaverCanvas.SetActive (true);
-				ScreensaverCanvas.GetComponent<Image>().canvasRenderer.SetAlpha(0.0f);
+				ScreensaverCanvas.GetComponent<Image> ().canvasRenderer.SetAlpha (0.0f);
 				ScreensaverCanvas.GetComponent<Image> ().CrossFadeAlpha (1, 2, false);
-				ScreensaverCanvas10.GetComponent<Image>().CrossFadeAlpha(0, 2, false);
+				ScreensaverCanvas10.GetComponent<Image> ().CrossFadeAlpha (0, 2, false);
 				screensaverReachedLoopEnd = false;
 				screensaverReachedLoopEnd2 = true;
 
-			}else{
+
+			} else {
 //				PauseMenu.instance.rayCasting = false;
-				PauseMenu.instance.RuntimeTagCanvas.SetActive(false);
+				PauseMenu.instance.RuntimeTagCanvas.SetActive (false);
 				ScreensaverCanvas.SetActive (true);
-				ScreensaverCanvasBackground.GetComponent<Image>().canvasRenderer.SetAlpha(0.0f);
-				ScreensaverCanvasBackground.GetComponent<Image>().CrossFadeAlpha(1, 2, false);
-				ScreensaverCanvas.GetComponent<Image>().canvasRenderer.SetAlpha(0.0f);
-				ScreensaverCanvas.GetComponent<Image>().CrossFadeAlpha(1, 2, false);
+				ScreensaverCanvasBackground.GetComponent<Image> ().canvasRenderer.SetAlpha (0.0f);
+				ScreensaverCanvasBackground.GetComponent<Image> ().CrossFadeAlpha (1, 2, false);
+				ScreensaverCanvas.GetComponent<Image> ().canvasRenderer.SetAlpha (0.0f);
+				ScreensaverCanvas.GetComponent<Image> ().CrossFadeAlpha (1, 2, false);
 
 				screenSaverIsActive = true;
 
+
+			}
 		}
 
 		if(current == (delay + 5) && screensaverReachedLoopEnd2 == true){
@@ -217,10 +220,13 @@ public class Spectator : MonoBehaviour
 			ScreensaverCanvas1.SetActive (true);
 			ScreensaverCanvas1.GetComponent<Image>().canvasRenderer.SetAlpha(0.0f);
 			ScreensaverCanvas1.GetComponent<Image>().CrossFadeAlpha(1, 2, false);
+//				Debug.Log("I changed from 0 to 1");
 		}
+
 
 		if(current == delay + (1 * offset) + 5){
 			ScreensaverCanvas.SetActive (false);
+
 
 		}
 
@@ -229,6 +235,7 @@ public class Spectator : MonoBehaviour
 			ScreensaverCanvas2.SetActive (true);
 			ScreensaverCanvas2.GetComponent<Image>().canvasRenderer.SetAlpha(0.0f);
 			ScreensaverCanvas2.GetComponent<Image>().CrossFadeAlpha(1, 2, false);
+//				Debug.Log("I changed from 1 to 2");
 		}
 		
 		if(current == delay + (2 * offset) + 5){
@@ -342,5 +349,4 @@ public class Spectator : MonoBehaviour
 		}
 	}
 
-}
 }
