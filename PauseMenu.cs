@@ -54,12 +54,13 @@ public class PauseMenu : MonoBehaviour {
 			Spectator.instance.ScreensaverCanvas8.SetActive(false);
 			Spectator.instance.ScreensaverCanvas9.SetActive(false);
 			Spectator.instance.ScreensaverCanvas10.SetActive(false);
-			Spectator.instance.ScreensaverCanvas11.SetActive(false);
+//			Spectator.instance.ScreensaverCanvas11.SetActive(false);
 			Spectator.instance.ScreensaverCanvasBackground.SetActive(false);
 			Spectator.instance.screenSaverIsActive = false;
 			Spectator.instance.screensaverReachedLoopEnd = false;
 			Spectator.instance.screensaverReachedLoopEnd2 = false;
 			Spectator.instance.timer = 0;
+
 
 		}
 	
