@@ -11,10 +11,12 @@ public class RuntimeTagHandler : MonoBehaviour {
     public GameObject RTTagPrefabOther;
     private List<GameObject> runtimeTagList = new List<GameObject>();
 	private List<string> otherList  = new List<string>();
+	public static RuntimeTagHandler instance;
 
 
 	// Use this for initialization
 	void Start () {
+		instance = this;
 	
 	}
 	

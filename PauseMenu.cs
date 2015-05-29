@@ -12,7 +12,7 @@ public class PauseMenu : MonoBehaviour {
 	private bool wasMoving = false;
 	public bool isInSight = false;
 
-	bool rayCasting = true;
+	public bool rayCasting = true;
 	Content currContentInSight;
 	Content contentInSight;
     Content oldContentInSight;
@@ -25,6 +25,11 @@ public class PauseMenu : MonoBehaviour {
 	public GameObject mainCamera;
 	public GameObject target;
 	public bool focusModeOn = false;
+	public float timerPauseMenu = 0;
+	public int currentPauseMenu = 0;
+	public bool iWillRaycast = true;
+
+	private float delayPauseMenu = 5;
 
     // Use this for initialization
     void Start()
@@ -41,7 +46,7 @@ public class PauseMenu : MonoBehaviour {
     // Update is called once per frame
     void Update()
     {
-		if (Input.anyKey || Input.GetAxis ("Mouse ScrollWheel") != 0 || Input.GetAxis ("Mouse X") != 0 || Input.GetAxis ("Mouse Y") != 0) {
+		if (Input.anyKey || Input.GetAxis ("Mouse ScrollWheel") != 0 || Input.GetAxis ("Mouse X") != 0 || Input.GetAxis ("Mouse Y") != 0){
 			Spectator.instance.current = 0;
 			Spectator.instance.ScreensaverCanvas.SetActive (false);
 			Spectator.instance.ScreensaverCanvas1.SetActive (false);
@@ -59,10 +64,25 @@ public class PauseMenu : MonoBehaviour {
 			Spectator.instance.screenSaverIsActive = false;
 			Spectator.instance.screensaverReachedLoopEnd = false;
 			Spectator.instance.screensaverReachedLoopEnd2 = false;
-			Spectator.instance.timer = 0;
+			currentPauseMenu = 0;
+			timerPauseMenu = 0;
 
 
 		}
+		if (isPause) {
+			timerPauseMenu += Time.deltaTime;
+		}
+		if(timerPauseMenu > 1.0f)
+		{
+			currentPauseMenu ++;
+			timerPauseMenu = 0;
+		}
+
+		if(currentPauseMenu == delayPauseMenu){
+			togglePause();
+		}
+
+	
 	
 //			if (Input.GetKeyDown (KeyCode.Z)) {
 //				Application.CaptureScreenshot ("/Users/itz/Desktop/Screenshots4/Screenshot4_.png", 10);		
@@ -78,11 +98,10 @@ public class PauseMenu : MonoBehaviour {
 			if (!contentInSight == oldContentInSight && clickCount != 2) {
 				PauseMenuCanvas.GetComponent<PauseTagHandler> ().setDisplayContent (contentInSight);
 				RuntimeTagCanvas.GetComponent<RuntimeTagHandler> ().setDisplayContent (contentInSight);
-//			currContentInSight.destroyHighlightPlane();
 			}
 
 			if (isInSight) {
-				if (!isPause && clickCount != 2) { 
+				if (!isPause && clickCount != 2 && Spectator.instance.screenSaverIsActive == false) { 
 					RuntimeTagCanvas.SetActive (true);
 				}
 				if (Input.GetKeyDown (KeyCode.C) || Input.GetMouseButtonDown (3)) {
@@ -127,7 +146,10 @@ public class PauseMenu : MonoBehaviour {
 
 
 	public bool setContentInSight(){
-		
+
+//		if (iWillRaycast == false) {
+//			return false;
+//		}
 		Ray raycheck = Camera.main.ViewportPointToRay (new Vector3 (0.5f, 0.5f, 0f));
 
 		RaycastHit hitcheck;
@@ -138,10 +160,11 @@ public class PauseMenu : MonoBehaviour {
 //			contentInSight.addHighlightPlane();
 			return true;
 
-		}else{
+			}else{
             contentInSight = null;
 			return false;	
 		}
+		
 	}
 
     void togglePause()
@@ -162,6 +185,8 @@ public class PauseMenu : MonoBehaviour {
         Spectator.instance.enabled = true;
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
+		currentPauseMenu = 0;
+
         if (isInSight && clickCount != 2)
         {
             RuntimeTagCanvas.SetActive (true);
@@ -174,6 +199,7 @@ public class PauseMenu : MonoBehaviour {
 
     private void setPause()
     {
+		currentPauseMenu = 0;
         MouseLook.instance.enabled = false;
         Spectator.instance.enabled = false;
         RuntimeTagCanvas.SetActive(false);

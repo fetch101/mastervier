@@ -15,7 +15,7 @@ public class Spectator : MonoBehaviour
     //initial speed
     public int speed = 60;
 	public float mouseWheel = 0;
-	public float timer = 3.0f;
+	public float timer = 0.0f;
 //	public GameObject ScreensaverCanvas;
 	public bool screenSaverIsActive = false;
 	public float newTimer = 0.0f;
@@ -23,7 +23,7 @@ public class Spectator : MonoBehaviour
 	public float maximum = 1.0f;
 	public Sprite Image1;
 	public Image myPanel;
-	private float delay = 5;
+	public float delay = 5;
 	private float offset = 25;
 	public bool loopEnd = false;
 	public bool screensaverReachedLoopEnd = false;
@@ -44,6 +44,12 @@ public class Spectator : MonoBehaviour
 	public GameObject ScreensaverCanvas10;
 //	public GameObject ScreensaverCanvas11;
 	public GameObject ScreensaverCanvasBackground;
+	public bool hadSameLines;
+	public bool hadDifferentLines;
+	public float oldThreshold;
+	public float oldTagweight;
+	public float oldMetatagweight;
+
 
 
 
@@ -131,22 +137,34 @@ public class Spectator : MonoBehaviour
 			{
 			timer = 0;
 			current = 0;
-			ScreensaverCanvas.SetActive(false);
-			ScreensaverCanvas1.SetActive(false);
-			ScreensaverCanvas2.SetActive(false);
-			ScreensaverCanvas3.SetActive(false);
-			ScreensaverCanvas4.SetActive(false);
-			ScreensaverCanvas5.SetActive(false);
-			ScreensaverCanvas6.SetActive(false);
-			ScreensaverCanvas7.SetActive(false);
-			ScreensaverCanvas8.SetActive(false);
-			ScreensaverCanvas9.SetActive(false);
-			ScreensaverCanvas10.SetActive(false);
-//			ScreensaverCanvas11.SetActive(false);
-			ScreensaverCanvasBackground.SetActive(false);
-			screenSaverIsActive = false;
-			screensaverReachedLoopEnd = false;
-			screensaverReachedLoopEnd2 = false;
+
+			if(screenSaverIsActive == true){
+				ScreensaverCanvas.SetActive(false);
+				ScreensaverCanvas1.SetActive(false);
+				ScreensaverCanvas2.SetActive(false);
+				ScreensaverCanvas3.SetActive(false);
+				ScreensaverCanvas4.SetActive(false);
+				ScreensaverCanvas5.SetActive(false);
+				ScreensaverCanvas6.SetActive(false);
+				ScreensaverCanvas7.SetActive(false);
+				ScreensaverCanvas8.SetActive(false);
+				ScreensaverCanvas9.SetActive(false);
+				ScreensaverCanvas10.SetActive(false);
+//				ScreensaverCanvas11.SetActive(false);
+				ScreensaverCanvasBackground.SetActive(false);
+				screensaverReachedLoopEnd = false;
+				screensaverReachedLoopEnd2 = false;
+//				PauseMenu.instance.rayCasting = true;
+
+				screenSaverIsActive = false;
+
+				if (PauseMenu.instance.isInSight && PauseMenu.instance.clickCount != 2)
+				{
+					PauseMenu.instance.RuntimeTagCanvas.SetActive (true);
+				}
+
+
+				}
 
 			}
 
@@ -165,7 +183,7 @@ public class Spectator : MonoBehaviour
 		}
 
 		if (current == delay) {
-			screenSaverIsActive = true;
+
 			ScreensaverCanvasBackground.SetActive (true);
 
 			if(screensaverReachedLoopEnd == true){
@@ -177,12 +195,15 @@ public class Spectator : MonoBehaviour
 				screensaverReachedLoopEnd2 = true;
 
 			}else{
-
+//				PauseMenu.instance.rayCasting = false;
+				PauseMenu.instance.RuntimeTagCanvas.SetActive(false);
 				ScreensaverCanvas.SetActive (true);
 				ScreensaverCanvasBackground.GetComponent<Image>().canvasRenderer.SetAlpha(0.0f);
-				ScreensaverCanvasBackground.GetComponent<Image>().CrossFadeAlpha(1, 2, false);}
+				ScreensaverCanvasBackground.GetComponent<Image>().CrossFadeAlpha(1, 2, false);
 				ScreensaverCanvas.GetComponent<Image>().canvasRenderer.SetAlpha(0.0f);
 				ScreensaverCanvas.GetComponent<Image>().CrossFadeAlpha(1, 2, false);
+
+				screenSaverIsActive = true;
 
 		}
 
@@ -321,4 +342,5 @@ public class Spectator : MonoBehaviour
 		}
 	}
 
+}
 }

@@ -31,8 +31,8 @@ public class SimKeeper : MonoBehaviour {
     public float differentStudentLinesWidth;
 
     private Dictionary<string, int> tagDic = new Dictionary<string, int>();
-    private bool sameStudentLinesActive = false;
-    private bool differentStudentLinesActive = true;
+    public bool sameStudentLinesActive = false;
+    public bool differentStudentLinesActive = true;
     private bool circleLinesActive;
 
 
@@ -49,13 +49,13 @@ public class SimKeeper : MonoBehaviour {
 //		errorLog ();
     }
 
-	public void errorLog(){
-		foreach (Content content in contentList) {
-			if (content.Phase != "P1" || content.Phase != "P2" || content.Phase != "P3" || content.Phase != "P4" || content.Phase != "P5" ){
-				Debug.Log(content.Student + "  " + content.Phase + "   " + content.Objecttype);
-			}
-		}
-	}
+//	public void errorLog(){
+//		foreach (Content content in contentList) {
+//			if (content.Phase != "P1" || content.Phase != "P2" || content.Phase != "P3" || content.Phase != "P4" || content.Phase != "P5" ){
+//				Debug.Log(content.Student + "  " + content.Phase + "   " + content.Objecttype);
+//			}
+//		}
+//	}
 
     private void buildTagDic()
     {
@@ -155,7 +155,7 @@ public class SimKeeper : MonoBehaviour {
         spawnLines();
     }
 
-    private void spawnLines()
+    public void spawnLines()
     {
         if (sameStudentLinesActive)
         {
