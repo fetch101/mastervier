@@ -35,6 +35,7 @@ public class ViewKeeper : MonoBehaviour {
         this.GetComponent<SunView>().destroyLines();
         this.GetComponent<CircleView>().alignContentsWithCenter(center);
         this.GetComponent<CircleView>().drawLines(center);
+		alignAllContents ();
     }
 
     public void cubeView()
@@ -52,6 +53,7 @@ public class ViewKeeper : MonoBehaviour {
         this.GetComponent<CircleView>().destroyLines();
         this.GetComponent<SunView>().destroyLines();
         this.GetComponent<CubeView>().alignContents(getAllContents());
+		alignAllContents ();
     }
 
     public void sunView()
@@ -70,6 +72,7 @@ public class ViewKeeper : MonoBehaviour {
         this.GetComponent<CircleView>().destroyLines();
         this.GetComponent<SunView>().destroyLines();
         this.GetComponent<SunView>().alignContents(getAllContents());
+		alignAllContents ();
     }
 
     public void filteredView(List<Content> filteredContents)
@@ -86,12 +89,20 @@ public class ViewKeeper : MonoBehaviour {
         this.GetComponent<CircleView>().destroyLines();
         this.GetComponent<SunView>().destroyLines();
         this.GetComponent<FilteredView>().alignContents(filteredContents);
+
     }
 
     public void redrawSpiralLines()
     {
         this.GetComponent<SunView>().alignContents(getAllContents());
     }
+
+	private void alignAllContents(){
+	
+		foreach (Content cont in getAllContents()) {
+			cont.shouldAlign = true;
+		}
+	}
     
     private List<Content> getAllContents()
     {

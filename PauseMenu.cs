@@ -30,7 +30,7 @@ public class PauseMenu : MonoBehaviour {
 	public bool iWillRaycast = true;
 	public bool setPauseWithButton = false;
 
-	private float delayPauseMenu = 5;
+	private float delayPauseMenu = 200;
 
     // Use this for initialization
     void Start()

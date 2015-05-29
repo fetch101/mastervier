@@ -23,8 +23,8 @@ public class Spectator : MonoBehaviour
 	public float maximum = 1.0f;
 	public Sprite Image1;
 	public Image myPanel;
-	public float delay = 5;
-	private float offset = 6;
+	public float delay = 200;
+	private float offset = 20;
 	public bool loopEnd = false;
 	public bool screensaverReachedLoopEnd = false;
 	public bool screensaverReachedLoopEnd2 = false;
@@ -138,7 +138,7 @@ public class Spectator : MonoBehaviour
 			timer = 0;
 			current = 0;
 
-			if(screenSaverIsActive == true){
+			if(screenSaverIsActive){
 				ScreensaverCanvas.SetActive(false);
 				ScreensaverCanvas1.SetActive(false);
 				ScreensaverCanvas2.SetActive(false);
